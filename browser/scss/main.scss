@@ -13,5 +13,11 @@
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
-@import 'tutorial/main';
 @import 'login/main';
+@import 'admin/orders';
+@import 'admin/products';
+@import 'admin/usermanagement';
+@import 'cart/cart';
+@import 'checkout/checkout';
+@import 'products/products';
+@import 'profile/profile';
