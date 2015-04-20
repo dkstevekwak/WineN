@@ -25,9 +25,9 @@ describe('Product model', function(){
 
     it('should have name, image, description, price, createdBy be strings',function(done){
     	var product = new Product({
-    		name: "Jimmy's Brew", 
-    		image:'/images/jimmysbrew.png', 
-    		description:"It's organic", 
+    		name: "Jimmy's Brew",
+    		image:'/images/jimmysbrew.png',
+    		description:"It's organic",
     		price:'29.99'
     	});
         product.save(function(err){
@@ -35,9 +35,9 @@ describe('Product model', function(){
             product.image.should.equal('/images/jimmysbrew.png');
             product.description.should.equal("It's organic");
             product.price.should.equal('29.99');
-            done(); 
+            done();
         });
-    });    
+    });
 
     it('should have qty which is a Number',function(done){
     	var product = new Product({
@@ -45,7 +45,7 @@ describe('Product model', function(){
     	});
         product.save(function(err){
             product.qty.should.equal(15);
-            done(); 
+            done();
         });
     });
 
@@ -55,24 +55,24 @@ describe('Product model', function(){
         });
        product.save(function(err){
             product.categories.should.equal(['Organic','Red']);
-            done(); 
+            done();
         });
      });
 
     it('should have createdBy which is an Object reference to a user',function(done){
-        var product = new Product({ 
+        var product = new Product({
             createdBy: {}
         });
        product.save(function(err){
             product.createdBy.should.equal({}); //FIX
-            done(); 
+            done();
         });
     });
 
     it('should have validation to require name',function(done){
-        var product = new Product({ 
-            image:'/images/jimmysbrew.png', 
-            description:"It's organic", 
+        var product = new Product({
+            image:'/images/jimmysbrew.png',
+            description:"It's organic",
             price:'29.99',
             qty: 15,
             categories: ['Organic','Red'],
@@ -80,52 +80,52 @@ describe('Product model', function(){
         });
        product.save(function(err){
             err.message.should.equal("Validation Failed"); //FI
-            done(); 
+            done();
         });
     });
 
     it('should require price',function(done){
-        var product = new Product({ 
-            name: "Jimmy's Brew", 
-            image:'/images/jimmysbrew.png', 
-            description:"It's organic", 
+        var product = new Product({
+            name: "Jimmy's Brew",
+            image:'/images/jimmysbrew.png',
+            description:"It's organic",
             qty: 15,
             categories: ['Organic','Red'],
             createdBy: {}
        });
        product.save(function(err){
             err.message.should.equal("Validation Failed"); //FI
-           done(); 
+           done();
         });
     });
 
     it('should require catergory',function(done){
-        var product = new Product({ 
-            name: "Jimmy's Brew", 
-            image:'/images/jimmysbrew.png', 
-            description:"It's organic", 
+        var product = new Product({
+            name: "Jimmy's Brew",
+            image:'/images/jimmysbrew.png',
+            description:"It's organic",
             price:'29.99',
             qty: 15,
             createdBy: {}
         });
        product.save(function(err){
              err.message.should.equal("Validation Failed"); //FI
-          done(); 
+          done();
         });
     });
 
     it('should require createdBy',function(done){
-        var product = new Product({ 
-            name: "Jimmy's Brew", 
-            image:'/images/jimmysbrew.png', 
-            description:"It's organic", 
+        var product = new Product({
+            name: "Jimmy's Brew",
+            image:'/images/jimmysbrew.png',
+            description:"It's organic",
             price:'29.99',
             qty: 15,
             categories: ['Organic','Red']
         });
        product.save(function(err){
              err.message.should.equal("Validation Failed"); //FI
-            done(); 
+            done();
         });
     });
 
