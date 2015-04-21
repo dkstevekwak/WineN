@@ -5,8 +5,8 @@ var schema = new mongoose.Schema({
     name: {
         type: String,
 		required: true,
-		unique : true, 
-		dropDups: true 
+		//unique : true,
+		//dropDups: true
     },
     image: {
         type: String
