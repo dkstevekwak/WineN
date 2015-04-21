@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller('CartController', function($scope,'Cart'){
+app.controller('CartController', function($scope, Cart){
 	$scope.addToCart = function(product){
 		Cart.addToCart(product);
 	};
