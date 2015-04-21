@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
     name: {
-        type: String
+        type: String,
 		required: true
     },
     image: {
@@ -20,10 +20,12 @@ var schema = new mongoose.Schema({
 		type: Number
     },
     createdBy: {
-        type: Schema.Types.ObjectId, ref: 'User'
+        type: mongoose.Schema.Types.ObjectId, ref: 'User',
+		required: true
     },
 	categories: {
-		type: [String]
+		type: [String],
+		required: true
 	}
 });
 
