@@ -8,17 +8,22 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller('CartController', function($scope){
-	$scope.cartProducts = [{
-		name: "Malbec",
-		quantity: "1",
-		price: "29.99",
-		amount: ""
-	}];
-
+app.controller('CartController', function($scope,'Cart'){
+	$scope.addToCart = function(product){
+		Cart.addToCart(product);
+	};
+	$scope.removeItem = function(product){
+		Cart.cart = Cart.cart.filter(function(element){
+			return element._id!==product._id;
+		});
+	}
+	$scope.cartProducts = Cart.cart;
+	$scope.updateCart = function(){
+		Cart.cart = $scope.cartProducts;
+	};	
 	$scope.calculateAmount = function(q,p){
 		if(!q||!p) return 0;
 		return parseFloat(q) * parseFloat(p);
-	}
+	};
 
 });
