@@ -23,7 +23,20 @@ var schema = new mongoose.Schema({
     },
     google: {
         id: String
-    }
+    },
+	role: {
+		type: String
+	},
+	username: {
+		type: String
+	},
+	address: {
+		line1: String,
+		line2: String,
+		city: String,
+		state: String,
+		zip: String
+	}
 });
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
