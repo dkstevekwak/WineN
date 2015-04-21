@@ -9,12 +9,17 @@ app.config(function ($stateProvider) {
 
 
 
-app.controller('ProductsController', function($scope){
+app.controller('ProductsController', function($scope, Products){
 	$scope.categories=['red','white','sparkling'];
 	$scope.currentCategory = "";
 	$scope.selectCategory = function(category){
 		$scope.currentCategory = category;
 	}
-
+  Products.getAllProducts().then(function(productList){
+    console.log("here is the fake productList", productList);
+    $scope.products = productList;
+  }, function(err){
+    console.log("errors", err);
+  })
 
 });
