@@ -30,10 +30,20 @@ app.factory('Products', function ($http) {
 	  });
   };
 
+  var createProduct = function(product) {
+    return $http.post('/api/products/add', product).then(function(res) {
+      console.log('response', res)
+      return res.data;
+    }, function(err) {
+      console.log('error', err);
+    });
+  };
+
   return {
     getAllProducts,
     getProduct,
-	updateProduct
+	updateProduct,
+    createProduct
   };
 
 });
