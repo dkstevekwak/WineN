@@ -1,7 +1,7 @@
 <section id="products-user">
 	<div class="categorySelection">
 		<ul>
-			<li class="eachCategory" ng-repeat="category in categories" ng-click="selectCategory(category)" ng-class="{'active': category===currentCategory}"> {{category}}</li>	
+			<li class="eachCategory" ng-repeat="category in categories" ng-click="selectCategory(category)" ng-class="{'active': category===currentCategory}"> {{category}}</li>
 		</ul>
 	</div>
 	<h1>{{currentCategory}}</h1>
@@ -15,6 +15,7 @@
 			<li class="eachProduct"> {{product.price}}</li>
 			<li class="eachProduct"> {{product.qty}}</li>
 			<li class="eachProduct"> {{product.categories}}</li>
+			<button ui-sref="productDetails({productId: product._id})">More Info</button>
 		</ul>
 	</section>
 </section>
