@@ -1,3 +1,16 @@
 <section id="profile">
-    This is profile view
+	<h1> Hello, {{user.username}}! </h1>
+	<h1>{{user.role}}</h1>
+    <form class="userForm">
+    	<input type="text" placeholder="{{user.username}}" ng-model="user.username" />
+    	<input type="password" ng-model="user.password"/>
+    	<input type="text" placeholder="{{user.email}}" ng-model="user.email" />
+    	<input type="text" placeholder="{{user.mailingAddress}}" ng-model="user.role" />
+    	<input type="text" placeholder="{{user.shippingAddress}}" ng-model="user.shippingAddress" />
+    	<button type="submit">Save Changes</button>
+    </form>
+    <div class="orderList">
+    	<h1> Order History</h1>
+    	<li ng-repeat="order in user.orders">{{order}}</li>
+    </div>
 </section>

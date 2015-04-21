@@ -1,0 +1,13 @@
+#products-user{
+	.categorySelection {
+		height: 60px;
+		width: 100%;
+		li {
+		margin-right: 30px;
+		display: inline;
+		}	
+	}
+	.active {
+		background: darkgray;
+	}	
+}

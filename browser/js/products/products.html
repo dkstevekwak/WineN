@@ -1,3 +1,9 @@
 <section id="products-user">
+	<div class="categorySelection">
+		<ul>
+			<li class="eachCategory" ng-repeat="category in categories" ng-click="selectCategory(category)" ng-class="{'active': category===currentCategory}"> {{category}}</li>	
+		</ul>
+	</div>
+	<h1>{{currentCategory}}</h1>
     This is products-user view
 </section>

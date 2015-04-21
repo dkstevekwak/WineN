@@ -1,3 +1,20 @@
 <section id="cart">
-    This is cart view
+    <h1>Cart</h1>
+    <div>
+    	<h2>Products</h1>
+    	<ul>
+    		<li ng-repeat="product in cartProducts">
+    			<h3>Name: {{product.name}}</h3>
+    			Product Quantity:<input type="text" ng-model="product.quantity" />
+    			<h3>Price: {{product.price}}</h3>
+    			<h3>Amount: {{calculateAmount(product.quantity,product.price)}}</h3>
+
+    		</li>
+    	</ul>
+    </div>
+    <h3>Sub Total</h3>
+    <h3>Tax</h3>
+    <h3>Shipping</h3>
+    <h2>Total</h2>
+    <button type="submit">Checkout</button>
 </section>
