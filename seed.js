@@ -23,6 +23,7 @@ var mongoose = require('mongoose');
 var connectToDb = require('./server/db');
 var User = mongoose.model('User');
 var Product = mongoose.model('Product');
+var Category = mongoose.model('Category');
 var q = require('q');
 var chalk = require('chalk');
 
@@ -61,14 +62,18 @@ var seedUsers = function () {
     return q.invoke(User, 'create', users);
 
 };
-User.find({}, function(err, data){
-    console.log("this is a mongoose thing");
-})
+var seedCategories = function () {
+    var categories = [
+        {name: 'Red'},
+        {name: 'White'},
+        {name: 'Sparkling'},
+        {name: 'Cider'}
+    ];
+    return q.invoke(Category, 'create', categories);
+
+};
 var seedProducts = function () {
-    console.log("before user find");
-    console.log("user", User);
-    return User.findOne({}).exec().then(function(user){
-        console.log("here")
+    return User.findOne({email:'obama@gmail.com'}).exec().then(function(user){
         var products = [
             {
                 name: 'A red wine',
@@ -77,7 +82,7 @@ var seedProducts = function () {
                 price: '59.99',
                 qty: 37,
                 createdBy: user._id,
-                categories: ['red', 'wine']
+                categories: ['Red']
             },
             {
                 name: 'A green wine',
@@ -86,7 +91,7 @@ var seedProducts = function () {
                 price: '39.99',
                 qty: 27,
                 createdBy: user._id,
-                categories: ['green', 'wine']
+                categories: ['White']
             }
         ];
 
@@ -107,10 +112,13 @@ connectToDb.then(function () {
                 //process.kill(0);
             }
         }).then(function () {
-            console.log("before seed products invoke")
+            
+            return seedCategories();
+        }).then(function () {
+            
             return seedProducts();
         }).then(function () {
-            console.log(chalk.green('Seed successful!'));
+            
             process.kill(0);
         }).catch(function (err) {
             console.error(err);
