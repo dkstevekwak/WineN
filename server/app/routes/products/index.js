@@ -34,6 +34,8 @@ router.put('/:productId', function(req,res,next){
 
 	Product.findById(req.params.productId, function(err, product) {
 		if (err) return next(err);
+		console.log('this is the body', body)
+		console.log('this is the product', product)
 		product = body;
 		product.save(function(err, savedProduct){
 			res.json(savedProduct);
