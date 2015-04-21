@@ -59,7 +59,8 @@ describe('Product model', function(){
 			price:'29.99',
             categories: ['Organic','Red'],
             createdBy: user._id,
-    		qty: 15
+    		qty: 15,
+			description:"It's organic"
     	});
         product.save(function(err){
 			expect(product.qty).to.equal(15);
@@ -72,7 +73,8 @@ describe('Product model', function(){
 			name: "Jimmy's Brew",
 			price:'29.99',
             createdBy: user._id,
-            categories: ['Organic','Red']
+            categories: ['Organic','Red'],
+			description:"It's organic"
         });
        product.save(function(err){
 			expect(product).to.have.deep.property('categories[0]', 'Organic');
@@ -86,7 +88,8 @@ describe('Product model', function(){
 			name: "Jimmy's Brew",
 			price:'29.99',
             categories: ['Organic','Red'],
-            createdBy: user._id
+            createdBy: user._id,
+			description:"It's organic"
         });
 		product.save(function(err){
             expect(product.createdBy).to.equal(user._id);
@@ -94,10 +97,25 @@ describe('Product model', function(){
         });
     });
 
-    it('should have validation to require name',function(done){
+   it('should have validation to require name',function(done){
         var product = new Product({
             image:'/images/jimmysbrew.png',
             description:"It's organic",
+            price:'29.99',
+            qty: 15,
+            categories: ['Organic','Red'],
+            createdBy: user._id
+        });
+       product.save(function(err){
+            expect(err.message).to.equal("Validation Failed"); //FI
+            done();
+        });
+    });
+
+   xit('should have validation to require description',function(done){
+        var product = new Product({
+			name: "Jimmy's Brew",
+            image:'/images/jimmysbrew.png',
             price:'29.99',
             qty: 15,
             categories: ['Organic','Red'],
