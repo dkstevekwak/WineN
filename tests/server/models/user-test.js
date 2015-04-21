@@ -143,4 +143,42 @@ describe('User model', function () {
 
     });
 
+	describe('should have store properties', function() {
+
+		var createUser = function () {
+			return User.create({
+				email: 'obama@gmail.com',
+			   password: 'potus',
+				   role: 'admin',
+				   username: 'awang',
+			address: {
+				line1: '5 Hanover Square',
+				   line2: '25th Flr',
+				   city: 'New York City',
+				   state: 'New York',
+				   zip: '10006'
+			}});
+		};
+
+		it('role and username of type String', function(done) {
+			createUser().then(function(user) {
+				expect(user.role).to.be.equal('admin');
+				expect(user.username).to.be.equal('awang');
+				done();
+			})
+		});
+
+		it('address of type object with line1, line2, city, state, and zip proerties', function(done) {
+			createUser().then(function(user) {
+				expect(user.address.line1).to.be.equal('5 Hanover Square');
+				expect(user.address.line2).to.be.equal('25th Flr');
+				expect(user.address.city).to.be.equal('New York City');
+				expect(user.address.state).to.be.equal('New York');
+				expect(user.address.zip).to.be.equal('10006');
+				done();
+			});
+		});
+
+	});
+
 });
