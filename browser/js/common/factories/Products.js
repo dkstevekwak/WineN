@@ -21,11 +21,19 @@ app.factory('Products', function ($http) {
     })
   }
 
-
+  var updateProduct = function(product) {
+	  return $http.put('/api/products/' + product._id, product).then(function(res) {
+		  console.log('response', res)
+		  return res.data;
+	  }, function(err) {
+		  console.log('error', err);
+	  });
+  };
 
   return {
     getAllProducts,
-    getProduct
+    getProduct,
+	updateProduct
   };
 
 });
