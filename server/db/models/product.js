@@ -23,8 +23,7 @@ var schema = new mongoose.Schema({
 		type: Number
     },
     createdBy: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'User',
-		required: true
+        type: mongoose.Schema.Types.ObjectId, ref: 'User' //commented out required
     },
 	categories: {
 		type: [String],
