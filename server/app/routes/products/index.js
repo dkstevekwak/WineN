@@ -28,7 +28,7 @@ router.put('/:productId', function(req,res,next){
 		product.description = body.description;
 		product.price = body.price;
 		product.qty = body.qty;
-		
+		g
 		product.save(function(err, savedProduct){
 			res.json(savedProduct);
 		});
