@@ -8,7 +8,7 @@
     This is products-user view
 	<section id="all-products">
 		This is products
-		<ul ng-repeat="product in products">
+		<ul ng-show="currentCategory === 'all' || product.categories.indexOf(currentCategory) !== -1" ng-repeat="product in products">
 			<li class="eachProduct"> {{product.name}}</li>
 			<li class="eachProduct"> {{product.description}}</li>
 			<img src="{{product.image}}">
