@@ -40,5 +40,4 @@ var schema = new mongoose.Schema({
 		type: String
 	}
 });
-//mongoose.Schema.Types.ObjectId, ref: 'User' //commented out required
 mongoose.model('Order', schema);
