@@ -27,10 +27,20 @@ var schema = new mongoose.Schema({
 	role: {
 		type: String
 	},
-	username: {
+	firstName: {
 		type: String
 	},
-	address: {
+	lastName: {
+		type: String
+	},
+	shippingAddress: {
+		line1: String,
+		line2: String,
+		city: String,
+		state: String,
+		zip: String
+	},
+	billingAddress: {
 		line1: String,
 		line2: String,
 		city: String,
