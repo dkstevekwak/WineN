@@ -36,6 +36,7 @@ app.controller('CartController', function($scope, Cart){
 			return element._id!==product._id;
 		});
 		$scope.cartProducts = Cart.cart;
+		$scope.calculateSubTotal();
 	}
 	$scope.updateCart = function(){
 		Cart.cart = $scope.cartProducts;
