@@ -15,10 +15,12 @@ app.controller('CartController', function($scope, Cart){
 	$scope.cartProducts = Cart.cart;
 	$scope.calculateSubTotal = function(){
 		$scope.subTotal = 0;
+		$scope.cartProducts = Cart.cart;
 		angular.forEach($scope.cartProducts, function(val){
 			$scope.subTotal += $scope.calculateAmount(val.orderQty, val.price);
-			$scope.total = $scope.shipping + $scope.tax + $scope.subTotal;
-		})
+		});
+		$scope.total = $scope.shipping + $scope.tax + $scope.subTotal;
+		console.log("cart:",Cart.cart);
 	};
 
 	$scope.calculateAmount = function(q,p){
@@ -38,6 +40,10 @@ app.controller('CartController', function($scope, Cart){
 		$scope.cartProducts = Cart.cart;
 		$scope.calculateSubTotal();
 	}
+	$scope.emptyCart = function (){
+		Cart.cart = [];
+		$scope.calculateSubTotal();		
+	};
 	$scope.updateCart = function(){
 		Cart.cart = $scope.cartProducts;
 	};
