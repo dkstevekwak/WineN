@@ -4,12 +4,12 @@
 		This is products
 		<ul ng-repeat="product in products">
 			<form name="editProduct-{{product._id}}" ng-submit="updateProduct(product)">
-				Name: <input name="editName-{{product._id}}" ng-model="product.name"/><br />
-				Description: <input name="editName-{{product._id}}" ng-model="product.description"/><br />
-				Image: <input name="editName-{{product._id}}" ng-model="product.image"/><br />
-				Price: <input name="editName-{{product._id}}" ng-model="product.price"/><br />
-				Quantity: <input name="editName-{{product._id}}" ng-model="product.qty"/><br />
-				Categories: <input name="editName-{{product._id}}" ng-model="product.categories"/><br />
+				Name: <input name="editName-{{product._id}}" ng-model="updatedProduct.name"/><br />
+				Description: <input name="editName-{{product._id}}" ng-model="updatedProduct.description"/><br />
+				Image: <input name="editName-{{product._id}}" ng-model="updatedProduct.image"/><br />
+				Price: <input name="editName-{{product._id}}" ng-model="updatedProduct.price"/><br />
+				Quantity: <input name="editName-{{product._id}}" ng-model="updatedProduct.qty"/><br />
+				Categories: <input name="editName-{{product._id}}" ng-model="updatedProduct.categories"/><br />
 				<button>Update Product</button>
 			</form>
 		</ul>

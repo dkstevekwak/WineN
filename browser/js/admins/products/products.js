@@ -8,6 +8,7 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('ProductsAdminController', function($scope, Products) {
+	$scope.updatedProduct = null;
 
 	Products.getAllProducts()
 	.then(function(productList){
@@ -17,10 +18,8 @@ app.controller('ProductsAdminController', function($scope, Products) {
 	});
 
 	$scope.updateProduct = function(product) {
-			console.log('first updated product', product)
-		Products.updateProduct(product)
+		Products.updateProduct(product, $scope.updatedProduct)
 		.then(function(product) {
-			console.log('updated product', product)
 		}).catch(function(err){
 			console.log(err);
 		});
