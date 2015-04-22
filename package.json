@@ -37,7 +37,7 @@
     "karma-chai": "^0.1.0",
     "karma-mocha": "^0.1.10",
     "karma-phantomjs-launcher": "^0.1.4",
-    "lodash": "^3.3.0",
+    "lodash": "~3.7.0",
     "mocha-mongoose": "^1.0.3",
     "mongodb": "^1.4.33",
     "mongoose": "3.8.23",
