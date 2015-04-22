@@ -38,6 +38,26 @@ var schema = new mongoose.Schema({
 	},
     total: {
 		type: String
-	}
+	},
+	firstName: {
+		type: String
+	},
+	lastName: {
+		type: String
+	},
+	shippingAddress: {
+		line1: String,
+		line2: String,
+		city: String,
+		state: String,
+		zip: String
+	},
+	billingAddress: {
+		line1: String,
+		line2: String,
+		city: String,
+		state: String,
+		zip: String
+	},
 });
 mongoose.model('Order', schema);
