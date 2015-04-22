@@ -17,7 +17,7 @@
 	<h3>Shipping: {{ shipping  | currency }}</h3>
 	<h2>Total: {{ total | currency }}</h2>
 	<button ng-click="calculateSubTotal()">Update Cart</button>
-	<button type="submit">Checkout</button>
+	<button type="submit" ui-sref='checkout'>Checkout</button>
 	<!-- <button ng-click="emptyCart()">Empty Cart</button> 
 	--> <button ng-click="emptyCart()">Empty Cart</button> 
 </section>

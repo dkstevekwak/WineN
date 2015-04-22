@@ -2,6 +2,10 @@
 app.factory('Cart', function ($http) {
 	// nice to haves cartID, total numberOfItems and subtotal for cookie/session
 	var cart = [];
+	var shipping = 5;
+	var tax = 5;
+
+
 	//add to cart
 	var addToCart = function(product) {
 		product.orderQty = 1;
@@ -9,22 +13,32 @@ app.factory('Cart', function ($http) {
 	};
 	//empty cart
 	var emptyCart = function(){
-		console.log("before empty cart")
-		if (cart.length){
-			console.log("inside empty cart")
-			do {
-				console.log("during empty cart")
-				cart.pop();
-			} while(cart.length)
+		while(cart.length) {
+			cart.pop();
 		}
 	};
 	//remove from cart
 	
 	//eventually save cart  
+	var calculateAmount = function(q,p){
+		if(!q||!p) return 0;
+		return parseFloat(q) * parseFloat(p);
+	};
+
+	var calculateSubTotal = function(){
+		var subTotal=0;
+		angular.forEach(cart, function(eachProduct){
+			subTotal+=calculateAmount(eachProduct.orderQty, eachProduct.price);
+		})
+		return subTotal;
+	}
   return {
 	  addToCart,
 	  cart,
-		emptyCart
+	  emptyCart,
+	  calculateSubTotal,
+	  shipping,
+	  tax
   };
 
 });
