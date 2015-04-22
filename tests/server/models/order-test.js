@@ -1,4 +1,4 @@
-var dbURI = 'mongodb:localhost:27017/testingDB';
+var dbURI = 'mongodb://localhost:27017/testingDB';
 var clearDB = require('mocha-mongoose')(dbURI);
 
 var sinon = require('sinon');
@@ -87,21 +87,24 @@ describe('Order model', function(){
 
     it('should have status field of type string',function(done){
 		expect(order.status).to.equal('Ordered');
+		expect(order.status).to.be.a('string');
 		done();
     });
 
-    xit('should have date field of type date',function(done){
+    it('should have date field of type date',function(done){
 		expect(order.date).to.be.instanceOf(Date);
 		done();
     });
 
     it('should have user field of type string',function(done){
-		expect(order.user).to.be.equal('fakeUser');
+//		expect(order.user.toString).to.equal(user._id.toString);
+		expect(order.user).to.be.a('string');
 		done();
     });
 
     it('should have a paid field which is a boolean',function(done){
 		expect(order.paid).to.be.equal(false);
+		expect(order.paid).to.be.a('boolean');
 		done();
     });
 

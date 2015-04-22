@@ -29,13 +29,13 @@ var schema = new mongoose.Schema({
     },
 	shipping: {
 		type: String
-	}
+	},
     tax: {
 		type: String
-	}
+	},
     subTotal: {
 		type: String
-	}
+	},
     total: {
 		type: String
 	}
