@@ -2,6 +2,30 @@
   box-sizing: border-box;
 }
 
+ui-view.ng-enter, ui-view.ng-leave, ui-view.ng-show, ui-view.ng-hide {
+	position: absolute;
+	left: 0;
+	right: 0;
+	-webkit-transition:all .5s ease-in-out;
+	transition:all .5s ease-in-out;
+}
+
+ui-view.ng-enter {
+	opacity: 0;
+}
+
+ui-view.ng-enter-active {
+	opacity: 1;
+}
+
+ui-view.ng-leave {
+	opacity: 1;
+}
+
+ui-view.ng-leave-active {
+	opacity: 0;
+}
+
 li {
 	list-style-type: none;
 }
@@ -18,9 +42,9 @@ li {
 @import 'home/main';
 @import 'about/main';
 @import 'login/main';
-@import 'admin/orders';
-@import 'admin/products';
-@import 'admin/usermanagement';
+@import 'admins/orders';
+@import 'admins/products';
+@import 'admins/usermanagement';
 @import 'cart/cart';
 @import 'checkout/checkout';
 @import 'products/products';
