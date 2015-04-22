@@ -14,7 +14,8 @@ app.factory('Cart', function ($http) {
 	//eventually save cart  
   return {
 	  addToCart,
-	  cart
+	  cart,
+		emptyCart
   };
 
 });
