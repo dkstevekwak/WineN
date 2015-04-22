@@ -15,7 +15,7 @@ module.exports = router;
 //guest order
 router.get('/:orderId', function(req, res, next) {
 	//authenticate that order has the right user AT A LATER TI
-	Order.findById({ req.params.orderId }, function(err, order) {
+	Order.findById(req.params.orderId, function(err, order) {
 		if (err) return next(err);
 		res.send(order);
 	});
