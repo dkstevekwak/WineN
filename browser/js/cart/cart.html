@@ -6,16 +6,16 @@
     		<li ng-repeat="product in cartProducts">
     			<h3>Name: {{product.name}}</h3>
     			Product Quantity:<input type="text" ng-model="product.orderQty" ng-change="calculateSubTotal()"/>
-    			<h3>Price: {{product.price}}</h3>
+    			<h3>Price: {{product.price | currency }}</h3>
     			<!--<h3>Amount: {{calculateAmount(product.quantity,product.price)}}</h3>-->
 				<button ng-click="removeItem(product)">remove from Cart</button>
     		</li>
 		</ul>
 	</div>
-	<h3>Sub Total: {{subTotal}}</h3>
-	<h3>Tax: {{tax}}</h3>
-	<h3>Shipping: {{shipping}}</h3>
-	<h2>Total: {{total}}</h2>
+	<h3>Sub Total: {{ subTotal | currency }}</h3>
+	<h3>Tax: {{ tax | currency }}</h3>
+	<h3>Shipping: {{ shipping  | currency }}</h3>
+	<h2>Total: {{ total | currency }}</h2>
 	<button ng-click="calculateSubTotal()">Update Cart</button>
 	<button type="submit">Checkout</button>
 </section>
