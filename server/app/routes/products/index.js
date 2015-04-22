@@ -19,18 +19,19 @@ router.get('/:productId', function(req, res, next) {
 
 router.put('/:productId', function(req,res,next){
 	var body = req.body;
+	console.log("this is server not test", body)
 	Product.findById(req.params.productId, function(err, product) {
 		if (err) return next(err);
-		console.log('this is the body', body)
-		console.log('this is the product', product)
-		product.name = body.name;
-		product.image = body.image;
-		product.description = body.description;
-		product.price = body.price;
-		product.qty = body.qty;
-		g
+		for (var key in body){
+			product[key] = body[key];
+		}
+		// product.name = body.name;
+		// product.image = body.image;
+		// product.description = body.description;
+		// product.price = body.price;
+		// product.qty = body.qty;
 		product.save(function(err, savedProduct){
-			res.json(savedProduct);
+			res.send(savedProduct);
 		});
 	});
 });
@@ -38,11 +39,9 @@ router.put('/:productId', function(req,res,next){
 
 router.post('/add', function(req,res,next){
 	var body = req.body;
-	console.log("this is body", body);
 	var newProduct = new Product(body);
 	newProduct.save(function(err,savedProduct){
 		if(err) return next(err);
-		console.log(savedProduct)
 		res.send(savedProduct);
 	});
 });

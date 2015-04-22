@@ -3,27 +3,28 @@ app.factory('Products', function ($http) {
 
   var getAllProducts = function () {
     return $http.get('/api/products').then(function(res){
-      console.log("here is res", res);
       return res.data; //should be an array of products
     }, function(err){
       console.log(err);
-      console.log("uh oh")
     })
   };
 
   var getProduct = function(productId){
     return $http.get('/api/products/' + productId).then(function(res){
-      console.log("here is res", res);
       return res.data; //should be an array of products
     }, function(err){
       console.log(err);
-      console.log("uh oh")
     })
   }
 
-  var updateProduct = function(product) {
-	  return $http.put('/api/products/' + product._id, product).then(function(res) {
-		  console.log('response', res)
+  var updateProduct = function(oldProduct, updatedProduct) {
+    var toSendProduct = {};
+    angular.forEach(oldProduct, function(info,key){
+      if(info!==updatedProduct[key]) {
+        toSendProduct[key]=updatedProduct[key]
+      }
+    }
+	  return $http.put('/api/products/' + product._id, toSendProduct).then(function(res) {
 		  return res.data;
 	  }, function(err) {
 		  console.log('error', err);
@@ -32,7 +33,6 @@ app.factory('Products', function ($http) {
 
   var createProduct = function(product) {
     return $http.post('/api/products/add', product).then(function(res) {
-      console.log('response', res)
       return res.data;
     }, function(err) {
       console.log('error', err);
