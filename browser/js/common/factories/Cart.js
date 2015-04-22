@@ -7,14 +7,17 @@ app.factory('Cart', function ($http) {
 		product.orderQty = 1;
 		cart.push(product);
 	};
-	//remove from cart
-	var emptyCart = function(cart){
+	//empty cart
+	var emptyCart = function(){
 		cart = [];
 	};
+	//remove from cart
+	
 	//eventually save cart  
   return {
 	  addToCart,
-	  cart
+	  cart,
+		emptyCart
   };
 
 });
