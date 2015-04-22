@@ -9,7 +9,14 @@ app.factory('Cart', function ($http) {
 	};
 	//empty cart
 	var emptyCart = function(){
-		cart = [];
+		console.log("before empty cart")
+		if (cart.length){
+			console.log("inside empty cart")
+			do {
+				console.log("during empty cart")
+				cart.pop();
+			} while(cart.length)
+		}
 	};
 	//remove from cart
 	

@@ -41,7 +41,8 @@ app.controller('CartController', function($scope, Cart){
 		$scope.calculateSubTotal();
 	}
 	$scope.emptyCart = function (){
-		Cart.cart = [];
+		//Cart.cart = [];
+		Cart.emptyCart();
 		$scope.calculateSubTotal();		
 	};
 	$scope.updateCart = function(){
