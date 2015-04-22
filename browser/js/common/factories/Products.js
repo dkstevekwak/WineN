@@ -23,7 +23,7 @@ app.factory('Products', function ($http) {
       if(info!==updatedProduct[key]) {
         toSendProduct[key]=updatedProduct[key]
       }
-    }
+    });
 	  return $http.put('/api/products/' + product._id, toSendProduct).then(function(res) {
 		  return res.data;
 	  }, function(err) {
