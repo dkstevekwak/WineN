@@ -1,4 +1,12 @@
 #products-user{
+	.IntroPic {
+		img{
+			width: 100%;
+			height: 600px;
+			position: relative;
+			z-index: 0;
+		}
+	}
 	.categorySelection {
 		height: 60px;
 		width: 100%;
@@ -10,4 +18,29 @@
 	.active {
 		background: darkgray;
 	}	
+
+}
+
+.productBox {
+		width: 29.5%;
+		float: left;
+		margin: 30px;
+		img{
+			width: 100%;
+		}
+	}
+
+.promoBox {
+	position: relative;
+	width: 40%;
+	text-align: center;
+	margin: -80px auto 0;
+	z-index: 1;
+	.promo{
+		float:left;
+		width:50%;
+		height: 400px;
+		background: lightgray;
+	    border: 1px dotted gray;
+	}
 }

@@ -10,7 +10,7 @@ app.config(function ($stateProvider) {
 
 
 app.controller('ProductsController', function($scope, Products){
-	$scope.categories=['all', 'red','white','sparkling'];
+	$scope.categories=['all', 'Red','White','Sparkling',"Cider"];
 	$scope.currentCategory = "all";
 	$scope.selectCategory = function(category){
 		$scope.currentCategory = category;
