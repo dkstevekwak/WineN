@@ -1,7 +1,7 @@
 'use strict';
 var crypto = require('crypto');
 var mongoose = require('mongoose');
-
+//Alex and DJ, about to add orders to userSchema 'userSchema-ordersUpdate-#46'
 var schema = new mongoose.Schema({
     email: {
         type: String
@@ -36,7 +36,10 @@ var schema = new mongoose.Schema({
 		city: String,
 		state: String,
 		zip: String
-	}
+	},
+	orders: [{
+		type: mongoose.Schema.Types.ObjectId, ref: 'Order'
+	}]
 });
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
