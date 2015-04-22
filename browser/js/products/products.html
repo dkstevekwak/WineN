@@ -1,21 +1,30 @@
-<section id="products-user">
+<section id="products-user" class="col-lg-12 col-md-12 col-sm-12">
+	
 	<div class="categorySelection">
 		<ul>
 			<li class="eachCategory" ng-repeat="category in categories" ng-click="selectCategory(category)" ng-class="{'active': category===currentCategory}"> {{category}}</li>
 		</ul>
 	</div>
-	<h1>{{currentCategory}}</h1>
-    This is products-user view
+    <div class="IntroPic">
+    	<img src="http://thumb101.shutterstock.com/display_pic_with_logo/184204/116996737/stock-photo-set-of-white-rose-and-red-wine-bottles-and-glas-isolated-on-white-background-116996737.jpg">
+    </div>
+    <div class='promoBox'>
+    	<div class='promo animated fadeInLeftBig'>
+    		<h1>Promotion A</h1>
+    	</div>
+    	<div class='promo animated fadeInRightBig'>
+    		<h1>Promotion B</h1>
+    	</div>
+    </div>
 	<section id="all-products">
-		This is products
-		<ul ng-show="currentCategory === 'all' || product.categories.indexOf(currentCategory) !== -1" ng-repeat="product in products">
-			<li class="eachProduct"> {{product.name}}</li>
-			<li class="eachProduct"> {{product.description}}</li>
+		<div class="productBox" ng-show="currentCategory === 'all' || product.categories.indexOf(currentCategory) !== -1" ng-repeat="product in products">
+			<h3 class="eachProduct"> {{product.name}}</h3>
+			<h3 class="eachProduct"> {{product.description}}</h3>
 			<img src="{{product.image}}">
-			<li class="eachProduct"> {{product.price}}</li>
-			<li class="eachProduct"> {{product.qty}}</li>
-			<li class="eachProduct"> {{product.categories}}</li>
+			<h3 class="eachProduct"> {{product.price}}</h3>
+			<h3 class="eachProduct"> {{product.qty}}</h3>
+			<h3 class="eachProduct" ng-repeat="productCategory in product.categories"> {{productCategory}}</h3>
 			<button ui-sref="productDetails({productId: product._id})">More Info</button>
-		</ul>
+		</div>
 	</section>
 </section>
