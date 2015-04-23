@@ -1,3 +1,15 @@
 <section id="usermanagement">
     This is usermanagement view
+    <section id="all-users-admin">
+        This is users
+        <ul ng-repeat="user in users">
+            <form name="editUser-{{user._id}}" ng-submit="updateUser(user)">
+                Name: <input name="editName-{{user._id}}" ng-model="user.username"/><br />
+                Email: <input name="editName-{{user._id}}" ng-model="user.email"/><br />
+                Password: <input name="editName-{{user._id}}" ng-model="user.password"/><br />
+                Role: <input name="editName-{{user._id}}" ng-model="user.role"/><br />
+                <button>Update User</button>
+            </form>
+        </ul>
+    </section>
 </section>
