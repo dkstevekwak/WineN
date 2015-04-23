@@ -37,25 +37,10 @@ router.post('/guest', function(req,res,next){
 router.post('/', function(req,res,next){
 	//authenticate to get userId AT A LATER TI
 	var body = req.body;
-	//var order = {
-	//	cart: $scope.products,
-	//	user: $scope.user,
-	//	details: $scope.checkoutDetails
-	//}
 	console.log('posting order', req.body);
 	var order = new Order();
-	order.cartProducts = body.cart;
-	order.user = body.user._id;
-	//need order.promoCode logic
-	order.shipping = body.details.shipping;
-	order.tax = body.details.tax;
-	order.subTotal = body.details.subTotal;
-	order.firstName = body.user.firstName;
-	order.lastName = body.user.lastName;
-	order.shippingAddress = body.user.shippingAddress;
-	order.paid = true;
-	order.status = 'Created'; //have to define business workflow of status
-	order.date = Date.now();
+	_.assign(order, body);
+	//TODO have to define business workflow of status
 	  //needs to decrease quantity
 	  //needs to check if quantity is OK && @ checkout
 	order.save(function(err,saved){

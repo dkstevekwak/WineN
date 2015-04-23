@@ -5,22 +5,42 @@ var mongoose = require('mongoose');
 
 
 var schema = new mongoose.Schema({
-	user: { //either user._id or session._id
-        type: String,
-		required: true
-		//unique : true,
-		//dropDups: true
-    },
+		user: {
+			_id: {
+				type: String, //tentative until we decide sessionID or userID handling
+				required: true
+			},
+			firstName: {
+				type: String
+			},
+			lastName: {
+				type: String
+			},
+			shippingAddress: {
+				line1: String,
+				line2: String,
+				city: String,
+				state: String,
+				zip: String
+			},
+			billingAddress: {
+				line1: String,
+				line2: String,
+				city: String,
+				state: String,
+				zip: String
+			}
+		},
+
     paid: {
         type: Boolean,
         default: false
     },
-    cartProducts: {
+    cart: {
         type: []
     },
     status: {
-        type: String,
-        required: true
+        type: String
     },
     date: {
 			type: Date
@@ -28,41 +48,30 @@ var schema = new mongoose.Schema({
     promoCode: {
         type: String
     },
-	shipping: {
-		type: Number
-	},
-    tax: {
-		type: Number
-	},
-    subTotal: {
-		type: Number
-	},
-	firstName: {
-		type: String
-	},
-	lastName: {
-		type: String
-	},
-	shippingAddress: {
-		line1: String,
-		line2: String,
-		city: String,
-		state: String,
-		zip: String
-	},
-	billingAddress: {
-		line1: String,
-		line2: String,
-		city: String,
-		state: String,
-		zip: String
+	details: {
+		shipping: {
+			type: Number
+		},
+		tax: {
+			type: Number
+		},
+		subTotal: {
+			type: Number
+		}
 	}
+
 });
 
-schema.virtual('total').get(function(){
-	return this.shipping + this.tax + this.subTotal;
+schema.virtual('details.total').get(function(){
+	return this.details.shipping + this.details.tax + this.details.subTotal;
 });
-
+schema.pre('save', function(next){
+	console.log('inside presave');
+	if (!this.paid) this.paid = true;
+	if (!this.status) this.status = 'Created';
+	if (!this.date) this.date = Date.now();
+	next();
+});
 
 mongoose.model('Order', schema);
 

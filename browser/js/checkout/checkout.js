@@ -31,6 +31,7 @@ app.controller("CheckoutCtrl", function($scope, Cart, Users, Orders){
 			details: $scope.checkoutDetails
 		}
 		Orders.userConfirmOrder(order).then(function(order){
+			Cart.emptyCart();
 			console.log("order created!!!", order);
 			//redirect via state after thankyou/confirmation page created
 		}, function(err){
