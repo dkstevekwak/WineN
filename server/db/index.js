@@ -15,6 +15,7 @@ require('./models/user');
 require('./models/product');
 require('./models/category');
 require('./models/order');
+require('./models/cart');
 
 var startDbPromise = new Q(function (resolve, reject) {
     db.on('open', resolve);
