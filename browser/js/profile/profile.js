@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller("ProfileController", function($scope, Users){
+app.controller("ProfileController", function($scope, Users, Orders, $state){
 	//$scope.user = {
 	//	username: "DJ",
 	//	password: "pass",
@@ -28,6 +28,14 @@ app.controller("ProfileController", function($scope, Users){
       }, function(err){
           console.log('not logged in');
       })
+  }
+  $scope.viewOrder = function(orderId){
+    Orders.getOrder(orderId).then(function(order){
+      Orders.update.currentOrder = order;
+      $state.go('order');
+    }, function(err){
+      console.log('failed to get order', err)
+    });
   }
     $scope.getCurrentUser();
 });
