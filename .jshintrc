@@ -1,4 +1,5 @@
 {
+  "esnext": true,
   "bitwise" : true,
   "camelcase" : false,
   "eqeqeq" : true,

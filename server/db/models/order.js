@@ -1,6 +1,9 @@
 'use strict';
 var mongoose = require('mongoose');
 
+//define cartProducts schema
+
+
 var schema = new mongoose.Schema({
 	user: { //either user._id or session._id
         type: String,
@@ -13,31 +16,26 @@ var schema = new mongoose.Schema({
         default: false
     },
     cartProducts: {
-        type: [],
-    	default: [] //we don't have to check if it exists or not
+        type: []
     },
     status: {
         type: String,
         required: true
     },
     date: {
-		type: Date,
-		default: new Date()
+			type: Date
     },
     promoCode: {
         type: String
     },
 	shipping: {
-		type: String
+		type: Number
 	},
     tax: {
-		type: String
+		type: Number
 	},
     subTotal: {
-		type: String
-	},
-    total: {
-		type: String
+		type: Number
 	},
 	firstName: {
 		type: String
@@ -58,6 +56,13 @@ var schema = new mongoose.Schema({
 		city: String,
 		state: String,
 		zip: String
-	},
+	}
 });
+
+schema.virtual('total').get(function(){
+	return this.shipping + this.tax + this.subTotal;
+});
+
+
 mongoose.model('Order', schema);
+
