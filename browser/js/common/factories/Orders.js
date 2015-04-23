@@ -17,19 +17,14 @@ app.factory('Orders', function ($http) {
     })
   }
 
-  //var updateOrder = function(oldProduct, updatedProduct) {
-  //  var toSendProduct = {};
-  //  angular.forEach(oldProduct, function(info,key){
-  //    if(info!==updatedProduct[key]) {
-  //      toSendProduct[key]=updatedProduct[key]
-  //    }
-  //  });
-  //  return $http.put('/api/products/' + product._id, toSendProduct).then(function(res) {
-  //    return res.data;
-  //  }, function(err) {
-  //    console.log('error', err);
-  //  });
-  //}; later
+  var updateOrder = function(order) {
+
+    return $http.put('/api/checkout/' + order._id, order).then(function(res) {
+      return res.data;
+    }, function(err) {
+      console.log('error', err);
+    });
+  };
 
     var userConfirmOrder = function(order) {
       return $http.post('/api/checkout', order).then(function(res) {
@@ -50,7 +45,8 @@ app.factory('Orders', function ($http) {
     getAllOrders,
     getOrder,
     userConfirmOrder,
-    guestConfirmOrder
+    guestConfirmOrder,
+    updateOrder
   };
 
 });

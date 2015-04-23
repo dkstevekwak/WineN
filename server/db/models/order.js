@@ -72,5 +72,7 @@ schema.pre('save', function(next){
 	next();
 });
 
+schema.set('toJSON', { virtuals: true });
+
 mongoose.model('Order', schema);
 
