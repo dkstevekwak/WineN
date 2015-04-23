@@ -7,7 +7,7 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('OrderManagementController', function($scope, Orders) {
+app.controller('OrderManagementController', function($scope, Orders, $state) {
 
     Orders.getAllOrders()
       .then(function(orders) {
@@ -23,5 +23,14 @@ app.controller('OrderManagementController', function($scope, Orders) {
             console.log('order update failed', err)
         })
     };
+
+    $scope.viewOrder = function(orderId){
+        Orders.getOrder(orderId).then(function(order){
+            Orders.update.currentOrder = order;
+            $state.go('order');
+        }, function(err){
+            console.log('failed to get order', err)
+        });
+    }
 
 });

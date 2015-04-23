@@ -9,6 +9,6 @@
     </form>
     <div class="orderList">
     	<h1> Order History</h1>
-    	<li ng-repeat="order in user.orders">{{order}}</li>
+    	<li ng-click="viewOrder(order)" ng-repeat="order in user.orders">{{order}}</li>
     </div>
 </section>

@@ -1,6 +1,7 @@
 'use strict';
 var router = require('express').Router();
 var Order = require('mongoose').model('Order');
+var User = require('mongoose').model('User');
 var _ = require("lodash");
 module.exports = router;
 
@@ -43,9 +44,15 @@ router.post('/', function(req,res,next){
 	//TODO have to define business workflow of status
 	  //needs to decrease quantity
 	  //needs to check if quantity is OK && @ checkout
-	order.save(function(err,saved){
+	order.save(function(err,savedOrder){
+		User.findById(order.user._id, function(err, user){
+			user.orders.push(savedOrder._id);
+			user.save(function(err, savedUser){
+				if(err) return next(err);
+				res.send(savedOrder);
+			})
+		})
 		if(err) return next(err);
-		res.send(saved);
 	});
 });
 

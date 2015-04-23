@@ -1,8 +1,11 @@
 <section id="order">
     <div ng-show="orderProcessed">
         <h3>Thank you!</h3>
+
         <h3>Your products have been shipped to : {{order.user.shippingAddress.line1}}</h3>
     </div>
+    <!--<h3>{{order}}</h3>-->
+    <h3>{{orderProcessed}}</h3>
 
     <section id="ordered-products">
         <div class="productBox" ng-repeat="product in order.cart">

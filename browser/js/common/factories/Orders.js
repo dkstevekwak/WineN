@@ -33,7 +33,7 @@ app.factory('Orders', function ($http) {
     var userConfirmOrder = function(order) {
       return $http.post('/api/checkout', order).then(function(res) {
         update.currentOrder = res.data;
-        update.justOrderd = true;
+        update.justOrdered = true;
         return res.data;
       }, function(err) {
         console.log('error', err);
