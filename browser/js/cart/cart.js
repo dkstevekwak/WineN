@@ -14,30 +14,30 @@ app.controller('CartController', function($scope, Cart){
 	$scope.subTotal = 0;
 	$scope.cartProducts = Cart.localCart;
 	// $scope.
-	$scope.calculateSubTotal = function(){
+	
+	var updateCartFields = function(){
 		$scope.subTotal = Cart.calculateSubTotal();
 		$scope.cartProducts = Cart.localCart;
 		$scope.total = $scope.shipping + $scope.tax + $scope.subTotal;
 
 	};
-
 	
 	//Order is important
-	if($scope.cartProducts.length) $scope.calculateSubTotal();	//runs initial calculate on load, further called with ng-change on html quantity forms
+	if($scope.cartProducts.length) updateCartFields();	//runs initial calculate on load, further called with ng-change on html quantity forms
 	
 	$scope.addToCart = function(product){
 		Cart.addToCart(product);
 	};
 	$scope.removeItem = function(product){
 		Cart.removeItem(product);
-		$scope.cartProducts = Cart.localCart;
-		$scope.calculateSubTotal();
+//		$scope.cartProducts = Cart.localCart;
+		updateCartFields();
 	}
 	$scope.emptyCart = function (){
 		//Cart.localCart = [];
 		Cart.emptyCart();
 		$scope.cartProducts = Cart.localCart;
-		$scope.calculateSubTotal();		
+		updateCartFields();		
 	};
 	$scope.updateCart = function(){
 		Cart.localCart = $scope.cartProducts;

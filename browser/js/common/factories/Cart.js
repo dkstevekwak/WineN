@@ -1,15 +1,35 @@
 'use strict';
 app.factory('Cart', function ($http,localStorageService) {
 	// nice to haves cartID, total numberOfItems and subtotal for cookie/session
-//	var cart = [];
+
 	var shipping = 5;
 	var tax = 5;
 	var localCart = JSON.parse(localStorage.getItem('cart')) || [];
 
 	//Jimmy and DJ, starting to work on ngCartPersistance-#74
 	
+	function productExists(productId){
+		var test = localCart.filter(function(el){
+			return el._id === productId;
+		})
+		return test.length;
+	}
+	
+	function incrementQty(productId){
+		localCart.filter(function(el){
+			return el._id === productId;
+		})[0].orderQty++;
+	}	
+	
 	//add to cart
 	var addToCart = function(product) {
+		//find product in local cart to update qty
+		if (productExists(product._id)){
+			incrementQty(product._id);
+			localStorage.setItem('cart',JSON.stringify(localCart));
+			return;
+		}		
+		
 		product.orderQty = 1;
 //		cart.push(product);
 		//set local storage in the browser
@@ -63,7 +83,8 @@ app.factory('Cart', function ($http,localStorageService) {
 			subTotal+=calculateAmount(eachProduct.orderQty, eachProduct.price);
 		})
 		return subTotal;
-	}
+	};
+	
   return {
 	  addToCart,
 	  localCart,
