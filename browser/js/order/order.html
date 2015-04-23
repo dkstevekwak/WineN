@@ -1,0 +1,24 @@
+<section id="order">
+    <div ng-show="orderProcessed">
+        <h3>Thank you!</h3>
+        <h3>Your products have been shipped to : {{order.user.shippingAddress.line1}}</h3>
+    </div>
+
+    <section id="ordered-products">
+        <div class="productBox" ng-repeat="product in order.cart">
+            <h3 class="eachProduct"> {{product.name}}</h3>
+            <h3 class="eachProduct"> {{product.description}}</h3>
+            <img src="{{product.image}}">
+            <h3 class="eachProduct"> {{product.price}}</h3>
+            <h3 class="eachProduct"> {{product.orderQty}}</h3>
+            <h3 class="eachProduct" ng-repeat="productCategory in product.categories"> {{productCategory}}</h3>
+            <button ui-sref="productDetails({productId: product._id})">More Info</button>
+        </div>
+    </section>
+    <div class="checkoutDetails">
+        <h3>Sub Total: {{order.details.subTotal | currency}}</h3>
+        <h3>Tax: {{ order.details.tax | currency }}</h3>
+        <h3>Shipping: {{ order.details.shipping  | currency }}</h3>
+        <h2>Total: {{ order.details.total | currency }}</h2>
+    </div>
+</section>

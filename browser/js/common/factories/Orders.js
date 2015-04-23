@@ -1,6 +1,9 @@
 'use strict';
 app.factory('Orders', function ($http) {
-
+  var update = {
+    currentOrder:null,
+    justOrdered: false
+  };
   var getAllOrders = function () {
     return $http.get('/api/checkout').then(function(res){
       return res.data; //should be an array of orders for admins only
@@ -10,10 +13,11 @@ app.factory('Orders', function ($http) {
   };
 
   var getOrder = function(orderId){
-    return $http.get('/api/checkout/' + orderId).then(function(res){
-      return res.data; //should be an order object
-    }, function(err){
-      console.log(err);
+        update.justOrderd = false;
+        return $http.get('/api/checkout/' + orderId).then(function(res){
+          return res.data; //should be an order object
+        }, function(err){
+          console.log(err);
     })
   }
 
@@ -28,7 +32,9 @@ app.factory('Orders', function ($http) {
 
     var userConfirmOrder = function(order) {
       return $http.post('/api/checkout', order).then(function(res) {
-        return res.data; //returns the order
+        update.currentOrder = res.data;
+        update.justOrderd = true;
+        return res.data;
       }, function(err) {
         console.log('error', err);
       });
@@ -42,6 +48,7 @@ app.factory('Orders', function ($http) {
     };
 
   return {
+    update,
     getAllOrders,
     getOrder,
     userConfirmOrder,

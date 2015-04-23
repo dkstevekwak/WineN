@@ -7,7 +7,7 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller("CheckoutCtrl", function($scope, Cart, Users, Orders){
+app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders){
 	var getCurrentUser = function(){
 		Users.getCurrentUser().then(function(currUser){
 			$scope.user = currUser;
@@ -33,6 +33,7 @@ app.controller("CheckoutCtrl", function($scope, Cart, Users, Orders){
 		Orders.userConfirmOrder(order).then(function(order){
 			Cart.emptyCart();
 			console.log("order created!!!", order);
+			$state.go('order'); //returns the order
 			//redirect via state after thankyou/confirmation page created
 		}, function(err){
 			console.log('order creation failed oh no', err);
