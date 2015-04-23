@@ -58,6 +58,6 @@ var schema = new mongoose.Schema({
 		city: String,
 		state: String,
 		zip: String
-	},
+	}
 });
 mongoose.model('Order', schema);
