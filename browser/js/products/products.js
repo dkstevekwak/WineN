@@ -7,9 +7,9 @@ app.config(function ($stateProvider) {
     });
 });
 
-
-
-app.controller('ProductsController', function($scope, Products){
+app.controller('ProductsController', function($scope, Products, localStorageService){
+	//locatStorageService	
+	
 	$scope.categories=['all', 'Red','White','Sparkling',"Cider"];
 	$scope.currentCategory = "all";
 	$scope.selectCategory = function(category){
