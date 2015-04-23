@@ -6,12 +6,10 @@ var sinon = require('sinon');
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
 
-require('../../../server/db/models/order');
 require('../../../server/db/models/user');
 require('../../../server/db/models/product');
 require('../../../server/db/models/cart');
 
-var Order = mongoose.model('Order');
 var User = mongoose.model('User');
 var Product = mongoose.model('Product');
 var Cart = mongoose.model('Cart');
@@ -54,11 +52,11 @@ describe('Cart model', function(){
 		});
     });
     
-	var order;
-    beforeEach('Create temporary order', function (done) {
-		order = new Order({
+	var cart;
+    beforeEach('Create temporary cart', function (done) {
+		cart = new Cart({
+			session: "Hpgq9Kdr5fpWDxqRnyR-KO_DvZFxcoqT", //session._id
 			user: user._id,
-			paid: false,
 			cartProducts: [
 			               { 
 			            	   product_id: product1._id, 
@@ -71,15 +69,9 @@ describe('Cart model', function(){
 			            	   qty: "2"
 			               }
 			              ],
-			status: "Ordered",
-			date: new Date(),
-			promoCode: "SPRING15",
-			shipping: "5.00",
-			tax: "1.00",
-			subTotal: "46.97",
-			total: "52.97"
+			date: Date.now,
 		});
-		order.save(function(err) {
+		cart.save(function(err) {
 			done();
 		});
     });
@@ -88,36 +80,29 @@ describe('Cart model', function(){
         clearDB(done);
     });
 
-    it('should have status field of type string',function(done){
-		expect(order.status).to.equal('Ordered');
-		expect(order.status).to.be.a('string');
+    it('has session field of type string',function(done){
+		expect(cart.session).to.equal('Hpgq9Kdr5fpWDxqRnyR-KO_DvZFxcoqT');
+		expect(cart.session).to.be.a('string');
 		done();
     });
 
-    it('should have date field of type date',function(done){
-		expect(order.date).to.be.instanceOf(Date);
+    it('has user field is a reference to User',function(done){
+		expect(cart.user).to.be.instanceOf(Object);
+		done();
+    });    
+    
+    it('has date field of type date',function(done){
+		expect(cart.date).to.be.instanceOf(Date);
 		done();
     });
-
-    it('should have user field of type string',function(done){
-//		expect(order.user.toString).to.equal(user._id.toString);
-		expect(order.user).to.be.a('string');
-		done();
-    });
-
-    it('should have a paid field which is a boolean',function(done){
-		expect(order.paid).to.be.equal(false);
-		expect(order.paid).to.be.a('boolean');
-		done();
-    });
-
-    it('should have cartProducts field which is an array of objects with keys: productId, price, qty',function(done){
-		expect(order.cartProducts[0].product_id).to.equal(product1._id);
-		expect(order.cartProducts[0].price).to.be.equal("8.99");
-		expect(order.cartProducts[0].qty).to.be.equal("1");
-		expect(order.cartProducts[1].product_id).to.equal(product2._id);
-		expect(order.cartProducts[1].price).to.be.equal("18.99");
-		expect(order.cartProducts[1].qty).to.be.equal("2");
+    
+    it('has cartProducts field which is an array of objects with keys: productId, price, qty',function(done){
+		expect(cart.cartProducts[0].product_id).to.equal(product1._id);
+		expect(cart.cartProducts[0].price).to.be.equal("8.99");
+		expect(cart.cartProducts[0].qty).to.be.equal("1");
+		expect(cart.cartProducts[1].product_id).to.equal(product2._id);
+		expect(cart.cartProducts[1].price).to.be.equal("18.99");
+		expect(cart.cartProducts[1].qty).to.be.equal("2");
 		done();
     });
     

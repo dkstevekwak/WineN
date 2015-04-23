@@ -119,7 +119,7 @@ describe('Product model', function(){
    //});
        //product.save(function(err){
 		   //console.log('ERR: ', err)
-            //expect(err.message).to.equal("Validation Failed"); //FI
+            //expect(err.message).to.equal("Validation Failed");
             //done();
         //});
     //});
@@ -134,12 +134,12 @@ describe('Product model', function(){
             createdBy: user._id
         });
        product.save(function(err){
-            expect(err.message).to.equal("Validation Failed"); //FI
+            expect(err.message).to.equal("Validation failed");
             done();
         });
     });
 
-    xit('should require price',function(done){
+    it('should require price',function(done){
         var product = new Product({
             name: "Jimmy's Brew",
             image:'/images/jimmysbrew.png',
@@ -149,12 +149,12 @@ describe('Product model', function(){
             createdBy: user._id
        });
        product.save(function(err){
-            expect(err.message).to.equal("Validation Failed"); //FI
+            expect(err.message).to.equal("Validation failed");
 			done();
         });
     });
 
-    xit('should require category',function(done){
+    it('should require category',function(done){
         var product = new Product({
             name: "Jimmy's Brew",
             image:'/images/jimmysbrew.png',
@@ -164,12 +164,12 @@ describe('Product model', function(){
             createdBy: user._id
         });
        product.save(function(err){
-            expect(err.message).to.equal("Validation Failed"); //FI
+            expect(err.message).to.equal("Validation failed");
 			done();
         });
     });
 
-    xit('should require createdBy',function(done){
+    it('should require createdBy',function(done){
         var product = new Product({
             name: "Jimmy's Brew",
             image:'/images/jimmysbrew.png',
@@ -179,7 +179,7 @@ describe('Product model', function(){
             categories: ['Organic','Red']
         });
        product.save(function(err){
-            expect(err.message).to.equal("Validation Failed"); //FI
+            expect(err.message).to.equal("Validation failed");
             done();
         });
     });
