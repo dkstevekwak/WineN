@@ -7,12 +7,20 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller("CheckoutCtrl", function($scope){
+app.controller("CheckoutCtrl", function($scope, Cart){
 	$scope.user = {
 		username: "DJ",
 		shippingAddress: "334 79th St"
 	};
-	$scope.products = [];
+
+	$scope.products = Cart.cart;
+	$scope.checkoutDetails = {
+		subtotal: Cart.calculateSubTotal(),
+		tax: Cart.tax,
+		shipping: Cart.shipping,
+		total: Cart.calculateSubTotal()+Cart.tax+Cart.shipping
+	};
+
 	
 
 });

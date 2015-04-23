@@ -1,4 +1,35 @@
 <section id="checkout">
     This is checkout view
+    <form>
+    	<h3>{{user.username}}<h3>
+    	<label for="firstname-order">First name:</label>
+    	<input id="firstname-order" type='text' class="form-control" ng-model="user.firstName" />
+    	<label for="lastname-order">Last name:</label>
+    	<input id="lastname-order" type='text' class="form-control" ng-model="user.lastName" />
+    	<label>Address:</label>
+    	<input type='text' placeholder="line1" class="form-control" ng-model="user.shippingAddress.line1" />
+    	<input type='text' placeholder="line2" class="form-control" ng-model="user.shippingAddress.line2" />
+    	<input type='text' placeholder="city" class="form-control" ng-model="user.shippingAddress.city" />
+    	<input type='text' placeholder="state" class="form-control" ng-model="user.shippingAddress.state" />
+    	<input type='text' placeholder="zip" class="form-control" ng-model="user.shippingAddress.zip" />
+    </form>
+    <section id="all-products">
+    	<div class="productBox" ng-repeat="product in products">
+    		<h3 class="eachProduct"> {{product.name}}</h3>
+    		<h3 class="eachProduct"> {{product.description}}</h3>
+    		<img src="{{product.image}}">
+    		<h3 class="eachProduct"> {{product.price}}</h3>
+    		<h3 class="eachProduct"> {{product.qty}}</h3>
+    		<h3 class="eachProduct" ng-repeat="productCategory in product.categories"> {{productCategory}}</h3>
+    		<button ui-sref="productDetails({productId: product._id})">More Info</button>
+    	</div>
+    </section>
+    <div class="checkoutDetails">
+    	<h3>Sub Total: {{checkoutDetails.subtotal | currency}}</h3>
+    	<h3>Tax: {{ checkoutDetails.tax | currency }}</h3>
+    	<h3>Shipping: {{ checkoutDetails.shipping  | currency }}</h3>
+    	<h2>Total: {{ checkoutDetails.total | currency }}</h2>
+    </div>
+
     
 </section>
