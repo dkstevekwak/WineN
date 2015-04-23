@@ -5,6 +5,7 @@ app.factory('Cart', function ($http,localStorageService) {
 	var shipping = 5;
 	var tax = 5;
 	var localProducts = JSON.parse(localStorage.getItem('cart')) || [];
+	
 	//Jimmy and DJ, starting to work on ngCartPersistance-#74
 		product.orderQty = 1;
 		cart.push(product);
@@ -18,12 +19,14 @@ app.factory('Cart', function ($http,localStorageService) {
             return response.data;
         });
 	};
+	
 	//empty cart
 	var emptyCart = function(){
 		var localCart = JSON.parse(localStorage.getItem('cart'));	
 		while(localCart.length){
 			localCart.pop();
 		}
+		
 		localStorage.setItem('cart',JSON.stringify(localCart));
 		while(cart.length) {
 			cart.pop();
@@ -59,7 +62,8 @@ app.factory('Cart', function ($http,localStorageService) {
 			subTotal+=calculateAmount(eachProduct.orderQty, eachProduct.price);
 		})
 		return subTotal;
-	}
+	};
+	
   return {
 	  addToCart,
 	  cart,
