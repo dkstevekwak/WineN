@@ -1,21 +1,20 @@
 'use strict';
 app.factory('Cart', function ($http,localStorageService) {
 	// nice to haves cartID, total numberOfItems and subtotal for cookie/session
-	var cart = [];
+//	var cart = [];
 	var shipping = 5;
 	var tax = 5;
-	var localProducts = JSON.parse(localStorage.getItem('cart')) || [];
+	var localCart = JSON.parse(localStorage.getItem('cart')) || [];
 
-//	var productsLS = localStorage.getItem('productIds').split(",") || [];
+	//Jimmy and DJ, starting to work on ngCartPersistance-#74
 	
-
 	//add to cart
 	var addToCart = function(product) {
 		product.orderQty = 1;
-		cart.push(product);
+//		cart.push(product);
 		//set local storage in the browser
-		localProducts.push(product);
-		localStorage.setItem('cart',JSON.stringify(localProducts));
+		localCart.push(product);
+		localStorage.setItem('cart',JSON.stringify(localCart));
 		//get local storage in the browser
 		$http.get('api/cart', {
             params: { productId: product._id }
@@ -30,25 +29,25 @@ app.factory('Cart', function ($http,localStorageService) {
 			localCart.pop();
 		}
 		localStorage.setItem('cart',JSON.stringify(localCart));
-		while(cart.length) {
-			cart.pop();
-		}
+//		while(cart.length) {
+//			cart.pop();
+//		}
 	};
 
 	var removeItem = function(product){
 		//local storage
-		localProducts = JSON.parse(localStorage.getItem('cart'));
-		localProducts = localProducts.filter(function(el){
+		localCart = JSON.parse(localStorage.getItem('cart'));
+		localCart = localCart.filter(function(el){
 			return el._id !== product._id;
 		});
-		localStorage.setItem('cart',JSON.stringify(localProducts));		
+		localStorage.setItem('cart',JSON.stringify(localCart));		
 		
 		//angular cart
-		cart.forEach(function(element,index){
-			if(element._id===product._id){
-				cart.splice(index,1)
-			}
-		});
+//		cart.forEach(function(element,index){
+//			if(element._id===product._id){
+//				cart.splice(index,1)
+//			}
+//		});
 	};
 	//remove from cart
 	
@@ -60,14 +59,14 @@ app.factory('Cart', function ($http,localStorageService) {
 
 	var calculateSubTotal = function(){
 		var subTotal=0;
-		angular.forEach(cart, function(eachProduct){
+		angular.forEach(localCart, function(eachProduct){
 			subTotal+=calculateAmount(eachProduct.orderQty, eachProduct.price);
 		})
 		return subTotal;
 	}
   return {
 	  addToCart,
-	  cart,
+	  localCart,
 	  emptyCart,
 	  calculateSubTotal,
 	  removeItem,
