@@ -29,9 +29,7 @@ app.controller('CartController', function($scope, Cart){
 		Cart.addToCart(product);
 	};
 	$scope.removeItem = function(product){
-		Cart.cart = Cart.cart.filter(function(element){
-			return element._id!==product._id;
-		});
+		Cart.removeItem(product);
 		$scope.cartProducts = Cart.cart;
 		$scope.calculateSubTotal();
 	}

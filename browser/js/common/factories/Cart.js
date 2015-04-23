@@ -17,6 +17,14 @@ app.factory('Cart', function ($http) {
 			cart.pop();
 		}
 	};
+
+	var removeItem = function(product){
+		cart.forEach(function(element,index){
+			if(element._id===product._id){
+				cart.splice(index,1)
+			}
+		});
+	};
 	//remove from cart
 	
 	//eventually save cart  
@@ -37,6 +45,7 @@ app.factory('Cart', function ($http) {
 	  cart,
 	  emptyCart,
 	  calculateSubTotal,
+	  removeItem,
 	  shipping,
 	  tax
   };

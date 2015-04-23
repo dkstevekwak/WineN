@@ -14,7 +14,13 @@ app.controller("CheckoutCtrl", function($scope, Cart){
 	};
 
 	$scope.products = Cart.cart;
-	
+	$scope.checkoutDetails = {
+		subtotal: Cart.calculateSubTotal(),
+		tax: Cart.tax,
+		shipping: Cart.shipping,
+		total: Cart.calculateSubTotal()+Cart.tax+Cart.shipping
+	};
+
 	
 
 });
