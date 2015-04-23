@@ -1,63 +1,78 @@
 'use strict';
 var mongoose = require('mongoose');
 
+//define cartProducts schema
+
+
 var schema = new mongoose.Schema({
-	user: { //either user._id or session._id
-        type: String,
-		required: true
-		//unique : true,
-		//dropDups: true
-    },
+		user: {
+			_id: {
+				type: String, //tentative until we decide sessionID or userID handling
+				required: true
+			},
+			firstName: {
+				type: String
+			},
+			lastName: {
+				type: String
+			},
+			shippingAddress: {
+				line1: String,
+				line2: String,
+				city: String,
+				state: String,
+				zip: String
+			},
+			billingAddress: {
+				line1: String,
+				line2: String,
+				city: String,
+				state: String,
+				zip: String
+			}
+		},
+
     paid: {
         type: Boolean,
         default: false
     },
-    cartProducts: {
-        type: [],
-    	default: [] //we don't have to check if it exists or not
+    cart: {
+        type: []
     },
     status: {
-        type: String,
-        required: true
+        type: String
     },
     date: {
-		type: Date,
-		default: new Date()
+			type: Date
     },
     promoCode: {
         type: String
     },
-	shipping: {
-		type: String
-	},
-    tax: {
-		type: String
-	},
-    subTotal: {
-		type: String
-	},
-    total: {
-		type: String
-	},
-	firstName: {
-		type: String
-	},
-	lastName: {
-		type: String
-	},
-	shippingAddress: {
-		line1: String,
-		line2: String,
-		city: String,
-		state: String,
-		zip: String
-	},
-	billingAddress: {
-		line1: String,
-		line2: String,
-		city: String,
-		state: String,
-		zip: String
+	details: {
+		shipping: {
+			type: Number
+		},
+		tax: {
+			type: Number
+		},
+		subTotal: {
+			type: Number
+		}
 	}
 });
+
+schema.virtual('details.total').get(function(){
+	return this.details.shipping + this.details.tax + this.details.subTotal;
+});
+schema.pre('save', function(next){
+	console.log('inside presave');
+	if (!this.paid) this.paid = true;
+	if (!this.status) this.status = 'Created';
+	if (!this.date) this.date = Date.now();
+	next();
+});
+
+schema.set('toJSON', { virtuals: true });
+
 mongoose.model('Order', schema);
+

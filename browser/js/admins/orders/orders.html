@@ -1,3 +1,17 @@
 <section id="orders">
     This is orders view
+    <section id="all-orders-admin">
+        This is orders
+        <ul ng-repeat="order in orders">
+            <h1>{{ order._id }}</h1>
+            <h2>{{ order.date }}</h2>
+            <form name="editOrder-{{order._id}}" ng-submit="updateOrder(order)">
+                Name: <input name="editName-{{order._id}}" ng-model="order.user.firstName"/><br />
+                Total: <input name="editName-{{order._id}}" ng-model="order.details.total"/><br />
+                Status: <input name="editName-{{order._id}}" ng-model="order.status"/><br />
+                Paid: <input name="editName-{{order._id}}" ng-model="order.paid"/><br />
+                <button>Update Order</button>
+            </form>
+        </ul>
+    </section>
 </section>
