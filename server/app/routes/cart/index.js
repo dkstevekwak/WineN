@@ -6,14 +6,11 @@ var _ = require("lodash");
 module.exports = router;
 
 router.get('/', function (req, res,next) {
-//	console.log("req.session.cart ",req.session.cart );
-	console.log("req",req);
-	var cart = req.session.cart || { products: [] };
-	req.session.cart = cart;
-	req.session.cart.products.push(req.query.productId);
-	console.log("req.session",req.session);
-	if (err) return next(err);
-	res.sendStatus(200);
+//	var cart = req.session.cart || { products: [] };
+//	req.session.cart = cart;
+//	req.session.cart.products.push(req.query.productId);
+//	if (err) return next(err);
+//	res.sendStatus(200);
 //	next();	
 //	//find product in database 
 //	Product.findById(req.param.productId,function(err,product){
