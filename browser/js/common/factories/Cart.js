@@ -10,6 +10,11 @@ app.factory('Cart', function ($http) {
 	var addToCart = function(product) {
 		product.orderQty = 1;
 		cart.push(product);
+		$http.get('api/cart', {
+            params: { productId: product._id }
+        }).then(function (response) {
+            return response.data;
+        });
 	};
 	//empty cart
 	var emptyCart = function(){

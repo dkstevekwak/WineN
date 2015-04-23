@@ -59,7 +59,6 @@ var schema = new mongoose.Schema({
 			type: Number
 		}
 	}
-
 });
 
 schema.virtual('details.total').get(function(){
