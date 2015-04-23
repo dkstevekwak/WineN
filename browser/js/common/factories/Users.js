@@ -16,6 +16,14 @@ app.factory('Users', function ($http) {
       console.log(err);
     })
   }
+  var getCurrentUser = function(){
+    return $http.get('/session').then(function(res){
+      console.log('session', res)
+      return res.data.user;
+    }, function(err){
+      console.log('user is not logged in');
+    })
+  }
 
   var updateUser = function(user) {
     //var toSendUser = {};
@@ -35,7 +43,8 @@ app.factory('Users', function ($http) {
   return {
     getAllUsers,
     getUser,
-    updateUser
+    updateUser,
+    getCurrentUser
   };
 
 });
