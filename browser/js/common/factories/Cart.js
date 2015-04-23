@@ -5,12 +5,7 @@ app.factory('Cart', function ($http,localStorageService) {
 	var shipping = 5;
 	var tax = 5;
 	var localProducts = JSON.parse(localStorage.getItem('cart')) || [];
-
-//	var productsLS = localStorage.getItem('productIds').split(",") || [];
-	
-
-	//add to cart
-	var addToCart = function(product) {
+	//Jimmy and DJ, starting to work on ngCartPersistance-#74
 		product.orderQty = 1;
 		cart.push(product);
 		//set local storage in the browser
