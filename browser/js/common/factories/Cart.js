@@ -7,20 +7,20 @@ app.factory('Cart', function ($http,localStorageService) {
 	var localCart = JSON.parse(localStorage.getItem('cart')) || [];
 
 	//Jimmy and DJ, starting to work on ngCartPersistance-#74
-	
+
 	function productExists(productId){
 		var test = localCart.filter(function(el){
 			return el._id === productId;
 		})
 		return test.length;
 	}
-	
+
 	function incrementQty(productId){
 		localCart.filter(function(el){
 			return el._id === productId;
 		})[0].orderQty++;
-	}	
-	
+	}
+
 	//add to cart
 	var addToCart = function(product) {
 		//find product in local cart to update qty
@@ -28,8 +28,8 @@ app.factory('Cart', function ($http,localStorageService) {
 			incrementQty(product._id);
 			localStorage.setItem('cart',JSON.stringify(localCart));
 			return;
-		}		
-		
+		}
+
 		product.orderQty = 1;
 //		cart.push(product);
 		//set local storage in the browser
@@ -44,7 +44,7 @@ app.factory('Cart', function ($http,localStorageService) {
 	};
 	//empty cart
 	var emptyCart = function(){
-		var localCart = JSON.parse(localStorage.getItem('cart'));	
+		localCart = JSON.parse(localStorage.getItem('cart'));
 		while(localCart.length){
 			localCart.pop();
 		}
@@ -60,8 +60,8 @@ app.factory('Cart', function ($http,localStorageService) {
 		localCart = localCart.filter(function(el){
 			return el._id !== product._id;
 		});
-		localStorage.setItem('cart',JSON.stringify(localCart));		
-		
+		localStorage.setItem('cart',JSON.stringify(localCart));
+
 		//angular cart
 //		cart.forEach(function(element,index){
 //			if(element._id===product._id){
@@ -70,8 +70,12 @@ app.factory('Cart', function ($http,localStorageService) {
 //		});
 	};
 	//remove from cart
-	
-	//eventually save cart  
+
+	var getCart = function() {
+		return localCart;
+	};
+
+	//eventually save cart
 	var calculateAmount = function(q,p){
 		if(!q||!p) return 0;
 		return parseFloat(q) * parseFloat(p);
@@ -84,14 +88,14 @@ app.factory('Cart', function ($http,localStorageService) {
 		})
 		return subTotal;
 	};
-	
+
   return {
 	  addToCart,
-	  localCart,
 	  emptyCart,
 	  calculateSubTotal,
 	  removeItem,
 	  shipping,
+	  getCart,
 	  tax
   };
 
