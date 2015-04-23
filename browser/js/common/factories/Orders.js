@@ -1,6 +1,7 @@
 'use strict';
 app.factory('Orders', function ($http) {
-
+  var currentOrder = null;
+  var justOrdered = false;
   var getAllOrders = function () {
     return $http.get('/api/checkout').then(function(res){
       return res.data; //should be an array of orders for admins only
@@ -10,10 +11,11 @@ app.factory('Orders', function ($http) {
   };
 
   var getOrder = function(orderId){
-    return $http.get('/api/checkout/' + orderId).then(function(res){
-      return res.data; //should be an order object
-    }, function(err){
-      console.log(err);
+        justOrdered=false;
+        return $http.get('/api/checkout/' + orderId).then(function(res){
+          return res.data; //should be an order object
+        }, function(err){
+          console.log(err);
     })
   }
 
@@ -28,13 +30,17 @@ app.factory('Orders', function ($http) {
 
     var userConfirmOrder = function(order) {
       return $http.post('/api/checkout', order).then(function(res) {
-        return res.data; //returns the order
+        currentOrder = res.data;
+        justOrdered= true;
+        console.log("his is res from server", res.data)
+        return res.data;
       }, function(err) {
         console.log('error', err);
       });
     };
     var guestConfirmOrder = function(order) {
       return $http.post('/api/checkout/guest', order).then(function(res) {
+        console.log()
         return res.data; //returns the order
       }, function(err) {
         console.log('error', err);
@@ -42,6 +48,8 @@ app.factory('Orders', function ($http) {
     };
 
   return {
+    justOrdered,
+    currentOrder,
     getAllOrders,
     getOrder,
     userConfirmOrder,
