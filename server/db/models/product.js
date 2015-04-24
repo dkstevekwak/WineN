@@ -28,7 +28,10 @@ var schema = new mongoose.Schema({
 	categories: {
 		type: [String],
 		required: true
-	}
+	},
+    reviews: [{
+        type: mongoose.Schema.Types.ObjectId, ref: 'Review' //commented out required
+    }]
 });
 
 mongoose.model('Product', schema);

@@ -38,7 +38,7 @@ app.factory('Users', function ($http) {
       console.log('error', err);
     });
   };
-  //TODO need to ensure changing password makes it salted
+
 
   return {
     getAllUsers,

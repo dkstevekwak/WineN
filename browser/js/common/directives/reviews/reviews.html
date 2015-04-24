@@ -2,15 +2,36 @@
     <div>
         <ul>
             <li ng-repeat = "review in reviews">
-                {{review}}
-                <button ng-click="editReview(review)">edit</button>
-                <button ng-click="deleteReview(review)">delete</button>
+                {{review.title}}
+                {{review.text}}
             </li>
         </ul>
     </div>
     <form name="commentForm" ng-submit="postReview(newReview.text)" novalidate>
-        <input type='textarea'  ng-model='newReview.text' ng-maxlength='40'/>
+        <label>
+            <input type="radio" ng-model="newReview.rating" ng-value="1" />
+            1
+        </label>
+        <label>
+            <input type="radio" ng-model="newReview.rating" ng-value="2" />
+            2
+        </label>
+        <label>
+            <input type="radio" ng-model="newReview.rating" ng-value="3" />
+            3
+        </label>
+        <label>
+            <input type="radio" ng-model="newReview.rating" ng-value="4" />
+            4
+        </label>
+        <label>
+            <input type="radio" ng-model="newReview.rating" ng-value="5" />
+            5
+        </label>
+
+        <input type='text'  ng-model='newReview.title' ng-maxlength='40'/>
+        <textarea ng-model='newReview.text' ng-maxlength='40'/>
         <br/>
         <button type='submit'>Post</button>
     </form>
-</div>
+</div>git
