@@ -8,21 +8,22 @@ app.factory('Reviews', function ($http) {
             })
         },
         getReviews: function(productId){
-            return $http.get('/api/reviews/:'+productId).then(function(res){
+            return $http.get('/api/reviews/'+ productId).then(function(res){
+                console.log(res.data)
                 return res.data;
             }, function(err){
                 console.log(err);
             })
         },
         updateReview: function(reviewId){
-            return $http.put('/api/reviews/:'+reviewId).then(function(res){
+            return $http.put('/api/reviews/'+reviewId).then(function(res){
                 return res.data;
             }, function(err){
                 console.log(err);
             })
         },
         deleteReview: function(reviewId){
-            return $http.delete('/api/reviews/:'+reviewId).then(function(res){
+            return $http.delete('/api/reviews/'+reviewId).then(function(res){
                 return res.data;
             }, function(err){
                 console.log(err);
