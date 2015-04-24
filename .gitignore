@@ -6,3 +6,4 @@ public
 .DS_Store
 *.swp
 *.swo
+server/env/development.js
