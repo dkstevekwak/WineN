@@ -24,7 +24,7 @@ app.factory('Products', function ($http) {
         toSendProduct[key]=updatedProduct[key]
       }
     });
-	  return $http.put('/api/products/' + product._id, toSendProduct).then(function(res) {
+	  return $http.put('/api/products/' + oldProduct._id, toSendProduct).then(function(res) {
 		  return res.data;
 	  }, function(err) {
 		  console.log('error', err);
