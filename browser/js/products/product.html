@@ -9,5 +9,8 @@
 		<li class="singleProduct"> {{product.categories}}</li>
 		<button ng-click="addToCart(product)">Add To Cart</button>
 	</ul>
+	<button type="submit" ng-click="viewComments()">Comments</button>
+	<reviews ng-show="seeComments"></reviews>
 </section>
+
 
