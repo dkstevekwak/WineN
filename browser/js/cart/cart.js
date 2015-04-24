@@ -19,11 +19,10 @@ app.controller('CartController', function($scope, Cart){
 		$scope.subTotal = Cart.calculateSubTotal();
 		$scope.cartProducts = Cart.getCart();
 		$scope.total = $scope.shipping + $scope.tax + $scope.subTotal;
-
 	};
 
 	//Order is important
-	if($scope.cartProducts.length) updateCartFields();	//runs initial calculate on load, further called with ng-change on html quantity forms
+	if($scope.cartProducts && $scope.cartProducts.length) updateCartFields();	//runs initial calculate on load, further called with ng-change on html quantity forms
 
 	$scope.addToCart = function(product){
 		Cart.addToCart(product);

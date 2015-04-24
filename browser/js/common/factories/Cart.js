@@ -6,6 +6,9 @@ app.factory('Cart', function ($http,localStorageService, Users) {
 	var tax = 5;
 	var localCart = JSON.parse(localStorage.getItem('cart')) || [];
 
+
+
+
 	//Jimmy and DJ, starting to work on ngCartPersistance-#74
 
 	function productExists(productId){
@@ -19,6 +22,7 @@ app.factory('Cart', function ($http,localStorageService, Users) {
 		localCart.filter(function(el){
 			return el._id === productId;
 		})[0].orderQty++;
+		localStorage.setItem('cart',JSON.stringify(localCart));
 	}
 	function changeQty(productId, qty){
 		localCart.filter(function(el){
@@ -29,11 +33,14 @@ app.factory('Cart', function ($http,localStorageService, Users) {
 
 	//add to cart
 	var addToCart = function(product) {
+		console.log(localCart);
+		if (!localCart) {
+			localCart = [];
+			localStorage.setItem('cart',JSON.stringify(localCart));
+		}
 		//find product in local cart to update qty
 		if (productExists(product._id)){
 			incrementQty(product._id);
-			localStorage.setItem('cart',JSON.stringify(localCart));
-
 			return;
 		}
 
@@ -69,12 +76,12 @@ app.factory('Cart', function ($http,localStorageService, Users) {
 
 	var cloudCartSync = function(){
 		readCart();
-		Users.getCurrentUser().then(function(user){
-			if (localCart.length == 0 && user.cart.length > 0) {
+		return Users.getCurrentUser().then(function(user){
+			if (localCart && localCart.length == 0 && user.cart.length > 0) {
 				localStorage.setItem('cart',JSON.stringify(user.cart));
 				readCart();
 			}
-			else if (localCart.length !== 0) {
+			else if (localCart && localCart.length) {
 				updateCloudCart();
 			}
 			console.log('cloudCartSynced');
@@ -97,7 +104,7 @@ app.factory('Cart', function ($http,localStorageService, Users) {
 	//	})
 	//}; //may not be necessary since cart is part of user object;
 	var updateCloudCart = function(){
-		Users.getCurrentUser().then(function(user) {
+		return Users.getCurrentUser().then(function(user) {
 			console.log('serverCart Updating');
 			readCart();
 			return $http.put('/api/users/' + user._id + '/cart', localCart).then(function (res) {
@@ -116,7 +123,7 @@ app.factory('Cart', function ($http,localStorageService, Users) {
 	//cart is  cleared server side upon order creation;
 	var removeItem = function(product){
 		//local storage
-		localCart = JSON.parse(localStorage.getItem('cart'));
+		readCart();
 		localCart = localCart.filter(function(el){
 			return el._id !== product._id;
 		});
@@ -143,6 +150,7 @@ app.factory('Cart', function ($http,localStorageService, Users) {
 	};
 
 	var calculateSubTotal = function(){
+		readCart();
 		var subTotal=0;
 		angular.forEach(localCart, function(eachProduct){
 			subTotal+=calculateAmount(eachProduct.orderQty, eachProduct.price);
