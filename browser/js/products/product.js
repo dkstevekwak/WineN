@@ -12,7 +12,7 @@ app.config(function($stateProvider) {
 app.controller('ProductController', function($scope, $stateParams, Products, Cart, Reviews) {
 
 	var productId = $stateParams.productId;
-	$scope.seeComments = true;
+	$scope.seeComments = false;
 
 	Products.getProduct(productId)
 	.then(function(product) {

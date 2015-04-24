@@ -77,7 +77,7 @@ var seedProducts = function () {
         var products = [
             {
                 name: 'A red wine',
-                image: 'http://placehold.it/500x500',
+                image: '/img/Andlau Riesling.gif',
                 description: 'This is a very fancy red wine',
                 price: '59.99',
                 qty: 37,
@@ -86,9 +86,42 @@ var seedProducts = function () {
             },
             {
                 name: 'A green wine',
-                image: 'http://placehold.it/500x500',
-                description: 'This is a very fancy green wine',
+                image: '/img/Drappier grande sendree rose.gif',
+                description: 'very fancy green wine',
                 price: '39.99',
+                qty: 27,
+                createdBy: user._id,
+                categories: ['White']
+            },
+            {
+                name: 'A yellow wine',
+                image: '/img/les vallerots Nuits Saint Georges.gif',
+                description: 'very fancy green wine',
+                price: '49.99',
+                qty: 27,
+                createdBy: user._id,
+                categories: ['White']
+            }, {
+                name: 'A red wine',
+                image: '/img/Moenchberg Pinot Gris.gif',
+                description: 'very fancy green wine',
+                price: '79.99',
+                qty: 27,
+                createdBy: user._id,
+                categories: ['White']
+            }, {
+                name: 'A blue wine',
+                image: '/img/LB valiniere.gif',
+                description: 'very fancy green wine',
+                price: '159.99',
+                qty: 27,
+                createdBy: user._id,
+                categories: ['White']
+            }, {
+                name: 'A purple wine',
+                image: '/img/Moenchberg Pinot Gris.gif',
+                description: 'very fancy green wine',
+                price: '309.99',
                 qty: 27,
                 createdBy: user._id,
                 categories: ['White']
