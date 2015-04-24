@@ -1,0 +1,16 @@
+<div id="reviews">
+    <div>
+        <ul>
+            <li ng-repeat = "review in reviews">
+                {{review}}
+                <button ng-click="editReview(review)">edit</button>
+                <button ng-click="deleteReview(review)">delete</button>
+            </li>
+        </ul>
+    </div>
+    <form name="commentForm" ng-submit="postReview(newReview.text)" novalidate>
+        <input type='textarea'  ng-model='newReview.text' ng-maxlength='40'/>
+        <br/>
+        <button type='submit'>Post</button>
+    </form>
+</div>

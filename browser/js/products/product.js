@@ -9,9 +9,10 @@ app.config(function($stateProvider) {
 
 });
 
-app.controller('ProductController', function($scope, $stateParams, Products, Cart) {
+app.controller('ProductController', function($scope, $stateParams, Products, Cart, Reviews) {
 
 	var productId = $stateParams.productId;
+	$scope.seeComments = true;
 
 	Products.getProduct(productId)
 	.then(function(product) {
@@ -21,7 +22,13 @@ app.controller('ProductController', function($scope, $stateParams, Products, Car
 	});
 
 	$scope.addToCart = function(product) {
+		console.log("hi")
 		Cart.addToCart(product);
 	};
+
+	$scope.viewComments = function(){
+		$scope.seeComments = true;
+		else $scope.seeComments = false;
+	}
 
 });
