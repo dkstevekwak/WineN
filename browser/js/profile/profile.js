@@ -8,34 +8,60 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller("ProfileController", function($scope, Users, Orders, $state){
-	//$scope.user = {
-	//	username: "DJ",
-	//	password: "pass",
-	//	email: "email@gmail.com",
-	//	role: "admin",
-	//	orders: ['order1','order2'],
-	//	mailingAddress: "334 79th St",
-	//	shippingAddress: "334 79th St"
-	//}
+app.controller("ProfileController", function($scope, Users, Orders, Reviews, $state){
+
+    $scope.updatedReview = null;
+
+    $scope.currentTab = 'orders';
+
     $scope.updateProfile = function(user){
         Users.updateUser(user); //not sure if this sets unshown fields to null;
     }
 	$scope.getCurrentUser = function(){
       Users.getCurrentUser().then(function(user){
-          console.log('successful user response', user)
           $scope.user = user;
-      }, function(err){
-          console.log('not logged in');
-      })
+      }).then(function() {
+        return Reviews.getUserReviews($scope.user._id)
+      }).then(function(reviews) {
+            $scope.reviews = reviews;
+      }).catch(function(err) {
+          console.log(err);
+      });
   }
-  $scope.viewOrder = function(orderId){
-    Orders.getOrder(orderId).then(function(order){
-      Orders.update.currentOrder = order;
-      $state.go('order');
-    }, function(err){
-      console.log('failed to get order', err)
-    });
-  }
+
+    $scope.setCurrentTab = function(tabName) {
+        $scope.currentTab = tabName;
+    };
+
+    $scope.viewOrder = function(orderId){
+        Orders.getOrder(orderId).then(function(order){
+            Orders.update.currentOrder = order;
+            $state.go('order');
+        }, function(err){
+            console.log('failed to get order', err)
+        });
+    }
+
+    $scope.updateReview = function(review) {
+        Reviews.updateReview(review)
+        .then(function() {
+        }, function(err) {
+            console.log(err);
+        });
+    };
+
+    $scope.deleteReview = function(reviewId) {
+        Reviews.deleteReview(reviewId)
+        .then(function() {
+            $scope.reviews = $scope.reviews.filter(review => review._id !== reviewId);
+            //function(review) {
+                //return review._id !== reviewId
+            //}
+        }, function(err) {
+            console.log(err)
+        });
+    };
+
     $scope.getCurrentUser();
+
 });

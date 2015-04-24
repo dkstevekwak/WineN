@@ -1,8 +1,9 @@
 'use strict';
+var _ = require('lodash');
 var router = require('express').Router();
 var Product = require('mongoose').model('Product');
 var Review = require('mongoose').model('Review');
-
+var User = require('mongoose').model('User');
 
 router.use(function(req,res,next){
     if(req.body.product){
@@ -17,7 +18,6 @@ router.use(function(req,res,next){
 
 router.get('/:productId', function(req, res, next) {
     var productId = req.params.productId;
-    console.log(productId)
     Review.find({product: productId}, function(err, reviews) {
         if (err) return next(err);
         res.send(reviews);
@@ -34,6 +34,33 @@ router.post('/', function(req,res,next){
         req.product.save(function(err){
             res.send(savedReview);
         })
+    });
+});
+
+router.get('/user/:userId', function(req, res, next) {
+    Review.find({ user: req.params.userId })
+    .populate('product')
+    .exec(function(err, reviews) {
+        if (err) return next(err);
+        res.send(reviews);
+    });
+});
+
+router.put('/', function(req, res, next) {
+    Review.findById(req.body._id, function(err, review) {
+        if (err) return next(err);
+        req.body.product = review.product;
+        _.extend(review, req.body);
+        review.save(function(err, savedReview) {
+            res.send(savedReview);
+        });
+    });
+});
+
+router.delete('/:reviewId', function(req, res, next) {
+    Review.findByIdAndRemove(req.params.reviewId, function(err) {
+        if (err) return next(err);
+        res.sendStatus(200);
     });
 });
 
