@@ -37,7 +37,11 @@ app.controller('CartController', function($scope, Cart){
 		Cart.emptyCart();
 		updateCartFields();
 	};
-	$scope.updateCart = function(){
+	$scope.changeQty = function(productId, qty){
+		Cart.changeQty(productId, qty);
+		updateCartFields();
+	};
+	$scope.updateCart = function(){//shouldn't exist
 		Cart.localCart = $scope.cartProducts;
 	};
 });

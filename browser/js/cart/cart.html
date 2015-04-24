@@ -5,7 +5,7 @@
     	<ul>
     		<li ng-repeat="product in cartProducts">
     			<h3>Name: {{product.name}}</h3>
-    			Product Quantity:<input type="text" ng-model="product.orderQty" ng-change="calculateSubTotal()"/>
+    			Product Quantity:<input type="text" ng-model="product.orderQty" ng-change="changeQty(product._id, product.orderQty)"/>
     			<h3>Price: {{product.price | currency }}</h3>
     			<!--<h3>Amount: {{calculateAmount(product.quantity,product.price)}}</h3>-->
 				<button ng-click="removeItem(product)">remove from Cart</button>

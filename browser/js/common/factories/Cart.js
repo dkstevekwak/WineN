@@ -20,6 +20,12 @@ app.factory('Cart', function ($http,localStorageService, Users) {
 			return el._id === productId;
 		})[0].orderQty++;
 	}
+	function changeQty(productId, qty){
+		localCart.filter(function(el){
+			return el._id === productId;
+		})[0] = qty;
+		localStorage.setItem('cart',JSON.stringify(localCart));
+	}
 
 	//add to cart
 	var addToCart = function(product) {
@@ -93,6 +99,7 @@ app.factory('Cart', function ($http,localStorageService, Users) {
 	var updateCloudCart = function(){
 		Users.getCurrentUser().then(function(user) {
 			console.log('serverCart Updating');
+			readCart();
 			return $http.put('/api/users/' + user._id + '/cart', localCart).then(function (res) {
 				console.log('serverCart Updated', res.data);
 				return res.data; //promise object that should be a cart;
@@ -125,6 +132,7 @@ app.factory('Cart', function ($http,localStorageService, Users) {
 	//remove from cart
 
 	var getCart = function() {
+		readCart();
 		return localCart;
 	};
 
@@ -149,7 +157,8 @@ app.factory('Cart', function ($http,localStorageService, Users) {
 	  removeItem,
 	  shipping,
 	  getCart,
-	  tax
+	  tax,
+		changeQty
   };
 
 });
