@@ -81,22 +81,27 @@ app.factory('Cart', function ($http,localStorageService, Users) {
 	};
 	cloudCartSync(); //checks cloud cart on load;
 
-	var getCloudCart = function(){
-		console.log('getting cloud cart');
-		return $http.get('/api/' + user._id + '/cart').then(function(res){
-			console.log('got serverCart', res);
-			return res.data; //should be promise object that is a cart;
-		}, function(err){
-			console.log('failed to update cart', err)
-		})
-	};
+	//var getCloudCart = function(){
+	//	console.log('getting cloud cart');
+	//	return $http.get('/api/' + user._id + '/cart').then(function(res){
+	//		console.log('got serverCart', res);
+	//		return res.data; //should be promise object that is a cart;
+	//	}, function(err){
+	//		console.log('failed to update cart', err)
+	//	})
+	//}; //may not be necessary since cart is part of user object;
 	var updateCloudCart = function(){
-		console.log('serverCart Updating');
-		return $http.put('/api/' + user._id + '/cart', localCart).then(function(res){
-			console.log('serverCart Updated', res.data);
-			return res.data; //promise object that should be a cart;
+		Users.getCurrentUser().then(function(user) {
+			console.log('serverCart Updating');
+			return $http.put('/api/users/' + user._id + '/cart', localCart).then(function (res) {
+				console.log('serverCart Updated', res.data);
+				return res.data; //promise object that should be a cart;
+			}, function (err) {
+				console.log('failed to update cart', err)
+			})
 		}, function(err){
-			console.log('failed to update cart', err)
+			console.log('failed to get current user', err);
+			return null;
 		})
 	};
 
