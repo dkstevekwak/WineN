@@ -25,12 +25,25 @@ describe('Review model', function(){
 	var user;
     beforeEach('Create temporary user', function (done) {
 		user = new User({
-			email: 'fake@email.com',
-			username: 'fakeUser'
+			email: 'obama@gmail.com',
+			   password: 'potus',
+				   role: 'admin',
+				   username: 'awang',
+			address: {
+				line1: '5 Hanover Square',
+				   line2: '25th Flr',
+				   city: 'New York City',
+				   state: 'New York',
+				   zip: '10006'
 		});
 		user.save(function(err) {
 			done();
 		});
+		var createUser = function () {
+			return User.create(user,saved){
+				if(err) throw err;
+			});
+		};
     });
     
     var products;
@@ -87,27 +100,15 @@ describe('Review model', function(){
 	var review;
     beforeEach('Create temporary review', function (done) {
 		review = new Review({
-			user: user._id,
-			paid: false,
-			cartProducts: [
-			               { 
-			            	   product_id: product1._id, 
-			            	   price: product1.price,
-			            	   qty: "1"
-			               },
-			               { 
-			            	   product_id: product2._id, 
-			            	   price: product2.price,
-			            	   qty: "2"
-			               }
-			              ],
-			status: "Ordered",
+			userId: user._id,
+			productId: product._id,
+			rating: 0.8,
+			title: "Fantasaticly Fruity Find",
+			body: "Wine to get smashed by, a case of this makes for a great travel companion, and the these bottles make create 'message bottles' when tossed into the ocean.",
+			approved: true,
+			verified: true,
 			date: Date.now,
-			promoCode: "SPRING15",
-			shipping: "5.00",
-			tax: "1.00",
-			subTotal: "46.97",
-			total: "52.97"
+			likes: 4
 		});
 		review.save(function(err) {
 			done();
@@ -117,31 +118,69 @@ describe('Review model', function(){
     afterEach('Clear test database', function (done) {
         clearDB(done);
     });
+    
+    var createReview = function (review) {
+        return Review.create(review,function(err,saved){        }
+        	if(err) throw err;
+        });
+    };
 
-    xit('should have status field of type string',function(done){
-		expect(order.status).to.equal('Ordered');
-		expect(order.status).to.be.a('string');
-		done();
+    it('has userId field of type string',function(done){
+    	createUser(user).createReview(review).then(function(review) {
+			expect(review.userId).to.be.equal('admin');
+			expect(review.username).to.be.equal('awang');
+			done();
+		})
     });
 
-    xit('should have date field of type date',function(done){
+    xit('has productId field of type date',function(done){
 		expect(order.date).to.be.instanceOf(Date);
 		done();
     });
 
-    xit('should have user field of type string',function(done){
+    xit('has rating field of type string',function(done){
 //		expect(order.user.toString).to.equal(user._id.toString);
 		expect(order.user).to.be.a('string');
 		done();
     });
 
-    xit('should have a paid field which is a boolean',function(done){
+    xit('has title field which is a boolean',function(done){
 		expect(order.paid).to.be.equal(false);
 		expect(order.paid).to.be.a('boolean');
 		done();
     });
 
-    xit('should have cartProducts field which is an array of objects with keys: productId, price, qty',function(done){
+    xit('has body field which is a boolean',function(done){
+		expect(order.paid).to.be.equal(false);
+		expect(order.paid).to.be.a('boolean');
+		done();
+    });
+
+    xit('has approved field which is a boolean',function(done){
+		expect(order.paid).to.be.equal(false);
+		expect(order.paid).to.be.a('boolean');
+		done();
+    });
+
+    xit('has verified field which is a boolean',function(done){
+		expect(order.paid).to.be.equal(false);
+		expect(order.paid).to.be.a('boolean');
+		done();
+    });
+
+    xit('has date field which is a boolean',function(done){
+		expect(order.paid).to.be.equal(false);
+		expect(order.paid).to.be.a('boolean');
+		done();
+    });
+
+    xit('has likes field which is a boolean',function(done){
+		expect(order.paid).to.be.equal(false);
+		expect(order.paid).to.be.a('boolean');
+		done();
+    });
+
+    xit('has cartProducts field which is an array of objects with keys: productId, price, qty',function(done){
 		expect(order.cartProducts[0].product_id).to.equal(product1._id);
 		expect(order.cartProducts[0].price).to.be.equal("8.99");
 		expect(order.cartProducts[0].qty).to.be.equal("1");
