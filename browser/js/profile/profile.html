@@ -1,21 +1,35 @@
 <section id="profile" class="contentTop">
 	<h1> Hello, {{user.email}}! </h1>
-	<h1>{{user.role}}</h1>
     <form class="userForm" ng-submit="updateProfile(user)">
-		Name: <input type="text" placeholder="{{user.username}}" ng-model="user.username" />
-		Password: <input type="password" ng-model="user.password"/>
-    	Email: <input type="text" placeholder="{{user.email}}" ng-model="user.email" />
-    	<button type="submit">Save Changes</button>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" placeholder="{{user.username}}" ng-model="user.username" class="form-control" id="name">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" placeholder="{{user.password}}" ng-model="user.password" class="form-control" id="password">
+        </div>
+        <div class="form-group">
+            <label for="password">email</label>
+            <input type="text" placeholder="{{user.email}}" ng-model="user.email" class="form-control" id="email">
+        </div>
+    	<button class="btn btn-default" type="submit">Save Changes</button>
     </form>
     <ul class="nav nav-tabs">
         <li role="presentation" ng-click="setCurrentTab('orders')" ng-class="{ active: currentTab === 'orders' }"><a href="#">My Orders</a></li>
         <li role="presentation" ng-click="setCurrentTab('reviews')" ng-class="{ active: currentTab === 'reviews' }"><a href="#">My Reviews</a></li>
     </ul>
     <div ng-show="currentTab === 'orders'" class="orderList">
-    	<h1> Order History</h1>
-    	<li ng-click="viewOrder(order)" ng-repeat="order in user.orders">{{order}}</li>
+    	<h1> Order Confirmation Number</h1>
+    	<div ng-repeat="order in user.orders">
+            <span>{{order}}</span>
+            <button ng-click="viewOrder(order)" class="btn btn-default">View Order Details</button>
+        </div>
+        <h3 ng-show="!user.orders">You have not placed any orders yet.</h3>
+
     </div>
     <div ng-show="currentTab === 'reviews'" class="reviewList">
+        <h3 ng-show="!user.reviews">You have not written any reviews yet.</h3>
         <ul>
             <li ng-repeat="review in reviews">
                 <h2>{{ review.product.name }}</h2>

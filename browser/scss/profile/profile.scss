@@ -1,9 +1,23 @@
 #profile{
-	margin-left:40px;
+	margin: 15% 0 0 15%;
 	.userForm {
 		input {
 			display: block;
 			margin: 0 0 10px 10px;
+		  	width: 33%;
 		}
+	  margin-bottom: 50px;
 	}
+}
+
+.orderList {
+  button {
+	display: inline-block;
+	margin-right: 30px;
+	margin-left: 30px;
+  }
+  span{
+	font-size: 20px;
+  }
+  margin-bottom: 100px;
 }
