@@ -25,6 +25,7 @@
 			<h3 class="eachProduct"> {{product.qty}}</h3>
 			<h3 class="eachProduct" ng-repeat="productCategory in product.categories"> {{productCategory}}</h3>
 			<button ui-sref="productDetails({productId: product._id})">More Info</button>
+			<button ng-click="addToCart(product)">Add To Cart</button>
 		</div>
 	</section>
 </section>
