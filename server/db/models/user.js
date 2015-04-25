@@ -49,7 +49,8 @@ var schema = new mongoose.Schema({
 	},
 	orders: [{
 		type: mongoose.Schema.Types.ObjectId, ref: 'Order'
-	}]
+	}],
+  cart: []
 });
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations

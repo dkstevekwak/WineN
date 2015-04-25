@@ -17,7 +17,7 @@ app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders){
 	}
 	getCurrentUser();
 
-	$scope.products = Cart.localCart;
+	$scope.products = Cart.getCart();
 	$scope.checkoutDetails = {
 		subTotal: Cart.calculateSubTotal(),
 		tax: Cart.tax,

@@ -47,6 +47,7 @@ router.post('/', function(req,res,next){
 	order.save(function(err,savedOrder){
 		User.findById(order.user._id, function(err, user){
 			user.orders.push(savedOrder._id);
+			user.cart = [];
 			user.save(function(err, savedUser){
 				if(err) return next(err);
 				res.send(savedOrder);
