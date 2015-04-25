@@ -30,7 +30,11 @@ app.directive('navbaradmins', function ($rootScope, AuthService, AUTH_EVENTS, $s
                     scope.user = user;
                 });
             };
-
+            scope.isAdmin = function(){
+              AuthService.getLoggedInUser().then(function (user) {
+                return (scope.user && scope.user.role === 'admin');
+              });
+            }
             var removeUser = function () {
                 scope.user = null;
             };
