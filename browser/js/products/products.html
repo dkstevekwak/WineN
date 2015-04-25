@@ -1,25 +1,28 @@
 <section id="products-user" class="contentTop col-lg-12 col-md-12 col-sm-12">
 
 	<div class="IntroPic">
-    	<img src="http://thumb101.shutterstock.com/display_pic_with_logo/184204/116996737/stock-photo-set-of-white-rose-and-red-wine-bottles-and-glas-isolated-on-white-background-116996737.jpg">
+    	<img src="http://cdn.shopify.com/s/files/1/0654/1551/t/2/assets/homeBackgroundImage.jpg?2703413769707300101">
     </div>
     <div class='promoBox'>
     	<div class='promo animated fadeInLeftBig'>
     		<h1>Promotion A</h1>
     	</div>
-    	<div class='promo animated fadeInRightBig'>
+    	<div class='promo animated zoomIn'>
     		<h1>Promotion B</h1>
     	</div>
+		<div class='promo animated fadeInRightBig'>
+			<h1>Promotion C</h1>
+		</div>
     </div>
 	<section id="all-products">
-		<div class="categorySelection">
-			<ul>
-				<li class="eachCategory" ng-repeat="category in categories" ng-click="selectCategory(category)" ng-class="{'active': category===currentCategory}"> {{category}}</li>
-			</ul>
-			<!-- Search Box Start -->
-			<input type="text" placeholder="Search" ng-model="query"/>
-			<!-- Search Box End -->
+		<div class="categorySelection btn-group btn-group-justified">
+			<div class="btn-group"  ng-repeat="category in categories" role="group">
+				<button type="button" class="btn btn-default eachCategory" ng-click="selectCategory(category)" ng-class="{'active': category===currentCategory}">{{category}}</button>
+			</div>
 		</div>
+		<!-- Search Box Start -->
+		<input class="searchBox" type="text" placeholder="Search" ng-model="query"/>
+		<!-- Search Box End -->
 
 		<div class="productBox" ng-show="currentCategory === 'all' || product.categories.indexOf(currentCategory) !== -1" ng-repeat=" product in products | filter: search ">
 			<h3 class="eachProduct"> {{product.name}}</h3>
