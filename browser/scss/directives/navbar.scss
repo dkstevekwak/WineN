@@ -1,44 +1,54 @@
+.navbar-fixed-top {
+  background: linear-gradient(#423F3F, #414040 80%, #5E5C5C);
+}
 navbar {
-
   display: block;
-  background: #a1a1a1;
-
-  fullstack-logo {
-    padding-top: 10px;
-    margin-right: 20px;
-    width: 30px;
+  font-family: sans-serif;
+  .categories {
+    margin-top: 37px;
+    letter-spacing: 2px;
+    margin-right:5%;
+  }
+  .container{
+    height:122px;
+    widht:100%;
   }
 
   a {
     color: white;
-    &:hover {
-      color: white;
-    }
+    //&:hover {
+    //  color: white;
+    //}
   }
+
 
   .nav > li > a {
     cursor: pointer;
+    font-size: 20px;
     &.active {
       color: #f30046;
     }
     &:hover {
-      transition: color 0.2s;
+      color:pink;
     }
-    &:focus {
-      color: #f30046;
-      background: transparent;
-    }
+    //&:focus {
+    //  color: #f30046;
+    //
+    //}
   }
 
   .login-button {
     float: right;
-    margin-top: 8px;
+    width: 80px;
+    margin-top: 46px;
     margin-right: 20px;
+    border: 1px solid skyblue;
   }
 
   .welcome {
     float: right;
-    margin-top: 12px;
+    margin-top: 52px;
+    margin-right: 30px;
     span {
       color: white;
     }
@@ -49,3 +59,11 @@ navbar {
   }
 
 }
+.winenlogo {
+  position: absolute;
+  padding-top: 5px;
+  width: 200px;
+  Height: 170px;
+  left: 45.5%;
+}
+
