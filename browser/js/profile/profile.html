@@ -1,5 +1,5 @@
 <section id="profile">
-	<h1> Hello, {{user.username}}! </h1>
+	<h1> Hello, {{user.email}}! </h1>
 	<h1>{{user.role}}</h1>
     <form class="userForm" ng-submit="updateProfile(user)">
 		Name: <input type="text" placeholder="{{user.username}}" ng-model="user.username" />
@@ -7,8 +7,46 @@
     	Email: <input type="text" placeholder="{{user.email}}" ng-model="user.email" />
     	<button type="submit">Save Changes</button>
     </form>
-    <div class="orderList">
+    <ul class="nav nav-tabs">
+        <li role="presentation" ng-click="setCurrentTab('orders')" ng-class="{ active: currentTab === 'orders' }"><a href="#">My Orders</a></li>
+        <li role="presentation" ng-click="setCurrentTab('reviews')" ng-class="{ active: currentTab === 'reviews' }"><a href="#">My Reviews</a></li>
+    </ul>
+    <div ng-show="currentTab === 'orders'" class="orderList">
     	<h1> Order History</h1>
     	<li ng-click="viewOrder(order)" ng-repeat="order in user.orders">{{order}}</li>
+    </div>
+    <div ng-show="currentTab === 'reviews'" class="reviewList">
+        <ul>
+            <li ng-repeat="review in reviews">
+                <h2>{{ review.product.name }}</h2>
+                <img src="{{ review.product.image }}">
+                <label>Title</label>
+                <input type="text" ng-model="review.title" />
+                <label>Content</label>
+                <input type="text" ng-model="review.text" />
+                <label>
+                    <input type="radio" ng-model="review.rating" ng-value="1" />
+                    1
+                </label>
+                <label>
+                    <input type="radio" ng-model="review.rating" ng-value="2" />
+                    2
+                </label>
+                <label>
+                    <input type="radio" ng-model="review.rating" ng-value="3" />
+                    3
+                </label>
+                <label>
+                    <input type="radio" ng-model="review.rating" ng-value="4" />
+                    4
+                </label>
+                <label>
+                    <input type="radio" ng-model="review.rating" ng-value="5" />
+                    5
+                </label>
+                <button ng-click="updateReview(review)">Edit Review</button>
+                <button ng-click="deleteReview(review._id)">Delete Review</button>
+            </li>
+        </ul>
     </div>
 </section>

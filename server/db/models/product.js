@@ -12,7 +12,7 @@ var schema = new mongoose.Schema({
         type: String
     },
     description: {
-        type: String,
+        type: mongoose.Schema.Types.Mixed,
         required: true
     },
     price: {
@@ -28,7 +28,10 @@ var schema = new mongoose.Schema({
 	categories: {
 		type: [String],
 		required: true
-	}
+	},
+    reviews: [{
+        type: mongoose.Schema.Types.ObjectId, ref: 'Review' //commented out required
+    }]
 });
 
 mongoose.model('Product', schema);

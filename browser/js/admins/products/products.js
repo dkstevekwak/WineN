@@ -7,8 +7,9 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('ProductsAdminController', function($scope, Products) {
+app.controller('ProductsAdminController', function($scope, Products, Reviews) {
 	$scope.updatedProduct = null;
+	$scope.seeReviews = true;
 
 	Products.getAllProducts()
 	.then(function(productList){
@@ -25,4 +26,26 @@ app.controller('ProductsAdminController', function($scope, Products) {
 		});
 	};
 
+	$scope.deleteReview = function(reviewId, productId) {
+		Reviews.deleteReview(reviewId).then(function() {
+			var indexToUpdate;
+			$scope.products.forEach(function(eachProduct,index) {
+				if (eachProduct._id === productId) {
+					indexToUpdate = index;
+				}
+			});
+			$scope.products[indexToUpdate].reviews = $scope.products[indexToUpdate].reviews.filter(review => review._id !== reviewId);
+
+
+			//function(review) {
+			//return review._id !== reviewId
+			//}
+		}, function(err) {
+			console.log(err)
+		})
+	};
+	$scope.showReviews = function(){
+		if(!$scope.seeReviews) $scope.seeReviews = true;
+		else $scope.seeReviews = false;
+	}
 });

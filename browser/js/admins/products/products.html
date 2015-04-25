@@ -4,7 +4,7 @@
 		This is products
 		<ul ng-repeat="product in products">
 			<form name="editProduct-{{product._id}}" ng-submit="updateProduct(product)">
-				Name: <input name="editName-{{product._id}}" ng-model="updatedProduct.name"/><br />
+				Name: <input name="editName-{{product._id}}" placeholder="{{product.name}}" ng-model="updatedProduct.name"/><br />
 				Description: <input name="editName-{{product._id}}" ng-model="updatedProduct.description"/><br />
 				Image: <input name="editName-{{product._id}}" ng-model="updatedProduct.image"/><br />
 				Price: <input name="editName-{{product._id}}" ng-model="updatedProduct.price"/><br />
@@ -12,6 +12,17 @@
 				Categories: <input name="editName-{{product._id}}" ng-model="updatedProduct.categories"/><br />
 				<button>Update Product</button>
 			</form>
+			<button ng-click="showReviews()">Show Reviews</button>
+			<div ng-show="seeReviews">
+				<ul>
+					<li ng-repeat="review in product.reviews">
+						Title: {{review.title}}
+						Content: {{review.text}}
+						Stars: {{review.rating}}
+						<button ng-click="deleteReview(review._id,product._id)"">Delete Review</button>
+					</li>
+				</ul>
+			</div>
 		</ul>
 	</section>
 </section>

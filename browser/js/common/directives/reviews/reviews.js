@@ -6,45 +6,53 @@ app.directive('reviews', function(){
     }
 });
 
-app.controller('ReviewsController', function($stateParams, $scope, Reviews) {
-    $scope.reviews=['hehe','hello'];
+app.controller('ReviewsController', function($stateParams, $scope, Reviews, Users) {
     $scope.newReview = {
-        text: null
+        title: null,
+        text: null,
+        rating: null,
+        user: null,
+        product: null
     };
-    //$scope.productId = $stateParams.productId;
+    var productId = $stateParams.productId;
+
+    Reviews.getReviews(productId).then(function(reviews){
+        $scope.reviews = reviews;
+    }, function(err){
+        console.log(err);
+    });
+
     $scope.postReview = function(review){
-        $scope.reviews.push(review);
-        $scope.newReview.text = null;
-        Reviews.postReview($scope.newReview).then(function(review){
+        $scope.newReview.product = productId;
+        Users.getCurrentUser().then(function(user){
+            $scope.newReview.user = user._id;
+        }).then(function(){
+            return Reviews.postReview($scope.newReview)
+        }).then(function(review){
+            $scope.reviews.push(review);
+        }).catch(function(err){
+            console.log(err);
+        })
 
-        }, function(err){
-            console.log(err);
-        })
-    };
-    $scope.getReviews = function(productId){
-        Reviews.getReviews(productId).then(function(reviews){
-            $scope.reviews = reviews;
-        }, function(err){
-            console.log(err);
-        })
-    };
-    $scope.updateReview = function(){
-        Reviews.updateReview(review).then(function(review){
-            $scope.review = review;
-        }, function(err){
-            console.log(err);
-        })
-    };
 
-    $scope.deleteReview = function(){
-        Reviews.deleteReview(review).then(function(review){
-            $scope.reviews.filter(function(each){
-                return each._id !== review._id;
-            })
-        }, function(err){
-            console.log(err);
-        });
     };
+    //$scope.updateReview = function(){
+    //    Reviews.updateReview(review).then(function(review){
+    //        $scope.review = review;
+    //    }, function(err){
+    //        console.log(err);
+    //    })
+    //};
+    //
+    //$scope.deleteReview = function(){
+    //    Reviews.deleteReview(review).then(function(review){
+    //        $scope.reviews.filter(function(each){
+    //            return each._id !== review._id;
+    //        })
+    //    }, function(err){
+    //        console.log(err);
+    //    });
+    //};
 
 
 });
