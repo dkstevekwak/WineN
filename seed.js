@@ -76,57 +76,225 @@ var seedProducts = function () {
     return User.findOne({email:'obama@gmail.com'}).exec().then(function(user){
         var products = [
             {
-                name: 'A red wine',
-                image: '/img/Andlau Riesling.gif',
-                description: 'This is a very fancy red wine',
+                name: 'Canada Negra',
+                image: 'http://www.wineand.co.kr/images/wine_r01.jpg',
+                description: {
+                  review: 'This is a very fancy red wine',
+                  winery: 'Bodegas Enguera',
+                  origin: 'Spain, Valencia',
+                  'do': 'Valencia',
+                  grapes: 'Tempranillo, Syrah',
+                  taste: ['light'],
+                  serves: '14 - 16',
+                  vintage: null,
+                  aoc: ''
+                },
                 price: '59.99',
                 qty: 37,
                 createdBy: user._id,
-                categories: ['Red']
+                categories: ['Red Wine']
             },
             {
-                name: 'A green wine',
-                image: '/img/Drappier grande sendree rose.gif',
-                description: 'very fancy green wine',
-                price: '39.99',
-                qty: 27,
-                createdBy: user._id,
-                categories: ['White']
+              name: 'Cote Chalonnaise',
+              image: 'http://www.wineand.co.kr/images/wine_r04.jpg',
+              description: {
+                review: 'This is a very fancy red wine',
+                winery: 'Guy Chaumont',
+                origin: 'France, Bourgogne Cote Chalonnaise',
+                'do': '',
+                grapes: 'Pinot Noir',
+                taste: ['light'],
+                serves: '',
+                vintage: 2010,
+                aoc: 'Bourgogne Cote Chalonnaise'
+              },
+              price: '59.99',
+              qty: 37,
+              createdBy: user._id,
+              categories: ['Red Wine']
             },
             {
-                name: 'A yellow wine',
-                image: '/img/les vallerots Nuits Saint Georges.gif',
-                description: 'very fancy green wine',
-                price: '49.99',
-                qty: 27,
-                createdBy: user._id,
-                categories: ['White']
+              name: 'Beaune Chauacheux Premier Cru',
+              image: 'http://www.wineand.co.kr/images/wine_r06.jpg',
+              description: {
+                review: 'This is a very fancy red wine',
+                winery: 'Fanny Sabre',
+                origin: 'France, Bourgogne',
+                'do': '',
+                grapes: 'Pinot Noir',
+                taste: ['full'],
+                serves: '',
+                vintage: null,
+                winery: 'Fanny Sabre',
+                aoc: 'Beaune ler Cru'
+              },
+              price: '59.99',
+              qty: 37,
+              createdBy: user._id,
+              categories: ['Red Wine']
+              }, {
+              name: 'Pommard \<Les Vignots\>',
+              image: 'http://www.wineand.co.kr/images/wine_r07.jpg',
+              description: {
+                review: 'This is a very fancy red wine',
+                winery: 'Chantal Lescure',
+                origin: 'France, Bourgogne',
+                'do': '',
+                grapes: 'Pinot Noir',
+                taste: ['medium', 'full'],
+                vintage: null,
+                aoc: ''
+              },
+              price: '59.99',
+              qty: 37,
+              createdBy: user._id,
+              categories: ['Red Wine']
+            },{
+            name: 'Cremant Brut Zero',
+            image: 'http://www.wineand.co.kr/images/wine_s04.jpg',
+            description: {
+              review: 'This is a wine with many bubbles',
+              winery: 'Guy Chaumont',
+              origin: 'France, Bourgogne',
+              'do': '',
+              grapes: 'Chardonnay 70%, Aligote 30%',
+              taste: ['bubbly'],
+              serves: '',
+              vintage: null,
+              aoc: ''
+            },
+            price: '59.99',
+            qty: 37,
+            createdBy: user._id,
+            categories: ['Sparkling']
+          }, {
+              name: 'Sidre Tendre',
+              image: 'http://www.wineand.co.kr/images/wine_c01.jpg',
+              description: {
+                review: 'This is another cidre',
+                winery: 'Eric Bordelet',
+                origin: 'Normandie, France',
+                'do': '',
+                grapes: 'some grapish korean immigrant to france',
+                taste: [''],
+                serves: '',
+                vintage: null,
+                aoc: ''
+              },
+              price: '59.99',
+              qty: 37,
+              createdBy: user._id,
+              categories: ['Cider']
             }, {
-                name: 'A red wine',
-                image: '/img/Moenchberg Pinot Gris.gif',
-                description: 'very fancy green wine',
-                price: '79.99',
-                qty: 27,
-                createdBy: user._id,
-                categories: ['White']
+            name: 'Poire authentique',
+            image: 'http://www.wineand.co.kr/images/wine_c02.jpg',
+            description: {
+              review: 'This is a cidre',
+              winery: 'Eric Bordelet',
+              origin: 'Normandie, France',
+              'do': '',
+              grapes: 'another grapish korean immigrant to france',
+              taste: [''],
+              serves: '',
+              vintage: null,
+              aoc: ''
+              },
+            price: '59.99',
+            qty: 37,
+            createdBy: user._id,
+            categories: ['Cider']
             }, {
-                name: 'A blue wine',
-                image: '/img/LB valiniere.gif',
-                description: 'very fancy green wine',
-                price: '159.99',
-                qty: 27,
-                createdBy: user._id,
-                categories: ['White']
+              name: 'Sydre Angelette',
+              image: 'http://www.wineand.co.kr/images/wine_c03.jpg',
+              description: {
+                review: 'I am the third spelling of Cidre on this site from the same winery, and it is on purpose',
+                winery: 'Eric Bordelet',
+                origin: 'Normandie, France',
+                'do': '',
+                grapes: 'another grapish korean immigrant to france',
+                taste: [''],
+                serves: '',
+                vintage: null,
+                aoc: ''
+                },
+              price: '59.99',
+              qty: 37,
+              createdBy: user._id,
+              categories: ['Cider']
             }, {
-                name: 'A purple wine',
-                image: '/img/Moenchberg Pinot Gris.gif',
-                description: 'very fancy green wine',
-                price: '309.99',
-                qty: 27,
-                createdBy: user._id,
-                categories: ['White']
-            }
-        ];
+            name: 'Tradition',
+            image: 'http://www.wineand.co.kr/images/wine_r11.jpg',
+            description: {
+              review: 'This is a very fancy red wine',
+              winery: 'Leon Barral',
+              origin: 'France, Languedoc',
+              'do': '',
+              grapes: 'Cinsault, Grenache, carignan',
+              taste: ['medium', 'full'],
+              serves: '',
+              vintage: null,
+              aoc: ''
+            },
+            price: '59.99',
+            qty: 37,
+            createdBy: user._id,
+            categories: ['Red Wine']
+          }, {
+            name: 'Jadis',
+            image: 'http://www.wineand.co.kr/images/wine_r12.jpg',
+            description: {
+              review: 'This is a very fancy red wine',
+              winery: 'Leon Barral',
+              origin: 'France, Languedoc',
+              'do': '',
+              grapes: 'Syrah, Grenache, carignan',
+              taste: ['full'],
+              serves: '',
+              vintage: null,
+              aoc: 'Faugeres'
+            },
+            price: '59.99',
+            qty: 37,
+            createdBy: user._id,
+            categories: ['Red Wine']
+          }, {
+            name: 'Valinieres',
+            image: 'http://www.wineand.co.kr/images/wine_r13.jpg',
+            description: {
+              review: 'This is a very fancy red wine',
+              winery: 'Leon Barral',
+              origin: 'France, Languedoc',
+              'do': '',
+              grapes: 'Mourvedre 80%, Syrah 20%',
+              taste: ['full'],
+              serves: '',
+              vintage: null,
+              aoc: 'Faugeres'
+            },
+            price: '59.99',
+            qty: 37,
+            createdBy: user._id,
+            categories: ['Red Wine']
+          }, {
+            name: 'Prelude',
+            image: 'http://www.wineand.co.kr/images/wine_r14.jpg',
+            description: {
+              review: 'This is a very fancy red wine',
+              winery: 'Mas Lumen',
+              origin: 'France, Languedoc',
+              'do': '',
+              grapes: 'Carignan 50%, Syrah 27%, Cinsault 13%, Grenache 10%',
+              taste: [],
+              serves: '16',
+              vintage: null,
+              aoc: ''
+            },
+            price: '59.99',
+            qty: 37,
+            createdBy: user._id,
+            categories: ['Red Wine']
+          }
+];
 
         return q.invoke(Product, 'create', products);
 
