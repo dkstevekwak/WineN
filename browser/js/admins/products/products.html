@@ -5,15 +5,15 @@
 		<ul ng-repeat="product in products">
 			<form name="editProduct-{{product._id}}" ng-submit="updateProduct(product)">
 				Name: <input name="editName-{{product._id}}" placeholder="{{product.name}}" ng-model="updatedProduct.name"/><br />
-				Description: <input name="editName-{{product._id}}" ng-model="updatedProduct.description"/><br />
-				Image: <input name="editName-{{product._id}}" ng-model="updatedProduct.image"/><br />
-				Price: <input name="editName-{{product._id}}" ng-model="updatedProduct.price"/><br />
-				Quantity: <input name="editName-{{product._id}}" ng-model="updatedProduct.qty"/><br />
-				Categories: <input name="editName-{{product._id}}" ng-model="updatedProduct.categories"/><br />
+				Description: <input name="editName-{{product._id}}" placeholder="{{product.description}}" ng-model="updatedProduct.description"/><br />
+				Image: <input name="editName-{{product._id}}" placeholder="{{product.image}}" ng-model="updatedProduct.image"/><br />
+				Price: <input name="editName-{{product._id}}" placeholder="{{product.price}}" ng-model="updatedProduct.price"/><br />
+				Quantity: <input name="editName-{{product._id}}" placeholder="{{product.qty}}" ng-model="updatedProduct.qty"/><br />
+				Categories: <input name="editName-{{product._id}}" placeholder="{{product.categories}}" ng-model="updatedProduct.categories"/><br />
 				<button>Update Product</button>
 			</form>
-			<button ng-click="showReviews()">Show Reviews</button>
-			<div ng-show="seeReviews">
+			<button ng-click="showReviews(product._id)">Show Reviews</button>
+			<div ng-show="viewingProducts.indexOf(product._id)!==-1">
 				<ul>
 					<li ng-repeat="review in product.reviews">
 						Title: {{review.title}}

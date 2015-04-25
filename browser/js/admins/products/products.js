@@ -9,7 +9,7 @@ app.config(function ($stateProvider) {
 
 app.controller('ProductsAdminController', function($scope, Products, Reviews) {
 	$scope.updatedProduct = null;
-	$scope.seeReviews = true;
+	$scope.viewingProducts = [];
 
 	Products.getAllProducts()
 	.then(function(productList){
@@ -44,8 +44,14 @@ app.controller('ProductsAdminController', function($scope, Products, Reviews) {
 			console.log(err)
 		})
 	};
-	$scope.showReviews = function(){
-		if(!$scope.seeReviews) $scope.seeReviews = true;
-		else $scope.seeReviews = false;
+	$scope.showReviews = function(productId){
+
+		if($scope.viewingProducts.indexOf(productId)===-1) {
+			$scope.viewingProducts.push(productId);
+		}
+		else {
+			var index = $scope.viewingProducts.indexOf(productId);
+			$scope.viewingProducts.splice(index,1);
+		}
 	}
 });
