@@ -20,7 +20,7 @@
 		<div class="productBox" ng-show="currentCategory === 'all' || product.categories.indexOf(currentCategory) !== -1" ng-repeat="product in products">
 			<h3 class="eachProduct"> {{product.name}}</h3>
 			Winery: <h3 class="eachProduct"> {{product.description.winery}}</h3>
-            <div style="width: 182px; height: 544px;overflow: hidden;"><img src="{{product.image}}"></div><!--Using div to hide rightside of image-->
+            <img src="{{product.image}}">
 			<h3 class="eachProduct"> {{product.price}}</h3>
 			<h3 class="eachProduct"> {{product.qty}}</h3>
 			<h3 class="eachProduct" ng-repeat="productCategory in product.categories"> {{productCategory}}</h3>
