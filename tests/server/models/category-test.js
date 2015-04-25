@@ -7,10 +7,9 @@ var mongoose = require('mongoose');
 
 require('../../../server/db/models/category');
 require('../../../server/db/models/product');
-require('../../../server/db/models/user');
+require('../../../server/db/models/category');
 
 var Category = mongoose.model('Category');
-var User = mongoose.model('User');
 
 describe('Category model', function(){
     beforeEach('Establish DB connection', function (done) {
@@ -18,12 +17,10 @@ describe('Category model', function(){
         mongoose.connect(dbURI, done);
     });
 
-	var user;
-    beforeEach('Create temporary user', function (done) {
-		user = new User({
-			email: 'fake@email.com'
-		});
-		user.save(function(err) {
+	var category;
+    beforeEach('Create temporary category', function (done) {
+		Category.create({ name: 'White' }, function(err, savedCategory) {
+            category = savedCategory;
 			done();
 		});
     });
@@ -36,13 +33,7 @@ describe('Category model', function(){
         expect(Category).to.be.a('function');
     });
 
-    it('should have name as String',function(done){
-		var category = new Category ({
-			name: "Red"
-		});
-		category.save(function(err){
-			expect(category.name).to.equal("Red");
-			done();
-		});
+    it('should have name as String',function(){
+        expect(category.name).to.equal("White");
     });
 });

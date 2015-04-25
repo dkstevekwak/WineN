@@ -17,7 +17,7 @@
 	<section id="all-products">
 		<div class="categorySelection btn-group btn-group-justified">
 			<div class="btn-group"  ng-repeat="category in categories" role="group">
-				<button type="button" class="btn btn-default eachCategory" ng-click="selectCategory(category)" ng-class="{'active': category===currentCategory}">{{category}}</button>
+				<button type="button" class="btn btn-default eachCategory" ng-click="selectCategory(category)" ng-class="{'active': category.name === currentCategory}">{{category.name}}</button>
 			</div>
 		</div>
 		<!-- Search Box Start -->
