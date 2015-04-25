@@ -15,6 +15,7 @@ app.controller('ProductsController', function($scope, Products, Cart, localStora
 	$scope.selectCategory = function(category){
 		$scope.currentCategory = category;
 	}
+	$scope.imageAnimating = [];
   Products.getAllProducts().then(function(productList){
     $scope.products = productList;
   }, function(err){
@@ -39,5 +40,15 @@ app.controller('ProductsController', function($scope, Products, Cart, localStora
 		    }
 		return false;
 	};
-
+	$scope.imageAnimate = function(productId){
+		var index = $scope.imageAnimating.indexOf(productId);
+		if(index===-1) {
+			$scope.imageAnimating.push(productId);
+			console.log($scope.imageAnimating.indexOf(productId));
+		}
+		else {
+			$scope.imageAnimating.splice(index,1);
+			console.log($scope.imageAnimating.indexOf(productId));
+		}
+	}
 });

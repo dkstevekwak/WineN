@@ -1,5 +1,5 @@
 .navbar-fixed-top {
-  background: linear-gradient(#1F1E1E, #474747 80%, #6E6E6E);
+  background: linear-gradient(#423F3F, #414040 80%, #5E5C5C);
 }
 navbar {
   display: block;
@@ -39,8 +39,10 @@ navbar {
 
   .login-button {
     float: right;
-    margin-top: 37px;
+    width: 80px;
+    margin-top: 46px;
     margin-right: 20px;
+    border: 1px solid skyblue;
   }
 
   .welcome {
@@ -60,7 +62,7 @@ navbar {
 .winenlogo {
   position: absolute;
   padding-top: 5px;
-  width: 150px;
+  width: 200px;
   Height: 170px;
   left: 45.5%;
 }
