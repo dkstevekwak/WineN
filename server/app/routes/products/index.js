@@ -2,6 +2,7 @@
 var router = require('express').Router();
 var Product = require('mongoose').model('Product');
 var _ = require('lodash');
+var authFn = require('../authRules.js');
 module.exports = router;
 
 router.get('/', function(req, res, next) {
@@ -18,7 +19,7 @@ router.get('/:productId', function(req, res, next) {
 	});
 });
 
-router.put('/:productId', function(req,res,next){
+router.put('/:productId', authFn.ensureAdmin, function(req,res,next){
 	var body = req.body;
 	console.log("this is server not test", body)
 	Product.findById(req.params.productId, function(err, product) {
@@ -34,7 +35,7 @@ router.put('/:productId', function(req,res,next){
 });
 
 
-router.post('/add', function(req,res,next){
+router.post('/add', authFn.ensureAdmin, function(req,res,next){
 	var body = req.body;
 	var newProduct = new Product(body);
 	newProduct.save(function(err,savedProduct){

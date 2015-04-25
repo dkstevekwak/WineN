@@ -4,6 +4,7 @@ var router = require('express').Router();
 var Product = require('mongoose').model('Product');
 var Review = require('mongoose').model('Review');
 var User = require('mongoose').model('User');
+var authFn = require('../authRules.js');
 
 router.use(function(req,res,next){
     if(req.body.product){
@@ -25,7 +26,7 @@ router.get('/:productId', function(req, res, next) {
 });
 
 
-router.post('/', function(req,res,next){
+router.post('/', authFn.ensureLoggedIn, function(req,res,next){
     var body = req.body;
     var newReview = new Review(body);
     newReview.save(function(err,savedReview){
@@ -46,7 +47,7 @@ router.get('/user/:userId', function(req, res, next) {
     });
 });
 
-router.put('/', function(req, res, next) {
+router.put('/', authFn.ensureLoggedIn, function(req, res, next) {
     Review.findById(req.body._id, function(err, review) {
         if (err) return next(err);
         req.body.product = review.product;
