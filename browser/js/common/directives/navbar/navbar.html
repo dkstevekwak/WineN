@@ -2,12 +2,12 @@
     <div class="container">
         <div class="navbar-header">
         </div>
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav categories">
             <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
                 <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
             </li>
         </ul>
-        
+            <img class="winenlogo" src="http://www.wineand.co.kr/images/logo_wines.jpg" />
 		<form class="navbar-form navbar-left" role="search">
 		  <div class="form-group">
 		    <input type="text" class="form-control" placeholder="Search not yet active" ng-model="search" id="search">
