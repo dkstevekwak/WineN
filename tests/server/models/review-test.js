@@ -1,4 +1,4 @@
-var dbURI = 'mongodb://localhost:27017/testingDB';
+/* var dbURI = 'mongodb://localhost:27017/testingDB';
 var clearDB = require('mocha-mongoose')(dbURI);
 
 var sinon = require('sinon');
@@ -35,18 +35,17 @@ describe('Review model', function(){
 				   city: 'New York City',
 				   state: 'New York',
 				   zip: '10006'
-		});
-		user.save(function(err) {
-			done();
-		});
+            }
+        });
 		var createUser = function () {
-			return User.create(user,saved){
+			return User.create(user, function(saved){
 				user = saved;
-				if(err) throw err;
+				if(err) done(err);
+                done();
 			});
 		};
     });
-    
+
     var product,products;
     beforeEach('Create temporary products', function (done) {
 		product1 = new Product({
@@ -61,33 +60,34 @@ describe('Review model', function(){
 			description: "product2 test brew",
 			categories: ["White"]
 		});
-		product1.save(function(err) {			
+		product1.save(function(err) {
 			product2.save(function(err) {
 				done();
 			});
 		});
-		var createProducts = function () {
-			return Product.create(product1,product2,saved1,saved2){
+		var createProducts = function (done) {
+			return Product.create(product1,product2, function(saved1,saved2){
 				product1 = saved1;
 				product2 = saved2;
-				if(err) throw err;
+				if(err) done(err);
+                done();
 			});
 		};
     });
-    
+
 	var order;
     beforeEach('Create temporary order', function (done) {
 		order = new Order({
 			user: user._id,
 			paid: false,
 			cartProducts: [
-			               { 
-			            	   product_id: product1._id, 
+			               {
+			            	   product_id: product1._id,
 			            	   price: product1.price,
 			            	   qty: "1"
 			               },
-			               { 
-			            	   product_id: product2._id, 
+			               {
+			            	   product_id: product2._id,
 			            	   price: product2.price,
 			            	   qty: "2"
 			               }
@@ -130,13 +130,13 @@ describe('Review model', function(){
 				review = saved;
 				if(err) throw err;
 			});
-		};		
+		};
     });
-    
+
     afterEach('Clear test database', function (done) {
         clearDB(done);
     });
-    
+
     var createReview = function (review) {
         return Review.create(review,function(err,saved){        }
         	if(err) throw err;
@@ -207,7 +207,7 @@ describe('Review model', function(){
 		expect(order.cartProducts[1].qty).to.be.equal("2");
 		done();
     });
-    
+
     xit('should have categories which is an Array ',function(done){
         var product = new Product({
 			name: "Jimmy's Brew",
@@ -222,5 +222,6 @@ describe('Review model', function(){
             done();
         });
      });
-    
+
 });
+*/
