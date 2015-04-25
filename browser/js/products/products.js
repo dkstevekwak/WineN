@@ -7,7 +7,7 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('ProductsController', function($scope, Products, localStorageService){
+app.controller('ProductsController', function($scope, Products, Cart, localStorageService){
 	//locatStorageService	
 	
 	$scope.categories=['all', 'Red','White','Sparkling',"Cider"];
@@ -16,10 +16,14 @@ app.controller('ProductsController', function($scope, Products, localStorageServ
 		$scope.currentCategory = category;
 	}
   Products.getAllProducts().then(function(productList){
-    console.log("here is the fake productList", productList);
     $scope.products = productList;
   }, function(err){
     console.log("errors", err);
   })
+  
+	$scope.addToCart = function(product) {
+		console.log("add to cart")
+		Cart.addToCart(product);
+	};
 
 });
