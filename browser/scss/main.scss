@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+.contentTop {
+  margin-top:10%;
+}
+
 ui-view.ng-enter, ui-view.ng-leave, ui-view.ng-show, ui-view.ng-hide {
 	position: absolute;
 	left: 0;
