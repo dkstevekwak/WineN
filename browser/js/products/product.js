@@ -29,6 +29,6 @@ app.controller('ProductController', function($scope, $stateParams, Products, Car
 	$scope.viewComments = function(){
 		if (!$scope.seeComments) $scope.seeComments = true;
 		else $scope.seeComments = false;
-	}
+	};
 
 });
