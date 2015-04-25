@@ -22,12 +22,12 @@ app.controller('ReviewsController', function($stateParams, $scope, Reviews, User
         console.log(err);
     });
 
-    $scope.postReview = function(review){
-        $scope.newReview.product = productId;
+    $scope.postReview = function(newReview){
+        newReview.product = productId;
         Users.getCurrentUser().then(function(user){
-            $scope.newReview.user = user._id;
+            newReview.user = user._id;
         }).then(function(){
-            return Reviews.postReview($scope.newReview)
+            return Reviews.postReview(newReview)
         }).then(function(review){
             $scope.reviews.push(review);
         }).catch(function(err){
