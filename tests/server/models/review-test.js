@@ -41,12 +41,13 @@ describe('Review model', function(){
 		});
 		var createUser = function () {
 			return User.create(user,saved){
+				user = saved;
 				if(err) throw err;
 			});
 		};
     });
     
-    var products;
+    var product,products;
     beforeEach('Create temporary products', function (done) {
 		product1 = new Product({
 			name: "Test Brew 1",
@@ -65,6 +66,13 @@ describe('Review model', function(){
 				done();
 			});
 		});
+		var createProducts = function () {
+			return Product.create(product1,product2,saved1,saved2){
+				product1 = saved1;
+				product2 = saved2;
+				if(err) throw err;
+			});
+		};
     });
     
 	var order;
@@ -95,24 +103,34 @@ describe('Review model', function(){
 		order.save(function(err) {
 			done();
 		});
+		var createOrder = function () {
+			return Order.create(order,saved){
+				order = saved;
+				if(err) throw err;
+			});
+		};
     });
 
 	var review;
     beforeEach('Create temporary review', function (done) {
 		review = new Review({
-			userId: user._id,
-			productId: product._id,
+			user: user._id,
+			product: product._id,
 			rating: 0.8,
 			title: "Fantasaticly Fruity Find",
-			body: "Wine to get smashed by, a case of this makes for a great travel companion, and the these bottles make create 'message bottles' when tossed into the ocean.",
-			approved: true,
-			verified: true,
+			text: "Wine to get smashed by, a case of this makes for a great travel companion, and the these bottles make create 'message bottles' when tossed into the ocean.",
 			date: Date.now,
 			likes: 4
 		});
 		review.save(function(err) {
 			done();
 		});
+		var createReview = function () {
+			return Review .create(review,saved){
+				review = saved;
+				if(err) throw err;
+			});
+		};		
     });
     
     afterEach('Clear test database', function (done) {
