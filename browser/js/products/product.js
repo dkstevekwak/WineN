@@ -22,7 +22,7 @@ app.controller('ProductController', function($scope, $stateParams, Products, Car
 	});
 
 	$scope.addToCart = function(product) {
-		console.log("hi")
+		console.log("add to cart")
 		Cart.addToCart(product);
 	};
 

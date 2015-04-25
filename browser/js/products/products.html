@@ -5,7 +5,10 @@
 			<li class="eachCategory" ng-repeat="category in categories" ng-click="selectCategory(category)" ng-class="{'active': category===currentCategory}"> {{category}}</li>
 		</ul>
 	</div>
-    <div class="IntroPic">
+	<!-- Search Box Start -->
+	<input type="text" placeholder="Search" ng-model="query"/>
+	<!-- Search Box End -->
+	<div class="IntroPic">
     	<img src="http://thumb101.shutterstock.com/display_pic_with_logo/184204/116996737/stock-photo-set-of-white-rose-and-red-wine-bottles-and-glas-isolated-on-white-background-116996737.jpg">
     </div>
     <div class='promoBox'>
@@ -17,7 +20,7 @@
     	</div>
     </div>
 	<section id="all-products">
-		<div class="productBox" ng-show="currentCategory === 'all' || product.categories.indexOf(currentCategory) !== -1" ng-repeat="product in products">
+		<div class="productBox" ng-show="currentCategory === 'all' || product.categories.indexOf(currentCategory) !== -1" ng-repeat=" product in products | filter: search ">
 			<h3 class="eachProduct"> {{product.name}}</h3>
 			Winery: <h3 class="eachProduct"> {{product.description.winery}}</h3>
             <img src="{{product.image}}">
@@ -25,6 +28,7 @@
 			<h3 class="eachProduct"> {{product.qty}}</h3>
 			<h3 class="eachProduct" ng-repeat="productCategory in product.categories"> {{productCategory}}</h3>
 			<button ui-sref="productDetails({productId: product._id})">More Info</button>
+			<button ng-click="addToCart(product)">Add To Cart</button>
 		</div>
 	</section>
 </section>

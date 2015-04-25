@@ -4,7 +4,7 @@ app.factory('Cart', function ($http,localStorageService, Users, AuthService) {
 
 	var shipping = 5;
 	var tax = 5;
-	var localCart = JSON.parse(localStorage.getItem('cart') || []);
+	var localCart = JSON.parse(localStorage.getItem('cart')) || [];
 
 	function productExists(productId){
 		var test = localCart.filter(function(el){
