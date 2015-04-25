@@ -16,7 +16,10 @@
 		<!--</form>-->
 
         <button ng-show="!user" ui-sref="login" class="btn btn-default btn-more login-button">Login</button>
-        <button ui-sref="cart" class="btn btn-default btn-more login-button">Cart</button>
+        <button ui-sref="cart" class="btn btn-default btn-more login-button">
+            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+            Cart
+        </button>
         <div ng-show="user" class="welcome">
             <span>Welcome, {{ user.email }}!</span>
             <a ng-click="logout()">Logout</a>
