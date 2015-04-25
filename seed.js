@@ -92,7 +92,7 @@ var seedProducts = function () {
                 price: '59.99',
                 qty: 37,
                 createdBy: user._id,
-                categories: ['Red Wine']
+                categories: ['Red']
             },
             {
               name: 'Cote Chalonnaise',
@@ -111,7 +111,7 @@ var seedProducts = function () {
               price: '59.99',
               qty: 37,
               createdBy: user._id,
-              categories: ['Red Wine']
+              categories: ['Red']
             },
             {
               name: 'Beaune Chauacheux Premier Cru',
@@ -131,7 +131,7 @@ var seedProducts = function () {
               price: '59.99',
               qty: 37,
               createdBy: user._id,
-              categories: ['Red Wine']
+              categories: ['Red']
               }, {
               name: 'Pommard \<Les Vignots\>',
               image: '/img/bourgogne rouge.gif',
@@ -148,7 +148,7 @@ var seedProducts = function () {
               price: '59.99',
               qty: 37,
               createdBy: user._id,
-              categories: ['Red Wine']
+              categories: ['Red']
             },{
             name: 'Cremant Brut Zero',
             image: '/img/cote chalonnaise.gif',
@@ -238,7 +238,7 @@ var seedProducts = function () {
             price: '59.99',
             qty: 37,
             createdBy: user._id,
-            categories: ['Red Wine']
+            categories: ['Red']
           }, {
             name: 'Jadis',
             image: '/img/LB jadis.gif',
@@ -256,7 +256,7 @@ var seedProducts = function () {
             price: '59.99',
             qty: 37,
             createdBy: user._id,
-            categories: ['Red Wine']
+            categories: ['Red']
           }, {
             name: 'Valinieres',
             image: '/img/LB tradition.gif',
@@ -274,7 +274,7 @@ var seedProducts = function () {
             price: '59.99',
             qty: 37,
             createdBy: user._id,
-            categories: ['Red Wine']
+            categories: ['Red']
           }, {
             name: 'Prelude',
             image: '/img/LB valiniere.gif',
@@ -292,7 +292,7 @@ var seedProducts = function () {
             price: '59.99',
             qty: 37,
             createdBy: user._id,
-            categories: ['Red Wine']
+            categories: ['Red']
           }
 ];
 
@@ -313,13 +313,13 @@ connectToDb.then(function () {
                 //process.kill(0);
             }
         }).then(function () {
-            
+
             return seedCategories();
         }).then(function () {
-            
+
             return seedProducts();
         }).then(function () {
-            
+
             process.kill(0);
         }).catch(function (err) {
             console.error(err);
