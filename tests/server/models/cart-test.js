@@ -52,7 +52,7 @@ describe('Cart model', function(){
 		});
     });
     
-	var cart;
+	var cart, dateTime = Date.now();
     beforeEach('Create temporary cart', function (done) {
 		cart = new Cart({
 			session: "Hpgq9Kdr5fpWDxqRnyR-KO_DvZFxcoqT", //session._id
@@ -69,12 +69,18 @@ describe('Cart model', function(){
 			            	   qty: "2"
 			               }
 			              ],
-			date: Date.now,
+			date: dateTime,
 		});
-		cart.save(function(err) {
+		
+		Cart.create(cart,function(err, saved){
+			if(err) {
+				throw err;
+				return done(err);
+			}
+			cart = saved;
 			done();
 		});
-    });
+   });
 
     afterEach('Clear test database', function (done) {
         clearDB(done);
@@ -89,10 +95,16 @@ describe('Cart model', function(){
     it('has user field is a reference to User',function(done){
 		expect(cart.user).to.be.instanceOf(Object);
 		done();
-    });    
+    });
+    
+    xit('has a date field with a date value when it was created',function(done){
+    	expect(cart.date).to.equal(Date(dateTime));
+		done();
+    });
+
     
     it('has date field of type date',function(done){
-		expect(cart.date).to.be.instanceOf(Date);
+		expect(cart.date).to.be.instanceof(Date);
 		done();
     });
     

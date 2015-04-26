@@ -77,7 +77,7 @@ var seedProducts = function () {
         var products = [
             {
                 name: 'Canada Negra',
-                image: 'http://www.wineand.co.kr/images/wine_r01.jpg',
+                image: '/img/Andlau Riesling.gif',
                 description: {
                   review: 'This is a very fancy red wine',
                   winery: 'Bodegas Enguera',
@@ -92,11 +92,11 @@ var seedProducts = function () {
                 price: '59.99',
                 qty: 37,
                 createdBy: user._id,
-                categories: ['Red Wine']
+                categories: ['Red']
             },
             {
               name: 'Cote Chalonnaise',
-              image: 'http://www.wineand.co.kr/images/wine_r04.jpg',
+              image: '/img/ansata.gif',
               description: {
                 review: 'This is a very fancy red wine',
                 winery: 'Guy Chaumont',
@@ -111,11 +111,11 @@ var seedProducts = function () {
               price: '59.99',
               qty: 37,
               createdBy: user._id,
-              categories: ['Red Wine']
+              categories: ['Red']
             },
             {
               name: 'Beaune Chauacheux Premier Cru',
-              image: 'http://www.wineand.co.kr/images/wine_r06.jpg',
+              image: '/img/beaune chouacheux.gif',
               description: {
                 review: 'This is a very fancy red wine',
                 winery: 'Fanny Sabre',
@@ -131,10 +131,10 @@ var seedProducts = function () {
               price: '59.99',
               qty: 37,
               createdBy: user._id,
-              categories: ['Red Wine']
+              categories: ['Red']
               }, {
               name: 'Pommard \<Les Vignots\>',
-              image: 'http://www.wineand.co.kr/images/wine_r07.jpg',
+              image: '/img/bourgogne rouge.gif',
               description: {
                 review: 'This is a very fancy red wine',
                 winery: 'Chantal Lescure',
@@ -148,10 +148,10 @@ var seedProducts = function () {
               price: '59.99',
               qty: 37,
               createdBy: user._id,
-              categories: ['Red Wine']
+              categories: ['Red']
             },{
             name: 'Cremant Brut Zero',
-            image: 'http://www.wineand.co.kr/images/wine_s04.jpg',
+            image: '/img/cote chalonnaise.gif',
             description: {
               review: 'This is a wine with many bubbles',
               winery: 'Guy Chaumont',
@@ -169,7 +169,7 @@ var seedProducts = function () {
             categories: ['Sparkling']
           }, {
               name: 'Sidre Tendre',
-              image: 'http://www.wineand.co.kr/images/wine_c01.jpg',
+              image: '/img/Drappier grande sendree rose.gif',
               description: {
                 review: 'This is another cidre',
                 winery: 'Eric Bordelet',
@@ -187,7 +187,7 @@ var seedProducts = function () {
               categories: ['Cider']
             }, {
             name: 'Poire authentique',
-            image: 'http://www.wineand.co.kr/images/wine_c02.jpg',
+            image: '/img/Drappier Grande sendree.gif',
             description: {
               review: 'This is a cidre',
               winery: 'Eric Bordelet',
@@ -205,7 +205,7 @@ var seedProducts = function () {
             categories: ['Cider']
             }, {
               name: 'Sydre Angelette',
-              image: 'http://www.wineand.co.kr/images/wine_c03.jpg',
+              image: '/img/Drappier sans souffre.gif',
               description: {
                 review: 'I am the third spelling of Cidre on this site from the same winery, and it is on purpose',
                 winery: 'Eric Bordelet',
@@ -223,7 +223,7 @@ var seedProducts = function () {
               categories: ['Cider']
             }, {
             name: 'Tradition',
-            image: 'http://www.wineand.co.kr/images/wine_r11.jpg',
+            image: '/img/grimaudes.gif',
             description: {
               review: 'This is a very fancy red wine',
               winery: 'Leon Barral',
@@ -238,10 +238,10 @@ var seedProducts = function () {
             price: '59.99',
             qty: 37,
             createdBy: user._id,
-            categories: ['Red Wine']
+            categories: ['Red']
           }, {
             name: 'Jadis',
-            image: 'http://www.wineand.co.kr/images/wine_r12.jpg',
+            image: '/img/LB jadis.gif',
             description: {
               review: 'This is a very fancy red wine',
               winery: 'Leon Barral',
@@ -256,10 +256,10 @@ var seedProducts = function () {
             price: '59.99',
             qty: 37,
             createdBy: user._id,
-            categories: ['Red Wine']
+            categories: ['Red']
           }, {
             name: 'Valinieres',
-            image: 'http://www.wineand.co.kr/images/wine_r13.jpg',
+            image: '/img/LB tradition.gif',
             description: {
               review: 'This is a very fancy red wine',
               winery: 'Leon Barral',
@@ -274,10 +274,10 @@ var seedProducts = function () {
             price: '59.99',
             qty: 37,
             createdBy: user._id,
-            categories: ['Red Wine']
+            categories: ['Red']
           }, {
             name: 'Prelude',
-            image: 'http://www.wineand.co.kr/images/wine_r14.jpg',
+            image: '/img/LB valiniere.gif',
             description: {
               review: 'This is a very fancy red wine',
               winery: 'Mas Lumen',
@@ -292,7 +292,7 @@ var seedProducts = function () {
             price: '59.99',
             qty: 37,
             createdBy: user._id,
-            categories: ['Red Wine']
+            categories: ['Red']
           }
 ];
 
@@ -313,13 +313,13 @@ connectToDb.then(function () {
                 //process.kill(0);
             }
         }).then(function () {
-            
+
             return seedCategories();
         }).then(function () {
-            
+
             return seedProducts();
         }).then(function () {
-            
+
             process.kill(0);
         }).catch(function (err) {
             console.error(err);

@@ -1,14 +1,25 @@
-<nav class="navbar navbar-static-top">
+<nav class="navbar navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
         </div>
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav categories">
             <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
                 <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
             </li>
         </ul>
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
-        <button ui-sref="cart" class="btn login-button">Cart</button>
+            <img class="winenlogo" src="http://www.wineand.co.kr/images/logo_wines.jpg" />
+		<!--<form class="navbar-form navbar-left" role="search">-->
+		  <!--<div class="form-group">-->
+		    <!--<input type="text" class="form-control" placeholder="Search not yet active" ng-model="search" id="search">-->
+		  <!--</div>-->
+		  <!--<button type="submit" class="btn btn-default">Submit</button>-->
+		<!--</form>-->
+
+        <button ng-show="!user" ui-sref="login" class="btn btn-default btn-more login-button">Login</button>
+        <button ui-sref="cart" class="btn btn-default btn-more login-button">
+            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+            Cart
+        </button>
         <div ng-show="user" class="welcome">
             <span>Welcome, {{ user.email }}!</span>
             <a ng-click="logout()">Logout</a>
