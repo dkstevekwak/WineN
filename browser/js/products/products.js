@@ -13,7 +13,6 @@ app.controller('ProductsController', function($scope, Products, Cart, Categories
 	$scope.currentCategory = "all";
 
 	$scope.selectCategory = function(category){
-        console.log('category.name', category.name);
 		$scope.currentCategory = category.name;
 	}
 
@@ -29,7 +28,6 @@ app.controller('ProductsController', function($scope, Products, Cart, Categories
         Categories.getCategories()
         .then(function(categoryList) {
             $scope.categories = categoryList;
-            console.log('categoryList', categoryList);
         })
         .catch(function(err) {
             console.log(err);
@@ -63,11 +61,9 @@ app.controller('ProductsController', function($scope, Products, Cart, Categories
 		var index = $scope.imageAnimating.indexOf(productId);
 		if(index===-1) {
 			$scope.imageAnimating.push(productId);
-			console.log($scope.imageAnimating.indexOf(productId));
 		}
 		else {
 			$scope.imageAnimating.splice(index,1);
-			console.log($scope.imageAnimating.indexOf(productId));
 		}
 	}
 });

@@ -1,5 +1,7 @@
 .navbar-fixed-top {
-  background: linear-gradient(#423F3F, #414040 80%, #5E5C5C);
+  background: #F5F5F5;
+  border-bottom: 3px solid skyblue;
+//linear-gradient(#423F3F, #414040 80%, #5E5C5C)
 }
 navbar {
   display: block;
@@ -15,7 +17,7 @@ navbar {
   }
 
   a {
-    color: white;
+    color:mediumslateblue;
     //&:hover {
     //  color: white;
     //}
