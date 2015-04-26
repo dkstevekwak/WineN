@@ -49,18 +49,19 @@ describe('Order model', function(){
     var product1;
     var product2;
     beforeEach('Create temporary products', function (done) {
-		product1 = new Product({
+		product1 = {
 			name: "Test Brew 1",
 			price: "8.99",
 			description: "product1 test brew",
 			categories: ["Red"]
-		});
-		product2 = new Product({
+		};
+		product2 = {
 			name: "Test Brew 2",
 			price: "18.99",
 			description: "product2 test brew",
 			categories: ["White"]
-		});
+		};
+		
 		Product.create(product1,product2,function(err, saved1,saved2){
 			if(err) return done(err);
 			product1 = saved1;
