@@ -1,4 +1,4 @@
-/* var dbURI = 'mongodb://localhost:27017/testingDB';
+var dbURI = 'mongodb://localhost:27017/testingDB';
 var clearDB = require('mocha-mongoose')(dbURI);
 
 var sinon = require('sinon');
@@ -24,29 +24,28 @@ describe('Review model', function(){
 
 	var user;
     beforeEach('Create temporary user', function (done) {
-		user = new User({
-			email: 'obama@gmail.com',
-			   password: 'potus',
-				   role: 'admin',
-				   username: 'awang',
-			address: {
-				line1: '5 Hanover Square',
-				   line2: '25th Flr',
-				   city: 'New York City',
-				   state: 'New York',
-				   zip: '10006'
-            }
-        });
-		var createUser = function () {
-			return User.create(user, function(saved){
+    	user = {
+				email: 'obama@gmail.com',
+				password: 'potus',
+			   	role: 'admin',
+				username: 'awang',
+				address: {
+					line1: '5 Hanover Square',
+					line2: '25th Flr',
+					city: 'New York City',
+					state: 'New York',
+					zip: '10006' }
+			};    	
+		var createUser = function (user) {
+			User.create(user,function(err, saved){
+				if(err) return done(err);
 				user = saved;
-				if(err) done(err);
-                done();
+				done();
 			});
 		};
     });
-
-    var product,products;
+    
+    var product1,product2;
     beforeEach('Create temporary products', function (done) {
 		product1 = new Product({
 			name: "Test Brew 1",
@@ -60,34 +59,34 @@ describe('Review model', function(){
 			description: "product2 test brew",
 			categories: ["White"]
 		});
-		product1.save(function(err) {
-			product2.save(function(err) {
-				done();
-			});
-		});
-		var createProducts = function (done) {
-			return Product.create(product1,product2, function(saved1,saved2){
+//		product1.save(function(err) {			
+//			product2.save(function(err) {
+//				done();
+//			});
+//		});
+		var createProducts = function () {
+			return Product.create(product1,product2,function(saved1,saved2){
 				product1 = saved1;
 				product2 = saved2;
-				if(err) done(err);
-                done();
+				if(err) throw err;
+				done();
 			});
 		};
     });
-
+    
 	var order;
     beforeEach('Create temporary order', function (done) {
 		order = new Order({
 			user: user._id,
 			paid: false,
 			cartProducts: [
-			               {
-			            	   product_id: product1._id,
+			               { 
+			            	   product_id: product1._id, 
 			            	   price: product1.price,
 			            	   qty: "1"
 			               },
-			               {
-			            	   product_id: product2._id,
+			               { 
+			            	   product_id: product2._id, 
 			            	   price: product2.price,
 			            	   qty: "2"
 			               }
@@ -100,13 +99,11 @@ describe('Review model', function(){
 			subTotal: "46.97",
 			total: "52.97"
 		});
-		order.save(function(err) {
-			done();
-		});
 		var createOrder = function () {
-			return Order.create(order,saved){
+			return Order.create(order,function(saved){
 				order = saved;
 				if(err) throw err;
+				done();
 			});
 		};
     });
@@ -122,23 +119,27 @@ describe('Review model', function(){
 			date: Date.now,
 			likes: 4
 		});
-		review.save(function(err) {
-			done();
-		});
 		var createReview = function () {
-			return Review .create(review,saved){
+			return Review .create(review,function(saved){
 				review = saved;
 				if(err) throw err;
+				done();
 			});
-		};
+		};		
     });
-
+    
     afterEach('Clear test database', function (done) {
         clearDB(done);
     });
-
+    
     var createReview = function (review) {
-        return Review.create(review,function(err,saved){        }
+        return Review.create(review,function(err,saved){
+        	if(err) throw err;
+        });
+    };
+    
+    var createUser = function (user) {
+        return User.create(user,function(err,saved){
         	if(err) throw err;
         });
     };
@@ -207,7 +208,7 @@ describe('Review model', function(){
 		expect(order.cartProducts[1].qty).to.be.equal("2");
 		done();
     });
-
+    
     xit('should have categories which is an Array ',function(done){
         var product = new Product({
 			name: "Jimmy's Brew",
@@ -222,6 +223,5 @@ describe('Review model', function(){
             done();
         });
      });
-
+    
 });
-*/
