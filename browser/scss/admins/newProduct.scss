@@ -1,9 +1,17 @@
 #new-product-admins {
+    height: 100%;
+    padding-top: 50px;
+    margin-bottom: 20px;
+    h2 {
+        text-align: center;
+    }
     .add-product-form {
-        width: 50%;
-        margin-left: auto;
-        margin-right: auto;
-        form {
+        label {
+            margin-top: 10px;
+        }
+        button.btn.btn-default {
+            border: 1px solid skyblue;
+            margin-top: 20px;
             width: 100%;
         }
     }
