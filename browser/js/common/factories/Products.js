@@ -17,14 +17,8 @@ app.factory('Products', function ($http) {
     })
   }
 
-  var updateProduct = function(oldProduct, updatedProduct) {
-    var toSendProduct = {};
-    angular.forEach(oldProduct, function(info,key){
-      if(info!==updatedProduct[key]) {
-        toSendProduct[key]=updatedProduct[key]
-      }
-    });
-	  return $http.put('/api/products/' + oldProduct._id, toSendProduct).then(function(res) {
+  var updateProduct = function(product) {
+	  return $http.put('/api/products/' + product._id, product).then(function(res) {
 		  return res.data;
 	  }, function(err) {
 		  console.log('error', err);

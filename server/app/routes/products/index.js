@@ -19,14 +19,13 @@ router.get('/:productId', function(req, res, next) {
 });
 
 router.put('/:productId', function(req,res,next){
-	var body = req.body;
-	console.log("this is server not test", body)
+	var updatedProduct = req.body;
 	Product.findById(req.params.productId, function(err, product) {
 		if (err) return next(err);
-		body.reviews = body.reviews.map(function(eachReview){
+		updatedProduct.reviews = updatedProduct.reviews.map(function(eachReview){
 			return eachReview._id;
 		});
-		_.extend(product, body);
+		_.extend(product, updatedProduct);
 		product.save(function(err, savedProduct){
 			res.send(savedProduct);
 		});

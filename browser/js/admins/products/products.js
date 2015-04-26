@@ -34,7 +34,7 @@ app.controller('ProductsAdminController', function($scope, Products, Reviews) {
 	});
 
 	$scope.updateProduct = function(product) {
-		Products.updateProduct(product, $scope.updatedProduct)
+		Products.updateProduct(product)
 		.then(function(product) {
 		}).catch(function(err){
 			console.log(err);
