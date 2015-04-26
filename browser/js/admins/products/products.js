@@ -9,7 +9,22 @@ app.config(function ($stateProvider) {
 
 app.controller('ProductsAdminController', function($scope, Products, Reviews) {
 	$scope.updatedProduct = null;
-	$scope.viewingProducts = [];
+	//$scope.viewingProducts = [];
+
+    $scope.currentProduct = null;
+
+    $scope.setCurrentProduct = function(product) {
+        if (product === $scope.currentProduct) {
+            $scope.currentProduct = null;
+            return;
+        }
+        $scope.currentProduct = product;
+        $scope.currentTab = 'details';
+    };
+
+    $scope.setCurrentTab = function(tab) {
+        $scope.currentTab = tab;
+    };
 
 	Products.getAllProducts()
 	.then(function(productList){
@@ -44,14 +59,14 @@ app.controller('ProductsAdminController', function($scope, Products, Reviews) {
 			console.log(err)
 		})
 	};
-	$scope.showReviews = function(productId){
+	//$scope.showReviews = function(productId){
 
-		if($scope.viewingProducts.indexOf(productId)===-1) {
-			$scope.viewingProducts.push(productId);
-		}
-		else {
-			var index = $scope.viewingProducts.indexOf(productId);
-			$scope.viewingProducts.splice(index,1);
-		}
-	}
+		//if($scope.viewingProducts.indexOf(productId)===-1) {
+			//$scope.viewingProducts.push(productId);
+		//}
+		//else {
+			//var index = $scope.viewingProducts.indexOf(productId);
+			//$scope.viewingProducts.splice(index,1);
+		//}
+	//}
 });
