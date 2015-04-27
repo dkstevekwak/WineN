@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller('CartController', function($scope, Cart){
+app.controller('CartController', function($scope, Cart, Recommendations){
 	$scope.shipping = Cart.shipping;
 	$scope.tax = Cart.tax;
 	$scope.subTotal = 0;
@@ -43,4 +43,12 @@ app.controller('CartController', function($scope, Cart){
 	$scope.updateCart = function(){//shouldn't exist
 		Cart.localCart = $scope.cartProducts;
 	};
+	$scope.getAllRecs = function(){
+		$scope.allRecs = Recommendations.getAllRecs();
+	};
+//	$scope.getAllRecs();
+	$scope.getProductRec = function(productId){
+		$scope.productRecs = Recommendations.getProductRec(productId);
+	};
+	$scope.getProductRec("553e4aac5c2208721215d319");
 });

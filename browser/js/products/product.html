@@ -1,28 +1,29 @@
 <section id="product-user" class="contentTop">
-	<div class="col-lg-5 col-md-5">
-		<img class="productImg" src="{{product.image}}">
-	</div>
-	<div class="col-lg-7 col-md-7 productDescription">
-			<li class="productCategory"> {{product.categories[0]}}</li>
-			<li class="productOrigin"> {{product.description.origin}}</li>
-			<li class="productPrice"> {{product.price | currency}}</li>
-			<li class="productReview"> {{product.description.review}}</li>
-			<li class="leaf">
-				<span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>
-				organic
-			</li>
-			<li class="thumbsUp">
-				<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-				quality guaranteed
-			</li>
-			<li class="stock">
-				<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-				<h3 ng-if="product.qty>0">stock available</h3>
-				<h3 ng-if="product.qty<1">SOLD OUT</h3>
-			</li>
-		<button is-active ng-class="{'highlight':active1}" ng-mouseenter="active1=true" ng-mouseleave="active1=false" class="menu-animation btn btn-default" ng-click="addToCart(product)">Add To Cart</button><br/>
-		<button is-active ng-class="{'highlight':active2}" ng-mouseenter="active2=true" ng-mouseleave="active2=false" class="menu-animation btn btn-default" type="submit" ng-click="viewComments()">See Reviews</button>
-	</div>
+		<div class="col-lg-5 col-md-5">
+			<img class="productImg" src="{{product.image}}">
+		</div>
+		<div class="col-lg-7 col-md-7 productDescription">
+				<li class="productCategory"> {{product.categories[0]}}</li>
+				<li class="productOrigin"> {{product.description.origin}}</li>
+				<li class="productPrice"> {{product.price | currency}}</li>
+				<li class="productReview"> {{product.description.review}}</li>
+				<li class="leaf">
+					<span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>
+					organic
+				</li>
+				<li class="thumbsUp">
+					<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+					quality guaranteed
+				</li>
+				<li class="stock">
+					<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+					<h3 ng-if="product.qty>0">stock available</h3>
+					<h3 ng-if="product.qty<1">SOLD OUT</h3>
+				</li>
+			<button is-active ng-class="{'highlight':active1}" ng-mouseenter="active1=true" ng-mouseleave="active1=false" class="menu-animation btn btn-default" ng-click="addToCart(product)">Add To Cart</button><br/>
+			<button is-active ng-class="{'highlight':active2}" ng-mouseenter="active2=true" ng-mouseleave="active2=false" class="menu-animation btn btn-default" type="submit" ng-click="viewComments()">See Reviews</button>
+		</div>
+	<!--  Reviews -->
 	<reviews class="col-lg-12 col-md-12" ng-if="seeComments"></reviews>
 	<div class="background col-lg-12 col-md-12">
 		<div class="wineFacts col-lg-9 col-md-9">
@@ -38,9 +39,21 @@
 					<h2>Best Served: {{product.description.serves}} C</h2>
 				</div>
 			</div>
-
 		</div>
 	</div>
+	
+			<!-- Recommendations NEED STYLING -->
+		<div class="recommendations col-lg-12 col-md-12">
+			<div class="col-lg-12 col-md-12">
+				<div><h2>Recommended Products:</h2>
+					<div ng-repeat="productRec in productRecs">
+						<h3>{{productRec.name}}</h3>
+						<p>{{productRec.categories[0]}} {{productRec.price}} </p>
+					</div>
+				</div>
+			</div>
+		</div>
+	
 </section>
 
 
