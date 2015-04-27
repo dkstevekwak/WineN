@@ -55,13 +55,14 @@ app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders, Pro
 						})
 					})
 				} else {
+					console.log("else", $scope.products);
 					$scope.products.forEach(function(cartProduct){
-						console.log(cartProduct);
-						console.log(promo.category);
-						if(cartProduct.categories[0]===promo.name) {
-							cartProduct.price *= (100-promo.percentage)/100;
-							$scope.checkoutDetails.subTotal = Cart.calculateSubTotal($scope.products);
-						}
+						cartProduct.categories.forEach(function(eachCategory){
+							if(eachCategory === promo.category) {
+								cartProduct.price *= (100-promo.percentage)/100;
+								$scope.checkoutDetails.subTotal = Cart.calculateSubTotal($scope.products);
+							}
+						})
 					})
 				}
 			}
