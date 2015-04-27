@@ -33,11 +33,103 @@ var getCurrentUserData = function () {
 var seedUsers = function () {
     var users = [
         {
-            email: 'testing@fsa.com',
+            email: 'jimmy@fsa.com',
             password: 'password',
             role: 'admin',
-            username: 'fullstack',
-            address: {
+            firstName: 'Jimmy',
+            lastName: 'Farrell',
+            shippingAddress: {
+                line1: '5 Hanover Square',
+                line2: '25th Floor',
+                city: 'New York City',
+                state: 'New York',
+                zip: '10006'
+            },
+            billingAddress: {
+                line1: '5 Hanover Square',
+                line2: '25th Floor',
+                city: 'New York City',
+                state: 'New York',
+                zip: '10006'
+            }
+        },
+        {
+            email: 'alex@fsa.com',
+            password: 'password',
+            role: 'admin',
+            firstName: 'Alex',
+            lastName: 'Wang',
+            shippingAddress: {
+                line1: '5 Hanover Square',
+                line2: '25th Floor',
+                city: 'New York City',
+                state: 'New York',
+                zip: '10006'
+            },
+            billingAddress: {
+                line1: '5 Hanover Square',
+                line2: '25th Floor',
+                city: 'New York City',
+                state: 'New York',
+                zip: '10006'
+            }
+        },
+        {
+            email: 'dj@fsa.com',
+            password: 'password',
+            role: 'admin',
+            firstName: 'DJ',
+            lastName: 'Nadgar',
+            shippingAddress: {
+                line1: '5 Hanover Square',
+                line2: '25th Floor',
+                city: 'New York City',
+                state: 'New York',
+                zip: '10006'
+            },
+            billingAddress: {
+                line1: '5 Hanover Square',
+                line2: '25th Floor',
+                city: 'New York City',
+                state: 'New York',
+                zip: '10006'
+            }
+        },
+        {
+            email: 'steve@fsa.com',
+            password: 'password',
+            role: 'admin',
+            firstName: 'Steve',
+            lastName: 'Kwak',
+            shippingAddress: {
+                line1: '5 Hanover Square',
+                line2: '25th Floor',
+                city: 'New York City',
+                state: 'New York',
+                zip: '10006'
+            },
+            billingAddress: {
+                line1: '5 Hanover Square',
+                line2: '25th Floor',
+                city: 'New York City',
+                state: 'New York',
+                zip: '10006'
+            }
+        },
+        {
+            email: 'testing@fsa.com',
+            password: 'password',
+            role: 'user',
+            firstName: 'Fullstack',
+            lastName: 'Academy',
+            shippingAddress: {
+                line1: '5 Hanover Square',
+                line2: '25th Floor',
+                city: 'New York City',
+                state: 'New York',
+                zip: '10006'
+            },
+            billingAddress: {
                 line1: '5 Hanover Square',
                 line2: '25th Floor',
                 city: 'New York City',
@@ -49,8 +141,16 @@ var seedUsers = function () {
             email: 'obama@gmail.com',
             password: 'potus',
             role: 'user',
-            username: 'pres',
-            address: {
+            firstName: 'Barack',
+            lastName: 'Obama',
+            shippingAddress: {
+                line1: '1 White House',
+                line2: 'Oval Office',
+                city: 'Capital',
+                state: 'Washington D.C.',
+                zip: '11111'
+            },
+            billingAddress: {
                 line1: '1 White House',
                 line2: 'Oval Office',
                 city: 'Capital',
