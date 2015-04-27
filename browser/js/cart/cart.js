@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller('CartController', function($scope, Cart, Recommendations){
+app.controller('CartController', function($scope, Cart, Products, Recommendations){
 	$scope.shipping = Cart.shipping;
 	$scope.tax = Cart.tax;
 	$scope.subTotal = 0;
@@ -20,7 +20,7 @@ app.controller('CartController', function($scope, Cart, Recommendations){
 		$scope.cartProducts = Cart.getCart();
 		$scope.total = $scope.shipping + $scope.tax + $scope.subTotal;
 	};
-
+  $scope.productRecs = [];
 	//Order is important
 	if($scope.cartProducts && $scope.cartProducts.length) updateCartFields();	//runs initial calculate on load, further called with ng-change on html quantity forms
 
@@ -48,7 +48,19 @@ app.controller('CartController', function($scope, Cart, Recommendations){
 	};
 //	$scope.getAllRecs();
 	$scope.getProductRec = function(productId){
-		$scope.productRecs = Recommendations.getProductRec(productId);
+		$scope.productRecs = [];
+		Recommendations.getProductRec(productId).then(function(pidArr){
+			pidArr.forEach(function(el){
+				Products.getProduct(el.productId)
+				.then(function(product) {
+						$scope.productRecs.push(product);
+					}, function(err) {
+				        throw new Error(err);
+				});
+			});
+		});
 	};
-	$scope.getProductRec("553e4aac5c2208721215d319");
+  if ($scope.cartProducts && $scope.cartProducts.length) {
+    $scope.getProductRec($scope.cartProducts[0]._id);
+  }
 });
