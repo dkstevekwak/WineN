@@ -18,7 +18,8 @@ var schema = new mongoose.Schema({
     }],
     category: {
         type: mongoose.Schema.Types.ObjectId, ref: 'Category'
-    }
+    },
+    percentage: Number
 });
 
 mongoose.model('Promo', schema);

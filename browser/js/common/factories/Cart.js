@@ -23,6 +23,20 @@ app.factory('Cart', function ($http,localStorageService, Users, AuthService) {
       target.push(source.pop());
     }
   };
+
+  function calculateSubTotal(products){
+    var subTotal=0;
+    products.forEach(function(eachProduct){
+      subTotal+=calculateAmount(eachProduct.orderQty, eachProduct.price);
+    });
+    return subTotal;
+  };
+
+  function calculateAmount(q,p){
+    if(!q||!p) return 0;
+    return parseFloat(q) * parseFloat(p);
+  };
+
   var readCart = function(){
     var temp = JSON.parse(localStorage.getItem('cart'));
     dumpCart(localCart);
@@ -86,18 +100,9 @@ app.factory('Cart', function ($http,localStorageService, Users, AuthService) {
 		return localCart;
 	}; //a function that resets localCart to read localStorage
 
-	var calculateAmount = function(q,p){
-		if(!q||!p) return 0;
-		return parseFloat(q) * parseFloat(p);
-	};
 
-	var calculateSubTotal = function(){
-		var subTotal=0;
-		angular.forEach(localCart, function(eachProduct){
-			subTotal+=calculateAmount(eachProduct.orderQty, eachProduct.price);
-		});
-		return subTotal;
-	};
+
+
 
 
   var updateCloudCart = function(){
@@ -132,11 +137,11 @@ app.factory('Cart', function ($http,localStorageService, Users, AuthService) {
   return {
 	  addToCart,
 	  emptyCart,
-	  calculateSubTotal,
 	  removeItem,
 	  shipping,
 	  getCart,
 	  tax,
+    calculateSubTotal,
 		changeQty,
     cloudCartSync
   };
