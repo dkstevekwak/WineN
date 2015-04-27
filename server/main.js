@@ -11,7 +11,7 @@ var recServer = require('http').createServer();
 
 var createApplication = function () {
     var app = require('./app');
-    var recApp = require('/recApp');
+    var recApp = require('./recApp');
     server.on('request', app); // Attach the Express application.
     recServer.on('request', recApp);//
     require('./io')(server);   // Attach socket.io.

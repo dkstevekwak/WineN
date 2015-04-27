@@ -29,9 +29,9 @@ app.use(function (req, res, next) {
 
 });
 
-app.get('/*', function (req, res) {
-    res.sendFile(app.get('indexHTMLPath'));
-});
+//app.get('/*', function (req, res) {
+//    res.sendFile(app.get('indexHTMLPath'));
+//});
 
 // Error catching endware.
 app.use(function (err, req, res) {
