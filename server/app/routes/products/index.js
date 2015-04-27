@@ -5,7 +5,7 @@ var _ = require('lodash');
 module.exports = router;
 
 router.get('/', function(req, res, next) {
-	Product.find({}).populate('reviews').exec(function(err, products) {
+	Product.find({}).populate('reviews categories').exec(function(err, products) {
 		if (err) return next(err);
 		res.send(products);
 	});

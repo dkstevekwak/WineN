@@ -3,7 +3,7 @@
 			<img class="productImg" src="{{product.image}}">
 		</div>
 		<div class="col-lg-7 col-md-7 productDescription">
-				<li class="productCategory"> {{product.categories[0]}}</li>
+				<li class="productCategory"> {{product.categories[0].name}}</li>
 				<li class="productOrigin"> {{product.description.origin}}</li>
 				<li class="productPrice"> {{product.price | currency}}</li>
 				<li class="productReview"> {{product.description.review}}</li>
@@ -41,7 +41,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 			<!-- Recommendations NEED STYLING -->
 			<!-- Recommendations NEED STYLING -->
 		<div class="recommendations col-lg-12 col-md-12">
@@ -55,7 +55,6 @@
 				</div>
 			</div>
 		</div>
-<	
 </section>
 
 
