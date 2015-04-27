@@ -39,6 +39,11 @@ router.use('/*', function(req, res, next){
       products.forEach(function(product){
         result[product._id] = productAnalyzer(product._id);
       })
+      
+      //sort results to have products with highest quantities first.
+      console.log("_.sortBy(result)",_.sortBy(result));
+//      results = _.sortBy(result);
+      
       req.hashTable = result;
 
       //console.log('here is the hashTable if it works!', result)
