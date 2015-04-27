@@ -41,7 +41,7 @@ router.use('/*', function(req, res, next){
       })
       
       //sort results to have products with highest quantities first.
-      console.log("_.sortBy(result)",_.sortBy(result));
+//      console.log("_.sortBy(result)",_.sortBy(result));
 //      results = _.sortBy(result);
       
       req.hashTable = result;

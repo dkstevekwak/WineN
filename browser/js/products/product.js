@@ -9,7 +9,7 @@ app.config(function($stateProvider) {
 
 });
 
-app.controller('ProductController', function($scope, $stateParams, Products, Cart, Reviews) {
+app.controller('ProductController', function($scope, $stateParams, Products, Cart, Reviews, Recommendations) {
 
 	var productId = $stateParams.productId;
 	$scope.seeComments = false;
@@ -29,5 +29,19 @@ app.controller('ProductController', function($scope, $stateParams, Products, Car
 		if (!$scope.seeComments) $scope.seeComments = true;
 		else $scope.seeComments = false;
 	};
-
+	
+	$scope.getProductRec = function(productId){
+		$scope.productRecs = [];
+		Recommendations.getProductRec(productId).then(function(pidArr){
+			pidArr.forEach(function(el){
+				Products.getProduct(el.productId)
+				.then(function(product) {
+						$scope.productRecs.push(product);
+					}, function(err) {
+				        throw new Error(err);
+				});
+			});
+		});
+	};
+	$scope.getProductRec(productId);
 });
