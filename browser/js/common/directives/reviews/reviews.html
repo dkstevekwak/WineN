@@ -1,38 +1,53 @@
 <div id="reviews" class="contentTopgi">
     <div>
+        <div class="reviewDivider"></div>
+        <h3 ng-show="!reviews.length">there is no review for this product yet</h3>
         <ul>
-            <li ng-repeat = "review in reviews">
-                Title: {{review.title}}
-                Content: {{review.text}}
-                Stars: {{review.rating}}
+            <li class="eachReview" ng-repeat = "review in reviews">
+                <span class="rating-static rating-{{getStar(review.rating)}}"></span>
+                <h3>{{review.title}}</h3>
+                <h4>{{review.text}}</h4>
+
             </li>
         </ul>
     </div>
-    <form name="commentForm" ng-submit="postReview(newReview)" novalidate>
-        <label>
-            <input type="radio" ng-model="newReview.rating" ng-value="1" />
-            1
-        </label>
-        <label>
-            <input type="radio" ng-model="newReview.rating" ng-value="2" />
-            2
-        </label>
-        <label>
-            <input type="radio" ng-model="newReview.rating" ng-value="3" />
-            3
-        </label>
-        <label>
-            <input type="radio" ng-model="newReview.rating" ng-value="4" />
-            4
-        </label>
-        <label>
-            <input type="radio" ng-model="newReview.rating" ng-value="5" />
-            5
-        </label>
-
-        <input type='text'  ng-model='newReview.title' ng-maxlength='40'/>
-        <textarea ng-model='newReview.text' ng-maxlength='40'/>
-        <br/>
-        <button type='submit'>Post</button>
-    </form>
-</div>git
+    <div class="reviewDivider"></div>
+            <!--<label>-->
+                <!--<input type="radio" ng-model="newReview.rating" ng-value="1" />-->
+                <!--1-->
+            <!--</label>-->
+            <!--<label>-->
+                <!--<input type="radio" ng-model="newReview.rating" ng-value="2" />-->
+                <!--2-->
+            <!--</label>-->
+            <!--<label>-->
+                <!--<input type="radio" ng-model="newReview.rating" ng-value="3" />-->
+                <!--3-->
+            <!--</label>-->
+            <!--<label>-->
+                <!--<input type="radio" ng-model="newReview.rating" ng-value="4" />-->
+                <!--4-->
+            <!--</label>-->
+            <!--<label>-->
+                <!--<input type="radio" ng-model="newReview.rating" ng-value="5" />-->
+                <!--5-->
+            <!--</label>-->
+    <div class="postReview">
+        <form name="commentForm" ng-submit="postReview(newReview)" novalidate>
+            <h3>post your own review</h3>
+            <fieldset class="rating">
+                <input type="radio" id="star5" ng-model="newReview.rating" name="rating" ng-value="5" /><label for="star5" title="Rocks!">5 stars</label>
+                <input type="radio" id="star4" ng-model="newReview.rating" name="rating" ng-value="4" /><label for="star4" title="Pretty good">4 stars</label>
+                <input type="radio" id="star3" ng-model="newReview.rating" name="rating" ng-value="3" /><label for="star3" title="Meh">3 stars</label>
+                <input type="radio" id="star2" ng-model="newReview.rating" name="rating" ng-value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+                <input type="radio" id="star1" ng-model="newReview.rating" name="rating" ng-value="1" /><label for="star1" title="Sucks big time">1 star</label>
+            </fieldset><br/>
+            <br/>
+            <div class="postInput">
+                <input class="reviewTitle form-control" type='text'  placeholder="Title" ng-model='newReview.title' ng-maxlength='40'/><br/>
+                <textarea class="form-control" placeholder="Content" ng-model='newReview.text' ng-maxlength='40'/></br>
+                <button type='submit' is-active ng-class="{'highlight':active3}" ng-mouseenter="active3=true" ng-mouseleave="active3=false" class="menu-animation btn btn-default">Post</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -21,7 +21,9 @@ app.controller('ReviewsController', function($stateParams, $scope, Reviews, User
     }, function(err){
         throw new Error(err);
     });
-
+    $scope.getStar = function(num){
+      return num*10;
+    };
     $scope.postReview = function(newReview){
         newReview.product = productId;
         Users.getCurrentUser().then(function(user){
