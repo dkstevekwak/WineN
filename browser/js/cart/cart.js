@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller('CartController', function($scope, Cart, Recommendations){
+app.controller('CartController', function($scope, Cart, Products, Recommendations){
 	$scope.shipping = Cart.shipping;
 	$scope.tax = Cart.tax;
 	$scope.subTotal = 0;
@@ -48,14 +48,19 @@ app.controller('CartController', function($scope, Cart, Recommendations){
 	};
 //	$scope.getAllRecs();
 	$scope.getProductRec = function(productId){
-    console.log('we are inside getProductRec', productId)
-		Recommendations.getProductRec(productId).then(function(prodArr){
-      console.log('this promise ran');
-      $scope.productRecs = prodArr;
-    });
+		$scope.productRecs = [];
+		Recommendations.getProductRec(productId).then(function(pidArr){
+			pidArr.forEach(function(el){
+				Products.getProduct(el.productId)
+				.then(function(product) {
+						$scope.productRecs.push(product);
+					}, function(err) {
+				        throw new Error(err);
+				});
+			});
+		});
 	};
   if ($scope.cartProducts && $scope.cartProducts.length) {
-    console.log('we are inside here');
     $scope.getProductRec($scope.cartProducts[0]._id);
   }
 });
