@@ -9,6 +9,15 @@ app.config(function ($stateProvider) {
 
 app.controller('PromosAdminsController', function($scope, Promos, Categories, Products){
 
+    function Promo (){
+        this.code = null;
+        this.expirationDate = null;
+        this.products = [];
+        this.category = null;
+    };
+
+    $scope.newPromo = new Promo();
+
     Promos.getAllPromos().then(function(promoList){
         $scope.promos = promoList;
     },function(err){
@@ -27,7 +36,15 @@ app.controller('PromosAdminsController', function($scope, Promos, Categories, Pr
         throw new Error(err);
     });
 
+    $scope.setProduct = function(product){
+        var index = $scope.newPromo.products.indexOf(product._id);
+        if(index === -1){
+            $scope.newPromo.products.push(product._id)
+        }
+        else $scope.newPromo.products.splice(index,1);
+    };
     $scope.createPromo = function(promo) {
+        console.log("this is category when creating", promo.category);
         Promos.postPromo(promo)
         .then(function(promo) {
             $scope.promos.push(promo);
@@ -54,6 +71,7 @@ app.controller('PromosAdminsController', function($scope, Promos, Categories, Pr
     };
 
     $scope.setCurrentPromo = function(promo) {
+        console.log("this is category when setting", promo.category);
         if ($scope.currentPromo === promo) {
             $scope.currentPromo = null;
             return;

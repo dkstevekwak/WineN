@@ -2,6 +2,7 @@
 app.factory('Promos', function ($http) {
     return {
         postPromo: function(promo){
+            promo.category = JSON.parse(promo.category)._id;
             return $http.post('/api/promos', promo).then(function(res){
                 return res.data;
             }, function(err){
@@ -10,7 +11,13 @@ app.factory('Promos', function ($http) {
         },
         getAllPromos: function() {
             return $http.get('/api/promos').then(function(res) {
-                return res.data;
+                console.log("this is res for promos", res.data);
+                var toReturn = res.data.map(function(each){
+                    each.expirationDate = new Date(each.expirationDate);
+                    return each;
+                });
+
+                return toReturn;
             }, function(err) {
                 throw new Error(err);
             });
