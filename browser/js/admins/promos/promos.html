@@ -1,0 +1,67 @@
+<section id="promomanagement" class="contentTop">
+    <div id="all-promos-admin" class="clearfix">
+        <div class="all-promos col-xs-6">
+            <input class="searchBox" type="text" placeholder="Search Promos" ng-model="query"/>
+            <div class="column-titles">
+                <div class="col-xs-12">
+                    <h3>Promo Code</h3>
+                </div>
+            </div>
+            <div ng-click="setCurrentPromo(promo)" ng-class-even="'even-promo'" ng-class="{ 'selected-promo': currentPromo._id === promo._id, 'first-promo': $first, 'last-promo': $last }" class="clearfix promo-listing" ng-repeat="promo in promos | orderBy: 'code' | filter: search">
+                <div class="col-xs-12 promo-name">
+                    <h4>{{ promo.code }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="single-promo col-xs-6" ng-show="currentPromo">
+            <h2>{{ currentPromo.code }}</h2>
+            <form ng-submit="updatePromo(currentPromo)">
+                <div class="col-xs-6">
+                    <label>Code</label>
+                    <input type="text" class="form-control" ng-model="currentPromo.code"/>
+                    <label>Expiration Date</label>
+                    <input type="date" class="form-control" ng-model="currentPromo.date"/>
+                    <label>Products</label>
+                    <div class="promo-products" ng-repeat="product in products">
+                        <input type="checkbox" ng-model="currentPromo.products" ng-true-value="product._id" ng-false-value="null"><span>{{ product.name }}</span>
+                    </div>
+                </div>
+                <label>Category</label>
+                <select class="form-control" ng-model="currentPromo.category">
+                    <option value="{{ category.name }}" ng-repeat="category in categories">{{ category.name }}</option>
+                </select>
+                <button class="btn btn-default">Update Promo</button>
+            </form>
+        </div>
+        <div class="create-promo col-xs-6" ng-if="!currentPromo">
+            <h2>Add New Promo</h2>
+            <form ng-submit="createPromo(newPromo)">
+                <div class="col-xs-6">
+                    <label>Code</label>
+                    <input type="text" class="form-control" ng-model="newPromo.code"/>
+                </div>
+                <div class="col-xs-6">
+                    <label>Expiration Date</label>
+                    <input type="date" class="form-control" ng-model="newPromo.date"/>
+                </div>
+                <div class="col-xs-6">
+                    <label>Products</label>
+                    <div class="promo-products" ng-repeat="product in products">
+                        <input type="checkbox" ng-model="newPromo.products" ng-click="setProduct(product)"><span>{{ product.name }}</span>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <label>Category</label>
+                    <select class="form-control" ng-model="newPromo.category">
+                        <option value="{{ category.name }}" ng-repeat="category in categories">{{ category.name }}</option>
+                    </select>
+                </div>
+                <div class="col-xs-12">
+                    <button class="btn btn-default">Add Promo</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
+
