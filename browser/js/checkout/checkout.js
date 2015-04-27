@@ -8,14 +8,12 @@ app.config(function ($stateProvider) {
 });
 
 app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders){
-	var getCurrentUser = function(){
-		Users.getCurrentUser().then(function(currUser){
-			$scope.user = currUser;
-		}, function(err){
-			console.log('error getting current user')
-		})
-	}
-	getCurrentUser();
+
+    Users.getCurrentUser().then(function(currUser){
+        $scope.user = currUser;
+    }, function(err){
+        throw new Error(err);
+    });
 
 	$scope.products = Cart.getCart();
 	$scope.checkoutDetails = {
@@ -29,16 +27,15 @@ app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders){
 			cart: $scope.products,
 			user: $scope.user,
 			details: $scope.checkoutDetails
-		}
+		};
 		Orders.userConfirmOrder(order).then(function(order){
 			Cart.emptyCart();
-			console.log("order created!!!", order);
 			$state.go('order'); //returns the order
 			//redirect via state after thankyou/confirmation page created
 		}, function(err){
-			console.log('order creation failed oh no', err);
-		})
-	}
-	
+            throw new Error(err);
+		});
+	};
+
 
 });

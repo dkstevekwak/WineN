@@ -10,8 +10,8 @@ var schema = new mongoose.Schema({
 //	},
 		user: {
 			_id: {
-				type: String //tentative until we decide sessionID or userID handling
-				,required: true
+				type: String, //tentative until we decide sessionID or userID handling
+				required: true
 			},
 			firstName: {
 				type: String

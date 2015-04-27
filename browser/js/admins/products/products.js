@@ -67,8 +67,8 @@ app.controller('ProductsAdminController', function($scope, Products, Reviews, Ca
 			//return review._id !== reviewId
 			//}
 		}, function(err) {
-			console.log(err)
-		})
+            throw new Error(err);
+		});
 	};
 	//$scope.showReviews = function(productId){
 

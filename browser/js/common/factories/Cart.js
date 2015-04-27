@@ -9,20 +9,20 @@ app.factory('Cart', function ($http,localStorageService, Users, AuthService) {
 	function productExists(productId){
 		var test = localCart.filter(function(el){
 			return el._id === productId;
-		})
+		});
 		return test.length;
 	} //check if product exists, returns a num
   var dumpCart = function(cart){
     while (cart && cart.length){
       cart.pop();
     }
-  }
+  };
   var populateCart = function(target, source){
     //assumes target is blank
     while (source && source.length){
       target.push(source.pop());
     }
-  }
+  };
   var readCart = function(){
     var temp = JSON.parse(localStorage.getItem('cart'));
     dumpCart(localCart);
@@ -30,7 +30,7 @@ app.factory('Cart', function ($http,localStorageService, Users, AuthService) {
   }; //reads from local cart;
   var setLocalCart = function(){
     localStorage.setItem('cart',JSON.stringify(localCart));
-  }
+  };
   function incrementQty(productId){
     localCart.filter(function(el){
       return el._id === productId;
@@ -43,23 +43,19 @@ app.factory('Cart', function ($http,localStorageService, Users, AuthService) {
 			return el._id === productId;
 		})[0] = qty;
 		setLocalCart();
-    console.log('setting cart');
     updateCloudCart();
-	}//edits item in local cart + localStorage
+	};//edits item in local cart + localStorage
 
 	var addToCart = function(product) {
 		if (!localStorage && !localStorage.getItem('cart')) {
 			localStorage.setItem('cart',JSON.stringify(localCart));
-      console.log('a ran')
 		} //if localStorage doesn't exist, create it
 		if (productExists(product._id)){
 			incrementQty(product._id);
-      console.log('b ran')
     }
     else {
       product.orderQty = 1;
       localCart.push(product);
-      console.log('c ran')
     }//find product in local cart to update qty, else set to 1 and add
 
 		setLocalCart();
@@ -99,42 +95,37 @@ app.factory('Cart', function ($http,localStorageService, Users, AuthService) {
 		var subTotal=0;
 		angular.forEach(localCart, function(eachProduct){
 			subTotal+=calculateAmount(eachProduct.orderQty, eachProduct.price);
-		})
+		});
 		return subTotal;
 	};
 
 
   var updateCloudCart = function(){
     Users.getCurrentUser().then(function(user) {
-      console.log('serverCart Updating');
       readCart();
       return $http.put('/api/users/' + user._id + '/cart', localCart).then(function (res) {
-        console.log('serverCart Updated', res.data);
         return res.data; //promise object that should be a cart;
       }, function (err) {
-        console.log('failed to update cart', err)
+          throw new Error(err);
       })
     }, function(err){
-      console.log('failed to get current user', err);
-      return null;
+        throw new Error(err);
     })
   };
 
   var cloudCartSync = function(){
     if (AuthService.isAuthenticated()){
       Users.getCurrentUser().then(function(user){
-        if (localCart && localCart.length == 0 && user.cart.length > 0) {
+        if (localCart && localCart.length === 0 && user.cart.length > 0) {
           localStorage.setItem('cart',JSON.stringify(user.cart));
           readCart();
         }// if localCart exists but is empty and user has a cloud cart, set localStorage and localCart to user.cart
         else if (localCart && localCart.length) {
           updateCloudCart();
         }
-        console.log('cloudCartSynced');
       }, function(err){
-        console.log('failed to get current user', err);
-        return null;
-      })
+          throw new Error(err);
+      });
     }
     //cloudCartSync(); //checks cloud cart on load;
   };

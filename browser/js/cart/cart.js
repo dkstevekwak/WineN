@@ -30,7 +30,7 @@ app.controller('CartController', function($scope, Cart){
 	$scope.removeItem = function(product){
 		Cart.removeItem(product);
 		updateCartFields();
-	}
+	};
 	$scope.emptyCart = function (){
 		//Cart.localCart = [];
 		Cart.emptyCart();
