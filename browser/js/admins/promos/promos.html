@@ -30,6 +30,8 @@
                 <select class="form-control" ng-model="currentPromo.category">
                     <option value="{{ category._id }}" ng-repeat="category in categories">{{ category.name }}</option>
                 </select>
+                <label>Discount</label>
+                <input type="number" ng-model="currentPromo.percentage" />
                 <button class="btn btn-default">Update Promo</button>
             </form>
         </div>
@@ -55,6 +57,8 @@
                     <select class="form-control" ng-model="newPromo.category">
                         <option value="{{ category }}" ng-repeat="category in categories">{{ category.name }}</option>
                     </select>
+                    <label>Discount</label>
+                    <input type="number" ng-model="newPromo.percentage" />
                 </div>
                 <div class="col-xs-12">
                     <button class="btn btn-default">Add Promo</button>

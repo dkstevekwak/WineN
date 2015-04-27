@@ -11,7 +11,6 @@ app.factory('Promos', function ($http) {
         },
         getAllPromos: function() {
             return $http.get('/api/promos').then(function(res) {
-                console.log("this is res for promos", res.data);
                 var toReturn = res.data.map(function(each){
                     each.expirationDate = new Date(each.expirationDate);
                     return each;
@@ -22,8 +21,8 @@ app.factory('Promos', function ($http) {
                 throw new Error(err);
             });
         },
-        getPromo: function(promoId){
-            return $http.get('/api/promos/' + promoId).then(function(res){
+        getPromo: function(promoCode){
+            return $http.get('/api/promos/' + promoCode).then(function(res){
                 return res.data;
             }, function(err){
                 throw new Error(err);

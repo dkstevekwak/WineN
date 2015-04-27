@@ -25,11 +25,12 @@
     	</div>
     </section>
     <div class="checkoutDetails">
-    	<h3>Sub Total: {{checkoutDetails.subtotal | currency}}</h3>
+    	<h3>Sub Total: {{checkoutDetails.subTotal | currency}}</h3>
     	<h3>Tax: {{ checkoutDetails.tax | currency }}</h3>
     	<h3>Shipping: {{ checkoutDetails.shipping  | currency }}</h3>
-    	<h2>Total: {{ checkoutDetails.total | currency }}</h2>
+    	<h2>Total: {{ checkoutDetails.subTotal + checkoutDetails.tax + checkoutDetails.shipping | currency }}</h2>
     </div>
-			<button ng-click="confirmOrder()">Order!!!!!</button>
+		<input type="text" ng-model="promoCode"><button ng-click="applyPromo(promoCode)">Apply Promo Code</button>
+		<button ng-click="confirmOrder()">Order!!!!!</button>
     
 </section>

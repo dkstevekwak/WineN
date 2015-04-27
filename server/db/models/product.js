@@ -26,7 +26,7 @@ var schema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, ref: 'User' //commented out required
     },
 	categories: {
-		type: [String],
+		type: [{mongoose.Schema.Types.ObjectId, ref:'Category'}],
 		required: true
 	},
     reviews: [{

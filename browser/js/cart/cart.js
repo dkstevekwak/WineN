@@ -16,8 +16,8 @@ app.controller('CartController', function($scope, Cart, Products, Recommendation
 	// $scope.
 
 	var updateCartFields = function(){
-		$scope.subTotal = Cart.calculateSubTotal();
 		$scope.cartProducts = Cart.getCart();
+		$scope.subTotal = Cart.calculateSubTotal($scope.cartProducts);
 		$scope.total = $scope.shipping + $scope.tax + $scope.subTotal;
 	};
   $scope.productRecs = [];
