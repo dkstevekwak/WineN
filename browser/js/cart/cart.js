@@ -20,7 +20,7 @@ app.controller('CartController', function($scope, Cart, Recommendations){
 		$scope.cartProducts = Cart.getCart();
 		$scope.total = $scope.shipping + $scope.tax + $scope.subTotal;
 	};
-
+  $scope.productRecs = [];
 	//Order is important
 	if($scope.cartProducts && $scope.cartProducts.length) updateCartFields();	//runs initial calculate on load, further called with ng-change on html quantity forms
 
@@ -48,7 +48,14 @@ app.controller('CartController', function($scope, Cart, Recommendations){
 	};
 //	$scope.getAllRecs();
 	$scope.getProductRec = function(productId){
-		$scope.productRecs = Recommendations.getProductRec(productId);
+    console.log('we are inside getProductRec', productId)
+		Recommendations.getProductRec(productId).then(function(prodArr){
+      console.log('this promise ran');
+      $scope.productRecs = prodArr;
+    });
 	};
-	$scope.getProductRec("553e4aac5c2208721215d319");
+  if ($scope.cartProducts && $scope.cartProducts.length) {
+    console.log('we are inside here');
+    $scope.getProductRec($scope.cartProducts[0]._id);
+  }
 });

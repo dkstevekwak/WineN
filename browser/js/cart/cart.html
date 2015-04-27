@@ -21,3 +21,10 @@
 	<!-- <button ng-click="emptyCart()">Empty Cart</button> 
 	--> <button ng-click="emptyCart()">Empty Cart</button> 
 </section>
+<div><h2>Recommended Products:</h2>
+    {{productRecs}}
+    <div ng-repeat="productRec in productRecs">
+        <h3>{{productRec.name}}</h3>
+        <p>{{productRec.categories[0]}} {{productRec.price}} </p>
+    </div>
+</div>
