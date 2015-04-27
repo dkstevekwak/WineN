@@ -1,6 +1,15 @@
 'use strict';
 app.factory('Users', function ($http) {
 
+    var createUser = function(user) {
+        return $http.post('/api/users', user).then(function(res) {
+            console.log('res.data', res.data)
+            return res.data;
+        }, function(err) {
+            throw new Error(err);
+        });
+    };
+
   var getAllUsers = function () {
     return $http.get('/api/users').then(function(res){
       return res.data; //should be an array of users
@@ -40,6 +49,7 @@ app.factory('Users', function ($http) {
 
 
   return {
+    createUser,
     getAllUsers,
     getUser,
     updateUser,
