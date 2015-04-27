@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+* {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 600;
+}
 .contentTop {
   margin-top:10%;
 }
@@ -43,6 +47,7 @@ li {
 }
 
 @import 'directives/main';
+@import 'directives/reviews';
 @import 'home/main';
 @import 'about/main';
 @import 'login/main';
@@ -53,4 +58,5 @@ li {
 @import 'cart/cart';
 @import 'checkout/checkout';
 @import 'products/products';
+@import 'products/product';
 @import 'profile/profile';
