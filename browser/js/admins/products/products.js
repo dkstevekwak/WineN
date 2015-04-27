@@ -7,7 +7,7 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('ProductsAdminController', function($scope, Products, Reviews) {
+app.controller('ProductsAdminController', function($scope, Products, Reviews, Categories) {
 	$scope.updatedProduct = null;
 	//$scope.viewingProducts = [];
 
@@ -24,6 +24,17 @@ app.controller('ProductsAdminController', function($scope, Products, Reviews) {
 
     $scope.setCurrentTab = function(tab) {
         $scope.currentTab = tab;
+    };
+
+    $scope.search = function(product) {
+		//query box is empty
+		if(!$scope.query) return true;
+		//query box has a string
+        var lowercaseQuery = $scope.query.toLowerCase();
+        var lowercaseName = product.name.toLowerCase();
+
+		if (lowercaseName.indexOf(lowercaseQuery) > -1) return true;
+		return false;
     };
 
 	Products.getAllProducts()

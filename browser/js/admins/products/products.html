@@ -1,6 +1,7 @@
 <section class="contentTop">
     <div id="products-admins" class="clearfix">
         <div class="all-products col-xs-6">
+            <input class="searchBox" type="text" placeholder="Search Products" ng-model="query"/>
             <div class="column-titles">
                 <div class="col-xs-9">
                     <h3>Product</h3>
@@ -9,7 +10,7 @@
                     <h3>Inventory</h3>
                 </div>
             </div>
-            <div ng-click="setCurrentProduct(product)" ng-class-even="'even-product'" ng-class="{ 'selected-product': currentProduct._id === product._id, 'first-product': $first, 'last-product': $last }" class="clearfix product-listing" ng-repeat="product in products">
+            <div ng-click="setCurrentProduct(product)" ng-class-even="'even-product'" ng-class="{ 'selected-product': currentProduct._id === product._id, 'first-product': $first, 'last-product': $last }" class="clearfix product-listing" ng-repeat="product in products | filter: search">
                 <div class="col-xs-9 product-name">
                     <h4>{{ product.name }}</h4>
                 </div>
