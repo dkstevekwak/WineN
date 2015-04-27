@@ -73,7 +73,6 @@ app.controller('PromosAdminsController', function($scope, Promos, Categories, Pr
     };
 
     $scope.setCurrentPromo = function(promo) {
-        console.log("this is category when setting", promo.category);
         if ($scope.currentPromo === promo) {
             $scope.currentPromo = null;
             return;
