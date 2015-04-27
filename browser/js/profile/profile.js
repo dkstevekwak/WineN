@@ -16,18 +16,18 @@ app.controller("ProfileController", function($scope, Users, Orders, Reviews, $st
 
     $scope.updateProfile = function(user){
         Users.updateUser(user); //not sure if this sets unshown fields to null;
-    }
+    };
 	$scope.getCurrentUser = function(){
       Users.getCurrentUser().then(function(user){
           $scope.user = user;
       }).then(function() {
-        return Reviews.getUserReviews($scope.user._id)
+        return Reviews.getUserReviews($scope.user._id);
       }).then(function(reviews) {
             $scope.reviews = reviews;
       }).catch(function(err) {
-          console.log(err);
+          throw new Error(err);
       });
-  }
+  };
 
     $scope.setCurrentTab = function(tabName) {
         $scope.currentTab = tabName;
@@ -38,9 +38,9 @@ app.controller("ProfileController", function($scope, Users, Orders, Reviews, $st
             Orders.update.currentOrder = order;
             $state.go('order');
         }, function(err){
-            console.log('failed to get order', err)
+            throw new Error(err);
         });
-    }
+    };
 
     $scope.updateReview = function(review) {
         Reviews.updateReview(review)
@@ -58,7 +58,7 @@ app.controller("ProfileController", function($scope, Users, Orders, Reviews, $st
                 //return review._id !== reviewId
             //}
         }, function(err) {
-            console.log(err)
+            throw new Error(err);
         });
     };
 

@@ -18,11 +18,10 @@ app.controller('ProductController', function($scope, $stateParams, Products, Car
 	.then(function(product) {
 		$scope.product = product;
 	}, function(err) {
-		console.log('error', err);
+        throw new Error(err);
 	});
 
 	$scope.addToCart = function(product) {
-		console.log("add to cart")
 		Cart.addToCart(product);
 	};
 

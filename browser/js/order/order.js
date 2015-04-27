@@ -15,7 +15,7 @@ app.controller('OrderController', function($scope, Orders, Cart) {
         Orders.getOrder(Orders.currentOrder._id).then(function (order) {
             $scope.order = order;
         });
-    }
+    };
 
 
 

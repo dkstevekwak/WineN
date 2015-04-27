@@ -5,25 +5,24 @@ app.factory('Users', function ($http) {
     return $http.get('/api/users').then(function(res){
       return res.data; //should be an array of users
     }, function(err){
-      console.log(err);
-    })
+        throw new Error(err);
+    });
   };
 
   var getUser = function(userId){
     return $http.get('/api/users/' + userId).then(function(res){
       return res.data; //should be a user object
     }, function(err){
-      console.log(err);
-    })
-  }
+        throw new Error(err);
+    });
+  };
   var getCurrentUser = function(){
     return $http.get('/session').then(function(res){
-      console.log('session', res)
       return res.data.user;
     }, function(err){
-      console.log('user is not logged in');
-    })
-  }
+        throw new Error(err);
+    });
+  };
 
   var updateUser = function(user) {
     //var toSendUser = {};
@@ -35,7 +34,7 @@ app.factory('Users', function ($http) {
     return $http.put('/api/users/' + user._id, user).then(function(res) {
       return res.data;
     }, function(err) {
-      console.log('error', err);
+        throw new Error(err);
     });
   };
 

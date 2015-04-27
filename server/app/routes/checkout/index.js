@@ -32,13 +32,12 @@ router.post('/guest', function(req,res,next){
 	});
 });
 
-//authenticated 
+//authenticated
 
 //checkout
 router.post('/', function(req,res,next){
 	//authenticate to get userId AT A LATER TI
 	var body = req.body;
-	console.log('posting order', req.body);
 	var order = new Order();
 	_.assign(order, body);
 	//TODO have to define business workflow of status
@@ -51,8 +50,8 @@ router.post('/', function(req,res,next){
 			user.save(function(err, savedUser){
 				if(err) return next(err);
 				res.send(savedOrder);
-			})
-		})
+			});
+		});
 		if(err) return next(err);
 	});
 });
@@ -74,7 +73,6 @@ router.put('/:orderId', function(req,res,next){
 //			order[key] = body[key];
 //		}
 		_.extend(order,body);
-		console.log("_.extended order",order);
 		order.save(function(err, saved){
 			res.send(saved);
 		});
