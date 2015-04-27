@@ -12,8 +12,8 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.get('/:promoId', function(req, res, next) {
-    Promo.findById(req.params.promoId, function(err, promo) {
+router.get('/:promoCode', function(req, res, next) {
+    Promo.findOne({code:req.params.promoCode}, function(err, promo) {
         if (err) return next(err);
         res.send(promo);
     });
