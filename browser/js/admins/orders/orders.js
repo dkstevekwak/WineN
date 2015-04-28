@@ -32,7 +32,6 @@ app.controller('OrderManagementController', function($scope, Orders, $state) {
               return order;
           });
           $scope.orders = orders;
-          console.log(orders)
       }, function(err){
           throw new Error(err);
       });
