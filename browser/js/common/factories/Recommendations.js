@@ -27,6 +27,6 @@ app.factory('Recommendations', function ($http,localStorageService, Users, AuthS
 	  };
 	return {
 		getAllRecs,
-		getProduc
+		getProductRec
 	};
 });
