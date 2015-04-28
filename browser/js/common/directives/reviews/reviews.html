@@ -7,7 +7,7 @@
                 <span class="rating-static rating-{{getStar(review.rating)}}"></span>
                 <h3>{{review.title}}</h3>
                 <h4>{{review.text}}</h4>
-
+                <h4 class="review-user">Review by {{ review.user.initials }}</h4>
             </li>
         </ul>
     </div>

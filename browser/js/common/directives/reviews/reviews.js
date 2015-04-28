@@ -19,6 +19,10 @@ app.controller('ReviewsController', function($stateParams, $scope, AuthService, 
     var productId = $stateParams.productId;
 
     Reviews.getReviews(productId).then(function(reviews){
+        reviews = reviews.map(function(review) {
+            review.user.initials = review.user.firstName[0] + '. ' + review.user.lastName[0] + '.';
+            return review;
+        });
         $scope.reviews = reviews;
     }, function(err){
         throw new Error(err);

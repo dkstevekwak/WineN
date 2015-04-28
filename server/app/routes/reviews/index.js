@@ -19,7 +19,7 @@ router.use(function(req,res,next){
 
 router.get('/:productId', function(req, res, next) {
     var productId = req.params.productId;
-    Review.find({product: productId}, function(err, reviews) {
+    Review.find({product: productId}).populate('user').exec(function(err, reviews) {
         if (err) return next(err);
         res.send(reviews);
     });
