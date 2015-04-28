@@ -29,7 +29,7 @@ app.factory('Products', function ($http) {
     return $http.post('/api/products/add', product).then(function(res) {
       return res.data;
     }, function(err) {
-        throw new Error(err);
+        return 'Error Adding Product - Please Try Again';
     });
   };
   var deleteProduct = function(productId) {

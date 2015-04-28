@@ -53,9 +53,13 @@ app.controller('ProductsAdminController', function($scope, Products, Reviews, Ca
 	$scope.createProduct = function(product) {
 		Products.createProduct(product)
 		.then(function(product) {
-            console.log('product', product);
+            if (typeof product === 'string') {
+                $scope.error = product;
+                return;
+            }
             $scope.products.push(product);
             $scope.newProduct = new Product();
+            $scope.newProductForm.$setPristine();
             $scope.selectedCategories = [];
 		});
 	};
@@ -67,6 +71,7 @@ app.controller('ProductsAdminController', function($scope, Products, Reviews, Ca
             return;
         }
         $scope.currentProduct = product;
+        $scope.selectedCategories = product.categories;
         $scope.currentTab = 'details';
     };
 
@@ -106,6 +111,7 @@ app.controller('ProductsAdminController', function($scope, Products, Reviews, Ca
 	$scope.updateProduct = function(product) {
 		Products.updateProduct(product)
 		.then(function(product) {
+            $scope.success = true;
 		}).catch(function(err){
 			console.log(err);
 		});

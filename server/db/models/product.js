@@ -9,7 +9,7 @@ var schema = new mongoose.Schema({
     },
     image: {
         type: String,
-        default: ''
+        default: 'https://s3.amazonaws.com/winen/no-image.jpg'
     },
     description: {
         review: {

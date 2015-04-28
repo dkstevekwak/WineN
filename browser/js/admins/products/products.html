@@ -21,19 +21,20 @@
             </div>
         </div>
         <div class="single-product col-xs-6" ng-show="currentProduct">
+            <h3 class="form-success" ng-show="success">Product Successfully Updated</h3>
             <h2>{{ currentProduct.name }}</h2>
             <ul class="nav nav-tabs">
                 <li role="presentation" ng-class="{ 'active': currentTab === 'details' }" ng-click="setCurrentTab('details')"><a href="#">Product Details</a></li>
                 <li role="presentation" ng-class="{ 'active': currentTab === 'reviews' }" ng-click="setCurrentTab('reviews')"><a href="#">Product Reviews</a></li>
             </ul>
-            <form ng-show="currentTab === 'details'" ng-submit="updateProduct(currentProduct)">
+            <form ng-show="currentTab === 'details'" name="currentProductForm" ng-submit="currentProductForm.$valid && selectedCategories.length && updateProduct(currentProduct)" novalidate>
                 <div class="col-xs-4">
-                    <label>Name</label>
-                    <input class="form-control" ng-model="currentProduct.name" required/>
+                    <label>Name*</label><span class="validationError" ng-show="currentProductForm.$submitted && currentProductForm.name.$error.required">Product Name Required</span>
+                    <input name="name" class="form-control" ng-model="currentProduct.name" required/>
                 </div>
                 <div class="col-xs-4">
-                    <label>Price</label>
-                    <input class="form-control" ng-model="currentProduct.price" required/>
+                    <label>Price*</label><span class="validationError" ng-show="currentProductForm.$submitted && currentProductForm.price.$error.required">Product Price Required</span>
+                    <input name="price" class="form-control" ng-model="currentProduct.price" required/>
                 </div>
                 <div class="col-xs-4">
                     <label>Inventory</label>
@@ -44,13 +45,13 @@
                     <input class="form-control" ng-model="currentProduct.image"/>
                 </div>
                 <div class="col-xs-6">
-                    <label>Categories</label>
+                    <label>Categories*<span class="validationError" ng-show="currentProductForm.$submitted && !selectedCategories.length">At Least 1 Category Required</span></label>
                     <div class="product-categories" ng-repeat="category in categories">
                         <input type="checkbox" ng-click="setCategory(category, currentProduct)" ng-checked="currentProduct.categories.indexOf(category._id)!==-1" ng-true-value="category._id" ng-false-value="null"><span>{{ category.name }}</span>
                     </div>
                 </div>
                 <div class="col-xs-12">
-                    <label>Review</label>
+                    <label>Review*</label><span class="validationError" ng-show="currentProductForm.$submitted && currentProductForm.review.$error.required">Product Review Required</span>
                     <textarea class="form-control" ng-model="currentProduct.description.review" required></textarea>
                 </div>
                 <div class="col-xs-6">
@@ -89,15 +90,16 @@
             </ul>
         </div>
         <div class="add-product-form col-xs-6" ng-if="!currentProduct">
+            <h3 class="form-error" ng-show="error">{{ error }}</h3>
             <h2>Add New Product</h2>
-            <form ng-submit="createProduct(newProduct)">
+            <form name="newProductForm" ng-submit="newProductForm.$valid && selectedCategories.length && createProduct(newProduct)" novalidate>
                 <div class="col-xs-4">
-                    <label>Name</label>
-                    <input class="form-control" ng-model="newProduct.name"/>
+                    <label>Name*</label><span class="validationError" ng-show="newProductForm.$submitted && newProductForm.name.$error.required">Product Name Required</span>
+                    <input name="name" class="form-control" ng-model="newProduct.name" required/>
                 </div>
                 <div class="col-xs-4">
-                    <label>Price</label>
-                    <input class="form-control" ng-model="newProduct.price"/>
+                    <label>Price*</label><span class="validationError" ng-show="newProductForm.$submitted && newProductForm.price.$error.required">Product Price Required</span>
+                    <input name="price" class="form-control" ng-model="newProduct.price" required/>
                 </div>
                 <div class="col-xs-4">
                     <label>Inventory</label>
@@ -108,14 +110,14 @@
                     <input class="form-control" ng-model="newProduct.image"/>
                 </div>
                 <div class="col-xs-6 product-categories">
-                    <label>Categories</label>
+                    <label>Categories*<span class="validationError" ng-show="newProductForm.$submitted && !selectedCategories.length">At Least 1 Category Required</span></label>
                     <div ng-repeat="category in categories">
                         <input type="checkbox" ng-checked="selectedCategories.indexOf(category._id) > -1" ng-click="setCategory(category, newProduct)"><span>{{ category.name }}</span>
                     </div>
                 </div>
                 <div class="col-xs-12">
-                    <label>Review</label>
-                    <textarea class="form-control" ng-model="newProduct.description.review"/></textarea>
+                    <label>Review*</label><span class="validationError" ng-show="newProductForm.$submitted && newProductForm.review.$error.required">Product Review Required</span>
+                    <textarea name="review" class="form-control" ng-model="newProduct.description.review" required></textarea>
                 </div>
                 <div class="col-xs-6">
                     <label>AOC</label>
