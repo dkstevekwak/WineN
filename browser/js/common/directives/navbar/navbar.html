@@ -6,10 +6,10 @@
             <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
                 <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
             </li>
-            <li class="dropdown">
+            <li class="dropdown" ng-show="user">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li ng-repeat="adminItem in adminItems" ng-show="user"><a ui-sref-active="active" ui-sref="{{ adminItem.state }}">{{ adminItem.label }}</a></li>
+                    <li ng-repeat="adminItem in adminItems"><a ui-sref-active="active" ui-sref="{{ adminItem.state }}">{{ adminItem.label }}</a></li>
                 </ul>
             </li>
         </ul>
