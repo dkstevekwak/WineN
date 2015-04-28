@@ -30,6 +30,7 @@
     	<h3>Shipping: {{ checkoutDetails.shipping  | currency }}</h3>
     	<h2>Total: {{ checkoutDetails.subTotal + checkoutDetails.tax + checkoutDetails.shipping | currency }}</h2>
     </div>
+		<h3 ng-if="promoApplied">your promo ({{promoCode}}) has been applied</h3>
 		<input type="text" ng-model="promoCode"><button ng-click="applyPromo(promoCode)">Apply Promo Code</button>
 		<button ng-click="confirmOrder()">Order!!!!!</button>
     

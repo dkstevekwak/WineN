@@ -59,7 +59,8 @@ var schema = new mongoose.Schema({
 		},
 		subTotal: {
 			type: Number
-		}
+		},
+		promo: String
 	}
 });
 
