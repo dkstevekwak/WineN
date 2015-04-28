@@ -1,17 +1,12 @@
 'use strict';
 var router = require('express').Router();
+var authFn = require('../authRules.js');
 module.exports = router;
 var _ = require('lodash');
 
-var ensureAuthenticated = function (req, res, next) {
-    if (req.isAuthenticated()) {
-        next();
-    } else {
-        res.status(401).end();
-    }
-};
 
-router.get('/secret-stash', ensureAuthenticated, function (req, res) {
+
+router.get('/secret-stash', authFn.ensureAdmin, function (req, res) {
 
     var theStash = [
         'http://ep.yimg.com/ay/candy-crate/bulk-candy-store-2.gif',
