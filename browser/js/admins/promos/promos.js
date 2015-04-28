@@ -45,11 +45,11 @@ app.controller('PromosAdminsController', function($scope, Promos, Categories, Pr
         else $scope.newPromo.products.splice(index,1);
     };
     $scope.createPromo = function(promo) {
-        console.log("this is category when creating", promo.category);
         Promos.postPromo(promo)
         .then(function(promo) {
+            promo.expirationDate = new Date(promo.expirationDate);
             $scope.promos.push(promo);
-                $scope.newPromo = new Promo();
+            $scope.newPromo = new Promo();
         }, function(err) {
             throw new Error(err);
         });
@@ -67,6 +67,7 @@ app.controller('PromosAdminsController', function($scope, Promos, Categories, Pr
         Promos.deletePromo(promoId)
         .then(function(promo) {
             $scope.promos = $scope.promos.filter(eachPromo => promoId !== eachPromo._id);
+            $scope.currentPromo = null;
         }, function(err) {
             throw new Error(err);
         });

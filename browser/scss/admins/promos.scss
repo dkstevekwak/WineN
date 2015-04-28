@@ -1,0 +1,67 @@
+#all-promos-admin {
+    padding-top: 50px;
+    margin-bottom: 20px;
+    ul {
+        padding-left: 0;
+    }
+    .column-titles {
+        clear: both;
+    }
+    .promo-listing {
+        height: 100%;
+        margin: 3px auto;
+        cursor: pointer;
+    }
+    .even-promo {
+        background: #F5F5F5;
+    }
+    .btn-default {
+      border: 1px solid skyblue;
+    }
+    .selected-promo {
+        margin: -3px;
+        border: 3px solid skyblue;
+        &.first-promo {
+            height: 39px;
+            margin-top: 53px;
+            h4 {
+                padding-bottom: 3px;
+            }
+        }
+        &.last-promo {
+            margin-bottom: 0;
+        }
+    }
+    .searchBox {
+        margin: 0;
+    }
+    .create-promo {
+        label {
+            margin-top: 10px;
+        }
+        button.btn {
+            margin-top: 20px;
+            width: 100%;
+        }
+    }
+    .promo-products {
+        span {
+            margin-left: 8px;
+        }
+    }
+    .single-promo {
+        height: 100%;
+        label {
+            margin-top: 10px;
+        }
+        button.btn {
+            margin-top: 20px;
+            width: 100%;
+        }
+    }
+    button.add-promo {
+        margin-bottom: 30px;
+    }
+}
+
+
