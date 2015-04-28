@@ -1,0 +1,46 @@
+#cart {
+  margin-right: 4%;
+  .cart{
+    text-align: center;
+    border-bottom: 1px solid skyblue;
+    width:98%;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    color: navy;
+  }
+  .productName {
+    color:navy;
+    font-size: 20px;
+  }
+  .price {
+    color:blue;
+    font-size: 20px;
+  }
+  .eachProduct {
+    text-align: center;
+    img{
+      height:200px;
+      width:70px;
+    }
+    margin-bottom: 40px;
+    input {
+      width:8%;
+    }
+    button{
+      border: 1px solid skyblue;
+    }
+  }
+  .cartDetails {
+    text-align: center;
+    button{
+      border: 1px solid skyblue;
+    }
+    .total {
+      padding-top: 10px;
+      border-top:1px solid skyblue;
+      color: blue;
+      width: 200px;
+      margin: 15px auto;
+    }
+  }
+}
