@@ -42,7 +42,9 @@ app.controller('ProductsController', function($scope, Products, Cart, Categories
 	$scope.addToCart = function(product) {
 		Cart.addToCart(product);
 	};
-
+	$scope.setPromo = function(promoCode) {
+		Cart.order.promo = promoCode;
+	}
 	//Search
 	$scope.search = function (product){
 		//query box is empty
