@@ -33,8 +33,8 @@
                 <!--5-->
             <!--</label>-->
     <div ng-if="isLoggedIn()" class="postReview">
-        <form name="commentForm" ng-submit="postReview(newReview)" novalidate>
-            <h3>post your own review</h3>
+        <form name="reviewForm" ng-submit="reviewForm.$valid && postReview(newReview)" novalidate>
+            <h3>Review This Product</h3>
             <fieldset class="rating">
                 <input type="radio" id="star5" ng-model="newReview.rating" name="rating" ng-value="5" /><label for="star5" title="Rocks!">5 stars</label>
                 <input type="radio" id="star4" ng-model="newReview.rating" name="rating" ng-value="4" /><label for="star4" title="Pretty good">4 stars</label>
@@ -44,8 +44,10 @@
             </fieldset><br/>
             <br/>
             <div class="postInput">
-                <input class="reviewTitle form-control" type='text'  placeholder="Title" ng-model='newReview.title' ng-maxlength='40'/><br/>
-                <textarea class="form-control" placeholder="Content" ng-model='newReview.text' ng-maxlength='40'/></br>
+                <span class="validationError" ng-show="reviewForm.$submitted && reviewForm.title.$error.required">Review Title Required</span>
+                <input name="title" class="reviewTitle form-control" type='text' placeholder="Title" ng-model='newReview.title' required/><br/>
+                <span class="validationError" ng-show="reviewForm.$submitted && reviewForm.text.$error.minlength">Review Must Be At Least 40 Characters</span>
+                <textarea name="text" class="form-control" placeholder="Content" ng-model='newReview.text' ng-minlength='40' required></textarea></br>
                 <button type='submit' is-active ng-class="{'highlight':active3}" ng-mouseenter="active3=true" ng-mouseleave="active3=false" class="menu-animation btn btn-default">Post</button>
             </div>
         </form>

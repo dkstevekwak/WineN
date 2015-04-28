@@ -80,4 +80,18 @@
             }
         }
     }
+    form {
+        span.validationError {
+            margin-left: 10px;
+            color: red;
+        }
+    }
+    .form-error {
+        color: red;
+        text-align: center;
+    }
+    .form-success {
+        color: skyblue;
+        text-align: center;
+    }
 }
