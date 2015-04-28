@@ -3,6 +3,7 @@
 			<img class="productImg" src="{{product.image}}">
 		</div>
 		<div class="col-lg-7 col-md-7 productDescription">
+				<li class="productName"> {{product.name}}</li>
 				<li class="productCategory"> {{product.categories[0].name}}</li>
 				<li class="productOrigin"> {{product.description.origin}}</li>
 				<li class="productPrice"> {{product.price | currency}}</li>
@@ -20,8 +21,8 @@
 					<h3 ng-if="product.qty>0">stock available</h3>
 					<h3 ng-if="product.qty<1">SOLD OUT</h3>
 				</li>
-			<button is-active ng-class="{'highlight':active1}" ng-mouseenter="active1=true" ng-mouseleave="active1=false" class="menu-animation btn btn-default" ng-click="addToCart(product)">Add To Cart</button><br/>
-			<button is-active ng-class="{'highlight':active2}" ng-mouseenter="active2=true" ng-mouseleave="active2=false" class="menu-animation btn btn-default" type="submit" ng-click="viewComments()">See Reviews</button>
+			<button is-active ng-class="{'highlight':active1}" ng-mouseenter="active1=true" ng-mouseleave="active1=false" class="menu-animation btn btn-default" ng-click="addToCart(product)"><span>Add To Cart</span></button><br/>
+			<button is-active ng-class="{'highlight':active2}" ng-mouseenter="active2=true" ng-mouseleave="active2=false" class="menu-animation btn btn-default" type="submit" ng-click="viewComments()"><span ng-show="!seeComments">See Reviews</span><span ng-show="seeComments">Hide Reviews</span></button>
 		</div>
 	<!--  Reviews -->
 	<reviews class="col-lg-12 col-md-12" ng-if="seeComments"></reviews>
@@ -32,11 +33,11 @@
 			</div>
 			<div class="col-lg-6 col-md-6">
 				<div class="factDescription">
-					<h1>WINE FACTS</h1>
-					<h2>Winery: {{product.description.winery}}</h2>
-					<h2>Grapes: {{product.description.grapes}}</h2>
-					<h2>Taste: <span ng-repeat="taste in product.description.taste">{{taste}}</span></h2>
-					<h2>Best Served: {{product.description.serves}} C</h2>
+					<h2>WINE FACTS</h2>
+					<h3>Winery: {{product.description.winery}}</h3>
+					<h3>Grapes: {{product.description.grapes}}</h3>
+					<h3>Taste: <span ng-repeat="taste in product.description.taste">{{taste}}</span></h3>
+					<h3>Best Served: {{product.description.serves}} C</h3>
 				</div>
 			</div>
 		</div>

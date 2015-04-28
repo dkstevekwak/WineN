@@ -1,4 +1,4 @@
-<section id="products-user" class="contentTop col-lg-12 col-md-12 col-sm-12">
+<section id="products-user" class="contentTop col-xs-12">
 
 	<div class="IntroPic">
     	<img src="http://cdn.shopify.com/s/files/1/0654/1551/t/2/assets/homeBackgroundImage.jpg?2703413769707300101">
@@ -26,7 +26,7 @@
 
 		<div class="productBox" ng-show="currentCategory === 'all' || product.categories.indexOf(currentCategory) !== -1" ng-repeat=" product in products | filter: search ">
 			<h3 class="eachProduct"> {{product.name}}</h3>
-            <img class="animated" ng-class="{'pulse':imageAnimating.indexOf(product._id)!==-1}" ng-mouseenter="imageAnimate(product._id)" ng-mouseleave="imageAnimate(product._id)" src="{{product.image}}">
+            <img class="animated" ui-sref="productDetails({productId: product._id})" ng-class="{'pulse':imageAnimating.indexOf(product._id)!==-1}" ng-mouseenter="imageAnimate(product._id)" ng-mouseleave="imageAnimate(product._id)" src="{{product.image}}">
 			<h3 class="eachProduct"> {{product.price | currency}}</h3>
 			<h3 class="eachProduct" ng-repeat="category in product.categories"> {{ category.name }}</h3>
 			<button class="btn btn-default btn-more" ui-sref="productDetails({productId: product._id})">More Info</button>

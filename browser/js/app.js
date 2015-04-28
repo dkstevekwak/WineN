@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('WineNApp', ['ui.router', 'fsaPreBuilt', 'ngAnimate', 'LocalStorageModule']);
+var app = angular.module('WineNApp', ['ui.router', 'fsaPreBuilt', 'ngAnimate', 'LocalStorageModule', 'angularModalService']);
 
 app.config(function ($urlRouterProvider, $locationProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)
