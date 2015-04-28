@@ -29,11 +29,11 @@
             <form ng-show="currentTab === 'details'" ng-submit="updateProduct(currentProduct)">
                 <div class="col-xs-4">
                     <label>Name</label>
-                    <input class="form-control" ng-model="currentProduct.name"/>
+                    <input class="form-control" ng-model="currentProduct.name" required/>
                 </div>
                 <div class="col-xs-4">
                     <label>Price</label>
-                    <input class="form-control" ng-model="currentProduct.price"/>
+                    <input class="form-control" ng-model="currentProduct.price" required/>
                 </div>
                 <div class="col-xs-4">
                     <label>Inventory</label>
@@ -51,7 +51,7 @@
                 </div>
                 <div class="col-xs-12">
                     <label>Review</label>
-                    <textarea class="form-control" ng-model="currentProduct.description.review"/></textarea>
+                    <textarea class="form-control" ng-model="currentProduct.description.review" required></textarea>
                 </div>
                 <div class="col-xs-6">
                     <label>AOC</label>

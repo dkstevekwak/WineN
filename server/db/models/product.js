@@ -4,12 +4,12 @@ var mongoose = require('mongoose');
 var schema = new mongoose.Schema({
     name: {
         type: String,
-		required: true
-		//unique : true,
-		//dropDups: true
+		required: true,
+        unique : true
     },
     image: {
-        type: String
+        type: String,
+        default: ''
     },
     description: {
         review: {
