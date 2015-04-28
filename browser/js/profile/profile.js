@@ -35,6 +35,8 @@ app.controller("ProfileController", function($scope, Users, Orders, Reviews, $st
 
     $scope.viewOrder = function(orderId){
         Orders.getOrder(orderId).then(function(order){
+            order.date = new Date(order.date);
+            order.date = order.date.toDateString();
             Orders.update.currentOrder = order;
             $state.go('order');
         }, function(err){
