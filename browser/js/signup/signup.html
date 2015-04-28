@@ -1,5 +1,5 @@
 <section class="signupForm contentTop">
-    <form id="signup-form" name="signupForm" ng-submit="signupForm.$valid && createUser(user)">
+    <form id="signup-form" name="signupForm" ng-submit="signupForm.$valid && createUser(user)" novalidate>
         <div class="alert alert-danger" ng-show="error">
             <span class="glyphicon glyphicon-exclamation-sign"></span>
             <span class="sr-only">Error:</span>
@@ -11,8 +11,8 @@
             <input type="text" ng-model="user.firstName" class="form-control" id="firstName">
             <label for="lastName">Last Name</label>
             <input type="text" ng-model="user.lastName" class="form-control" id="lastName">
-            <label for="email">Email Address</label>
-            <input type="text" ng-model="user.email" class="form-control" id="email">
+            <label for="email">Email Address*</label><span class="validationError" ng-show="signupForm.$submitted && signupForm.email.$error.required">Email Required</span>
+            <input name="email" type="email" ng-model="user.email" class="form-control" id="email" required>
             <label for="password">Password</label>
             <input type="password" ng-model="user.password" class="form-control" id="password">
             <label for="confirmPassword">Confirm Password</label>

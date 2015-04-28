@@ -6,7 +6,7 @@ app.factory('Users', function ($http) {
             console.log('res.data', res.data)
             return res.data;
         }, function(err) {
-            throw new Error(err);
+            return 'An Account Is Already Associated With That Email';
         });
     };
 
