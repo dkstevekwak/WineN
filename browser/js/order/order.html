@@ -1,8 +1,4 @@
 <section id="order" class="contentTop">
-    <div class="orderProcessed" ng-show="orderProcessed">
-        <h3>Thank you!</h3>
-        <h3>Your products have been shipped to : {{order.user.shippingAddress.line1}}</h3>
-    </div>
     <h3 class="orderDetailTag">Your Order Details</h3>
     <h3 ng-if="order.details.promo">your promo ({{order.details.promo}}) has been applied</h3>
     <section class="productDetails" id="ordered-products">
