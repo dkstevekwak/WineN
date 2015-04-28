@@ -7,10 +7,11 @@ var _ = require('lodash');
 module.exports = router;
 
 router.get('/:userId', authFn.ensureLoggedIn, function(req, res, next) {
-  User.findById(req.params.userId, function(err, user) {
+  User.findById(req.params.userId, function (err, user) {
     if (err) return next(err);
     res.send(user);
   });
+});
 router.post('/', function(req, res, next) {
     var user = req.body;
     //console.log('user in post', user);
