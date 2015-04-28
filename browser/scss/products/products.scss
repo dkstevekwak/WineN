@@ -56,13 +56,50 @@
 	position: relative;
 	width: 60%;
 	text-align: center;
-	margin: -140px auto 0;
+	margin: -200px auto 0;
 	z-index: 1;
-	.promo{
-		float:left;
-		width:33.3333%;
-		height: 300px;
-		background: lightgray;
-	    border: 1px dotted gray;
+    border: 10px solid lightblue;
+
+    .promoA {
+	  float:left;
+	  color: navy;
+	  font-weight: bolder;
+	  width:33.3333%;
+	  height: 300px;
+	  background: url("http://rlv.zcache.com/retro_pink_gingham_checkered_pattern_background_wine_stopper-r32cf8463faed47b1901bb7ca3630f099_zl3bw_324.jpg?rlvnet=1") no-repeat center center;
+	  background-size: cover;
+	  button {
+		width: 50%;
+		margin-top: 50%;
+		border: 1px solid skyblue;
+	  }
+	}
+	.promoB {
+	  font-weight: bolder;
+	  float:left;
+	  color: white;
+	  width:33.3333%;
+	  height: 300px;
+	  background: url("http://thefrugalwinesnob.com/wp-content/uploads/2011/08/Retro-Wine-Guy-Small-BW1-234x300.jpg") no-repeat center center;
+	  background-size: cover;
+	  button {
+		width: 50%;
+		margin-top: 50%;
+		border: 1px solid skyblue;
+	  }
+	}
+	.promoC {
+	  font-weight: bolder;
+	  float:left;
+	  color: white;
+	  width:33.3333%;
+	  height: 300px;
+	  background: url("http://cdn2.bigcommerce.com/server1600/4274e/products/19063/images/20251/t5461_WineHowClassyPeople_BYELL_BURG__18307.1405458798.600.600.jpg?c=2") no-repeat center center;
+	  background-size: cover;
+	  button {
+		width: 50%;
+		margin-top: 50%;
+		border: 1px solid skyblue;
+	  }
 	}
 }

@@ -15,7 +15,7 @@ app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders, Pro
         throw new Error(err);
     });
 
-	$scope.promoCode = null;
+	$scope.promoCode = Cart.order.promo || null;
 	$scope.products = Cart.getCart();
 	$scope.promoApplied = false;
 

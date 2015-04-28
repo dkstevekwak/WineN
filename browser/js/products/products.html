@@ -3,15 +3,18 @@
 	<div class="IntroPic">
     	<img src="http://cdn.shopify.com/s/files/1/0654/1551/t/2/assets/homeBackgroundImage.jpg?2703413769707300101">
     </div>
-    <div class='promoBox'>
-    	<div class='promo animated fadeInLeftBig'>
-    		<h1>Promotion A</h1>
+    <div class='promoBox clearfix'>
+    	<div class='animated promoA fadeInLeftBig'>
+    		<h1>Sign up and receive 10% off</h1>
+			<button ui-sref="signup" class="btn btn-default">Sign Up</button>
     	</div>
-    	<div class='promo animated zoomIn'>
-    		<h1>Promotion B</h1>
+    	<div class='animated promoB zoomIn'>
+    		<h1>10% off on all red wines</h1>
+			<button ui-sref="checkout" ng-click="setPromo('RedWine')" class="btn btn-default">Apply Promo</button>
     	</div>
-		<div class='promo animated fadeInRightBig'>
-			<h1>Promotion C</h1>
+		<div class='animated promoC animated fadeInRightBig'>
+			<h1>15% off on Poire authentique</h1>
+			<button ui-sref="checkout" ng-click="setPromo('Poire')" class="btn btn-default">Apply Promo</button>
 		</div>
     </div>
 	<section id="all-products">
