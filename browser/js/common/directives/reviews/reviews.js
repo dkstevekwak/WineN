@@ -3,7 +3,7 @@ app.directive('reviews', function(){
         restrict: 'E',
         templateUrl: "js/common/directives/reviews/reviews.html",
         controller: 'ReviewsController'
-    }
+    };
 });
 
 app.controller('ReviewsController', function($stateParams, $scope, Reviews, Users) {
@@ -19,20 +19,22 @@ app.controller('ReviewsController', function($stateParams, $scope, Reviews, User
     Reviews.getReviews(productId).then(function(reviews){
         $scope.reviews = reviews;
     }, function(err){
-        console.log(err);
+        throw new Error(err);
     });
-
-    $scope.postReview = function(review){
-        $scope.newReview.product = productId;
+    $scope.getStar = function(num){
+      return num*10;
+    };
+    $scope.postReview = function(newReview){
+        newReview.product = productId;
         Users.getCurrentUser().then(function(user){
-            $scope.newReview.user = user._id;
+            newReview.user = user._id;
         }).then(function(){
-            return Reviews.postReview($scope.newReview)
+            return Reviews.postReview(newReview);
         }).then(function(review){
             $scope.reviews.push(review);
         }).catch(function(err){
             console.log(err);
-        })
+        });
 
 
     };

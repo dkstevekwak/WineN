@@ -24,10 +24,15 @@ module.exports = function (app) {
             if (user) {
                 done(null, user);
             } else {
+              console.log(profile);
                 UserModel.create({
                     google: {
                         id: profile.id
-                    }
+                    },
+                    firstName: profile.name.givenName,
+                    lastName: profile.name.familyName,
+                    role: 'user',
+                    email: profile.emails[0].value
                 }).then(function (user) {
                     done(null, user);
                 }, function (err) {

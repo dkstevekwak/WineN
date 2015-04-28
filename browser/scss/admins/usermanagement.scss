@@ -1,0 +1,49 @@
+#all-users-admin {
+    padding-top: 50px;
+    margin-bottom: 20px;
+    ul {
+        padding-left: 0;
+    }
+    .column-titles {
+        clear: both;
+    }
+    .user-listing {
+        height: 100%;
+        margin: 3px auto;
+        cursor: pointer;
+    }
+    .even-user {
+        background: #F5F5F5;
+    }
+    .btn-default {
+      border: 1px solid skyblue;
+    }
+    .selected-user {
+        margin: -3px;
+        border: 3px solid skyblue;
+        &.first-user {
+            height: 39px;
+            margin-top: 53px;
+            h4 {
+                padding-bottom: 3px;
+            }
+        }
+        &.last-user {
+            margin-bottom: 0;
+        }
+    }
+    .searchBox {
+        margin: 0;
+    }
+    .single-user {
+        height: 100%;
+        label {
+            margin-top: 10px;
+        }
+        button.btn.btn-default {
+            margin-top: 20px;
+            width: 100%;
+        }
+    }
+}
+

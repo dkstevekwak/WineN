@@ -1,51 +1,74 @@
-<section id="profile">
-	<h1> Hello, {{user.email}}! </h1>
-	<h1>{{user.role}}</h1>
+<section id="profile" class="contentTop">
     <form class="userForm" ng-submit="updateProfile(user)">
-		Name: <input type="text" placeholder="{{user.username}}" ng-model="user.username" />
-		Password: <input type="password" ng-model="user.password"/>
-    	Email: <input type="text" placeholder="{{user.email}}" ng-model="user.email" />
-    	<button type="submit">Save Changes</button>
+        <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input type="text" placeholder="{{user.firstName}}" ng-model="user.firstName" class="form-control" id="firstname">
+        </div>
+        <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input type="text" placeholder="{{user.lastName}}" ng-model="user.lastName" class="form-control" id="lastname">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" placeholder="{{user.password}}" ng-model="user.password" class="form-control" id="password">
+        </div>
+        <div class="form-group">
+            <label for="password">email</label>
+            <input type="text" placeholder="{{user.email}}" ng-model="user.email" class="form-control" id="email">
+        </div>
+    	<button class="saveButton btn btn-default" type="submit">Save Changes</button>
     </form>
     <ul class="nav nav-tabs">
         <li role="presentation" ng-click="setCurrentTab('orders')" ng-class="{ active: currentTab === 'orders' }"><a href="#">My Orders</a></li>
         <li role="presentation" ng-click="setCurrentTab('reviews')" ng-class="{ active: currentTab === 'reviews' }"><a href="#">My Reviews</a></li>
     </ul>
     <div ng-show="currentTab === 'orders'" class="orderList">
-    	<h1> Order History</h1>
-    	<li ng-click="viewOrder(order)" ng-repeat="order in user.orders">{{order}}</li>
+    	<h2> Order Confirmation Number</h2>
+    	<div ng-repeat="order in user.orders">
+            <span>{{order}}</span>
+            <button ng-click="viewOrder(order)" class="btn btn-default">View Order Details</button>
+        </div>
+        <h3 ng-show="!user.orders">You have not placed any orders yet.</h3>
+
     </div>
     <div ng-show="currentTab === 'reviews'" class="reviewList">
+        <h3 ng-show="!reviews">You have not written any reviews yet.</h3>
         <ul>
-            <li ng-repeat="review in reviews">
-                <h2>{{ review.product.name }}</h2>
-                <img src="{{ review.product.image }}">
-                <label>Title</label>
-                <input type="text" ng-model="review.title" />
-                <label>Content</label>
-                <input type="text" ng-model="review.text" />
-                <label>
-                    <input type="radio" ng-model="review.rating" ng-value="1" />
-                    1
-                </label>
-                <label>
-                    <input type="radio" ng-model="review.rating" ng-value="2" />
-                    2
-                </label>
-                <label>
-                    <input type="radio" ng-model="review.rating" ng-value="3" />
-                    3
-                </label>
-                <label>
-                    <input type="radio" ng-model="review.rating" ng-value="4" />
-                    4
-                </label>
-                <label>
-                    <input type="radio" ng-model="review.rating" ng-value="5" />
-                    5
-                </label>
-                <button ng-click="updateReview(review)">Edit Review</button>
-                <button ng-click="deleteReview(review._id)">Delete Review</button>
+            <li class="bottleRepeat" ng-repeat="review in reviews">
+                <h3>{{ review.product.name }}</h3>
+                <div class="col-xs-4">
+                    <img class="bottleImg" src="{{ review.product.image }}">
+                </div>
+                <div class="col-xs-8 reviewContent">
+                    <label>Title</label>
+                    <input class="title form-control" type="text" ng-model="review.title" />
+                    <label>Content</label>
+                    <input class="content form-control" type="text" ng-model="review.text" />
+                    <div class="radio">
+                        <label>
+                            <input type="radio" class="radio" ng-model="review.rating" ng-value="1" />
+                            1
+                        </label>
+                        <label>
+                            <input type="radio" class="radio" ng-model="review.rating" ng-value="2" />
+                            2
+                        </label>
+                        <label>
+                            <input type="radio" class="radio" ng-model="review.rating" ng-value="3" />
+                            3
+                        </label>
+                        <label>
+                            <input type="radio" class="radio" ng-model="review.rating" ng-value="4" />
+                            4
+                        </label>
+                        <label>
+                            <input type="radio" class="radio" ng-model="review.rating" ng-value="5" />
+                            5
+                    </div>
+                    </label><br/>
+                    <button class="btn btn-default" ng-click="updateReview(review)">Edit Review</button>
+                    <button class="btn btn-default" ng-click="deleteReview(review._id)">Delete Review</button>
+                </div>
             </li>
         </ul>
     </div>

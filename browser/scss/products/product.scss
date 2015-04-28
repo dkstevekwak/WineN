@@ -1,0 +1,117 @@
+#product-user {
+  margin-top: 13%;
+}
+
+.productName {
+  color: #276281;
+  font-size: 35px;
+}
+
+.productImg {
+  margin-left: 55%;
+  height: 550px;
+}
+
+
+.productCategory {
+  color: #276281;
+  font-size: 35px;
+}
+
+.productOrigin {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.productPrice {
+  font-size: 30px;
+  margin: 15px 0;
+  color: #00a6d9;
+}
+
+.productReview {
+  font-size: 20px;
+  margin-bottom: 15px;
+  min-height: 160px;
+}
+
+.leaf {
+  padding-top: 20px;
+  border-top: 2px solid skyblue;
+  font-size: 20px;
+  span {
+    color: #276281;
+    margin-right:10px;
+  }
+}
+
+.thumbsUp {
+  font-size: 20px;
+  span {
+    color: #276281;
+    margin-right:10px;
+  }
+}
+
+
+.stock {
+  font-size: 20px;
+  span {
+    color: #276281;
+    margin-right:10px;
+  }
+  h3{
+    display:inline;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  margin-bottom:10px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid skyblue;
+}
+
+.productDescription {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  width:30%;
+  button{
+    height: 40px;
+    width: 40%;
+    font-size:15px;
+    border: 1px solid skyblue;
+  }
+}
+.wineFacts {
+  padding-left: 20%;
+  margin-bottom: 80px;
+  margin-top: 50px;
+  button {
+    display:block;
+    height: 40px;
+    width: 100%;
+  }
+  img {
+    height: 350px;
+    width:100%;
+  }
+  .factDescription {
+    margin-left: 50px;
+    margin-bottom: 40px;
+    h2{
+      text-align: center;
+      padding: 15px 0;
+      border-top: 1px solid blue;
+      border-bottom: 1px solid blue;
+    }
+
+  }
+
+}
+
+.background {
+  background-color: #F5F5F5;
+}
+reviews {
+  margin-left: 25%;
+  margin-bottom: 100px;
+}

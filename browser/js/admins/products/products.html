@@ -1,28 +1,145 @@
-<section id="products-admins">
-    This is products-admins view
-	<section id="all-products-admin">
-		This is products
-		<ul ng-repeat="product in products">
-			<form name="editProduct-{{product._id}}" ng-submit="updateProduct(product)">
-				Name: <input name="editName-{{product._id}}" placeholder="{{product.name}}" ng-model="updatedProduct.name"/><br />
-				Description: <input name="editName-{{product._id}}" ng-model="updatedProduct.description"/><br />
-				Image: <input name="editName-{{product._id}}" ng-model="updatedProduct.image"/><br />
-				Price: <input name="editName-{{product._id}}" ng-model="updatedProduct.price"/><br />
-				Quantity: <input name="editName-{{product._id}}" ng-model="updatedProduct.qty"/><br />
-				Categories: <input name="editName-{{product._id}}" ng-model="updatedProduct.categories"/><br />
-				<button>Update Product</button>
-			</form>
-			<button ng-click="showReviews()">Show Reviews</button>
-			<div ng-show="seeReviews">
-				<ul>
-					<li ng-repeat="review in product.reviews">
-						Title: {{review.title}}
-						Content: {{review.text}}
-						Stars: {{review.rating}}
-						<button ng-click="deleteReview(review._id,product._id)"">Delete Review</button>
-					</li>
-				</ul>
-			</div>
-		</ul>
-	</section>
+<section class="contentTop">
+    <div id="products-admins" class="clearfix">
+        <div class="all-products col-xs-6">
+            <button class="btn btn-default add-product" ng-click="currentProduct = null">Add New Product</button>
+            <input class="searchBox" type="text" placeholder="Search Products" ng-model="query"/>
+            <div class="column-titles">
+                <div class="col-xs-9">
+                    <h3>Product</h3>
+                </div>
+                <div class="col-xs-3">
+                    <h3>Inventory</h3>
+                </div>
+            </div>
+            <div ng-click="setCurrentProduct(product)" ng-class-even="'even-product'" ng-class="{ 'selected-product': currentProduct._id === product._id, 'first-product': $first, 'last-product': $last }" class="clearfix product-listing" ng-repeat="product in products | orderBy: 'name' | filter: search">
+                <div class="col-xs-9 product-name">
+                    <h4>{{ product.name }}</h4>
+                </div>
+                <div class="col-xs-3 product-inventory">
+                    <h4>{{ product.qty }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="single-product col-xs-6" ng-show="currentProduct">
+            <h2>{{ currentProduct.name }}</h2>
+            <ul class="nav nav-tabs">
+                <li role="presentation" ng-class="{ 'active': currentTab === 'details' }" ng-click="setCurrentTab('details')"><a href="#">Product Details</a></li>
+                <li role="presentation" ng-class="{ 'active': currentTab === 'reviews' }" ng-click="setCurrentTab('reviews')"><a href="#">Product Reviews</a></li>
+            </ul>
+            <form ng-show="currentTab === 'details'" ng-submit="updateProduct(currentProduct)">
+                <div class="col-xs-4">
+                    <label>Name</label>
+                    <input class="form-control" ng-model="currentProduct.name"/>
+                </div>
+                <div class="col-xs-4">
+                    <label>Price</label>
+                    <input class="form-control" ng-model="currentProduct.price"/>
+                </div>
+                <div class="col-xs-4">
+                    <label>Inventory</label>
+                    <input class="form-control" ng-model="currentProduct.qty"/>
+                </div>
+                <div class="col-xs-6">
+                    <label>Image</label>
+                    <input class="form-control" ng-model="currentProduct.image"/>
+                </div>
+                <div class="col-xs-6">
+                    <label>Categories</label>
+                    <div class="product-categories" ng-repeat="category in categories">
+                        <input type="checkbox" ng-click="setCategory(category, currentProduct)" ng-checked="currentProduct.categories.indexOf(category._id)!==-1" ng-true-value="category._id" ng-false-value="null"><span>{{ category.name }}</span>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <label>Review</label>
+                    <textarea class="form-control" ng-model="currentProduct.description.review"/></textarea>
+                </div>
+                <div class="col-xs-6">
+                    <label>AOC</label>
+                    <input class="form-control" ng-model="currentProduct.description.aoc"/>
+                    <label>Vintage</label>
+                    <input class="form-control" ng-model="currentProduct.description.vintage"/>
+                    <label>Serves</label>
+                    <input class="form-control" ng-model="currentProduct.description.serves"/>
+                    <label>Grapes</label>
+                    <input class="form-control" ng-model="currentProduct.description.grapes"/>
+                </div>
+                <div class="col-xs-6">
+                    <label>DO</label>
+                    <input class="form-control" ng-model="currentProduct.description.do"/>
+                    <label>Origin</label>
+                    <input class="form-control" ng-model="currentProduct.description.origin"/>
+                    <label>Winery</label>
+                    <input class="form-control" ng-model="currentProduct.description.winery"/>
+                    <label>Taste</label>
+                    <input class="form-control" ng-model="currentProduct.description.taste"/>
+                </div>
+                <div class="col-xs-12">
+                    <button class="btn btn-default">Update Product</button>
+                    <button class="btn btn-danger" type="button" ng-click="deleteProduct(currentProduct._id)">Delete Product</button>
+                </div>
+            </form>
+            <ul ng-show="currentTab === 'reviews'">
+                <li ng-class-even="'even-review'" class="review" ng-repeat="review in currentProduct.reviews">
+                    <h4>{{ review.title }}</h4>
+                    <p>{{review.text}}</p>
+                    <h5>Stars: {{ review.rating }}</h5>
+                    <h5>Likes: {{ review.likes }}</h5>
+                    <button class="btn btn-danger" ng-click="deleteReview(review._id,currentProduct._id)">Delete Review</button>
+                </li>
+            </ul>
+        </div>
+        <div class="add-product-form col-xs-6" ng-if="!currentProduct">
+            <h2>Add New Product</h2>
+            <form ng-submit="createProduct(newProduct)">
+                <div class="col-xs-4">
+                    <label>Name</label>
+                    <input class="form-control" ng-model="newProduct.name"/>
+                </div>
+                <div class="col-xs-4">
+                    <label>Price</label>
+                    <input class="form-control" ng-model="newProduct.price"/>
+                </div>
+                <div class="col-xs-4">
+                    <label>Inventory</label>
+                    <input class="form-control" ng-model="newProduct.qty"/>
+                </div>
+                <div class="col-xs-6">
+                    <label>Image</label>
+                    <input class="form-control" ng-model="newProduct.image"/>
+                </div>
+                <div class="col-xs-6 product-categories">
+                    <label>Categories</label>
+                    <div ng-repeat="category in categories">
+                        <input type="checkbox" ng-checked="selectedCategories.indexOf(category._id) > -1" ng-click="setCategory(category, newProduct)"><span>{{ category.name }}</span>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <label>Review</label>
+                    <textarea class="form-control" ng-model="newProduct.description.review"/></textarea>
+                </div>
+                <div class="col-xs-6">
+                    <label>AOC</label>
+                    <input class="form-control" ng-model="newProduct.description.aoc"/>
+                    <label>Vintage</label>
+                    <input class="form-control" ng-model="newProduct.description.vintage"/>
+                    <label>Serves</label>
+                    <input class="form-control" ng-model="newProduct.description.serves"/>
+                    <label>Grapes</label>
+                    <input class="form-control" ng-model="newProduct.description.grapes"/>
+                </div>
+                <div class="col-xs-6">
+                    <label>DO</label>
+                    <input class="form-control" ng-model="newProduct.description.do"/>
+                    <label>Origin</label>
+                    <input class="form-control" ng-model="newProduct.description.origin"/>
+                    <label>Winery</label>
+                    <input class="form-control" ng-model="newProduct.description.winery"/>
+                    <label>Taste</label>
+                    <input class="form-control" ng-model="newProduct.description.taste"/>
+                </div>
+                <div class="col-xs-12">
+                    <button class="btn btn-default">Add Product</button>
+                </div>
+            </form>
+    </div>
 </section>

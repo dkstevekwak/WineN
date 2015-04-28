@@ -1,15 +1,54 @@
-<section id="new-product-admins">
-    This is products-admins view
-	<section id="really-new-product-admin">
-		This is new product page- no alcohol please
-			<form name="newProduct" ng-submit="createProduct(product)">
-				Name: <input ng-model="product.name"/><br />
-				Description: <input ng-model="product.description"/><br />
-				Image: <input ng-model="product.image"/><br />
-				Price: <input ng-model="product.price"/><br />
-				Quantity: <input ng-model="product.qty"/><br />
-				Categories: <input ng-model="product.categories"/><br />
-				<button>Create Product</button>
-			</form>
-	</section>
+<section id="new-product-admins" class="contentTop clearfix">
+    <div class="add-product-form col-xs-8 col-xs-offset-2">
+        <h2>Add New Product</h2>
+        <form ng-submit="createProduct(product)">
+            <div class="col-xs-4">
+                <label>Name</label>
+                <input class="form-control" ng-model="product.name"/>
+            </div>
+            <div class="col-xs-4">
+                <label>Price</label>
+                <input class="form-control" ng-model="product.price"/>
+            </div>
+            <div class="col-xs-4">
+                <label>Inventory</label>
+                <input class="form-control" ng-model="product.qty"/>
+            </div>
+            <div class="col-xs-6">
+                <label>Image</label>
+                <input class="form-control" ng-model="product.image"/>
+            </div>
+            <div class="col-xs-6">
+                <label>Categories</label>
+                <input class="form-control" ng-model="product.categories"/>
+            </div>
+            <div class="col-xs-12">
+                <label>Review</label>
+                <textarea class="form-control" ng-model="product.description.review"/></textarea>
+            </div>
+            <div class="col-xs-6">
+                <label>AOC</label>
+                <input class="form-control" ng-model="product.description.aoc"/>
+                <label>Vintage</label>
+                <input class="form-control" ng-model="product.description.vintage"/>
+                <label>Serves</label>
+                <input class="form-control" ng-model="product.description.serves"/>
+                <label>Grapes</label>
+                <input class="form-control" ng-model="product.description.grapes"/>
+            </div>
+            <div class="col-xs-6">
+                <label>DO</label>
+                <input class="form-control" ng-model="product.description.do"/>
+                <label>Origin</label>
+                <input class="form-control" ng-model="product.description.origin"/>
+                <label>Winery</label>
+                <input class="form-control" ng-model="product.description.winery"/>
+                <label>Taste</label>
+                <input class="form-control" ng-model="product.description.taste"/>
+            </div>
+            <div class="col-xs-12">
+                <button class="btn btn-default">Add Product</button>
+            </div>
+        </form>
+    </div>
 </section>

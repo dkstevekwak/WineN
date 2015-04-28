@@ -1,9 +1,58 @@
 #profile{
-	margin-left:40px;
+	margin: 11% 0 0 10%;
 	.userForm {
 		input {
 			display: block;
 			margin: 0 0 10px 10px;
+		  	width: 25%;
 		}
+	  margin-bottom: 40px;
 	}
+	h2{
+	  color: navy;
+	}
+}
+
+.saveButton{
+  margin-left:10px;
+}
+
+.orderList {
+  button {
+	display: inline-block;
+	margin-right: 30px;
+	margin-left: 30px;
+  }
+  span{
+	font-size: 20px;
+  }
+  margin-bottom: 100px;
+}
+
+.reviewList {
+  input {
+	width:100%;
+  }
+  .title{
+	margin-bottom:10px;
+  }
+  .content{
+	height: 80px;
+  }
+  min-height:400px;
+}
+.reviewContent {
+  margin-top:10%;
+}
+
+.bottleImg {
+  height:400px;
+}
+
+.bottleRepeat {
+  float:left;
+  width: 33.33%;
+  h3 {
+	color: navy;
+  }
 }

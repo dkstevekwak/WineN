@@ -1,15 +1,43 @@
-<section id="usermanagement">
-    This is usermanagement view
-    <section id="all-users-admin">
-        This is users
-        <ul ng-repeat="user in users">
-            <form name="editUser-{{user._id}}" ng-submit="updateUser(user)">
-                Name: <input name="editName-{{user._id}}" ng-model="user.username"/><br />
-                Email: <input name="editName-{{user._id}}" ng-model="user.email"/><br />
-                Password: <input name="editName-{{user._id}}" ng-model="user.password"/><br />
-                Role: <input name="editName-{{user._id}}" ng-model="user.role"/><br />
-                <button>Update User</button>
+<section id="usermanagement" class="contentTop">
+    <div id="all-users-admin" class="clearfix">
+        <div class="all-users col-xs-6">
+            <input class="searchBox" type="text" placeholder="Search Users" ng-model="query"/>
+            <div class="column-titles">
+                <div class="col-xs-6">
+                    <h3>User</h3>
+                </div>
+                <div class="col-xs-6">
+                    <h3>Email</h3>
+                </div>
+            </div>
+            <div ng-click="setCurrentUser(user)" ng-class-even="'even-user'" ng-class="{ 'selected-user': currentUser._id === user._id, 'first-user': $first, 'last-user': $last }" class="clearfix user-listing" ng-repeat="user in users | orderBy: 'lastName' | filter: search">
+                <div class="col-xs-6 user-name">
+                    <h4>{{ user.firstName }} {{ user.lastName }}</h4>
+                </div>
+                <div class="col-xs-6 user-email">
+                    <h4>{{ user.email }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="single-user col-xs-6" ng-show="currentUser">
+            <h2>{{ currentUser.firstName }} {{ currentUser.lastName }}</h2>
+            <h3>{{ currentUser.email }}</h3>
+            <form ng-submit="updateUser(currentUser)">
+                <div class="col-xs-6">
+                    <label>Role</label>
+                    <select class="form-control" ng-model="currentUser.role">
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                    </select>
+                </div>
+                <div class="col-xs-6">
+                    <label>New Password</label>
+                    <input type="password" class="form-control" ng-model="newPassword"/>
+                </div>
+                <div class="col-xs-12">
+                    <button class="btn btn-default">Update User</button>
+                </div>
             </form>
-        </ul>
-    </section>
+        </div>
+    </div>
 </section>

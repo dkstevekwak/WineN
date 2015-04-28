@@ -45,11 +45,11 @@ var schema = new mongoose.Schema({
 		line2: String,
 		city: String,
 		state: String,
-		zip: String
 	},
 	orders: [{
 		type: mongoose.Schema.Types.ObjectId, ref: 'Order'
-	}]
+	}],
+  cart: []
 });
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations

@@ -5,29 +5,23 @@ app.factory('Products', function ($http) {
     return $http.get('/api/products').then(function(res){
       return res.data; //should be an array of products
     }, function(err){
-      console.log(err);
-    })
+        throw new Error(err);
+    });
   };
 
   var getProduct = function(productId){
     return $http.get('/api/products/' + productId).then(function(res){
       return res.data; //should be an array of products
     }, function(err){
-      console.log(err);
-    })
-  }
-
-  var updateProduct = function(oldProduct, updatedProduct) {
-    var toSendProduct = {};
-    angular.forEach(oldProduct, function(info,key){
-      if(info!==updatedProduct[key]) {
-        toSendProduct[key]=updatedProduct[key]
-      }
+        throw new Error(err);
     });
-	  return $http.put('/api/products/' + oldProduct._id, toSendProduct).then(function(res) {
+  };
+
+  var updateProduct = function(product) {
+	  return $http.put('/api/products/' + product._id, product).then(function(res) {
 		  return res.data;
 	  }, function(err) {
-		  console.log('error', err);
+        throw new Error(err);
 	  });
   };
 
@@ -35,15 +29,21 @@ app.factory('Products', function ($http) {
     return $http.post('/api/products/add', product).then(function(res) {
       return res.data;
     }, function(err) {
-      console.log('error', err);
+        throw new Error(err);
     });
+  };
+  var deleteProduct = function(productId) {
+      return $http.delete('/api/products/' + productId).then(function(res) {
+          return res.data;
+      });
   };
 
   return {
     getAllProducts,
     getProduct,
 	updateProduct,
-    createProduct
+    createProduct,
+    deleteProduct
   };
 
 });

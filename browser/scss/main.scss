@@ -2,6 +2,15 @@
   box-sizing: border-box;
 }
 
+* {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 600;
+}
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.contentTop {
+  margin-top:10%;
+}
+
 ui-view.ng-enter, ui-view.ng-leave, ui-view.ng-show, ui-view.ng-hide {
 	position: absolute;
 	left: 0;
@@ -39,13 +48,18 @@ li {
 }
 
 @import 'directives/main';
+@import 'directives/reviews';
 @import 'home/main';
 @import 'about/main';
 @import 'login/main';
 @import 'admins/orders';
 @import 'admins/products';
 @import 'admins/usermanagement';
+@import 'admins/newProduct';
+@import 'admins/promos';
+@import 'admins/categories';
 @import 'cart/cart';
 @import 'checkout/checkout';
 @import 'products/products';
+@import 'products/product';
 @import 'profile/profile';

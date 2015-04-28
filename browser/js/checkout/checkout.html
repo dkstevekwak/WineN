@@ -1,4 +1,4 @@
-<section id="checkout">
+<section id="checkout" class="contentTop">
     This is checkout view
     <form>
     	<h3>{{user.username}}<h3>
@@ -25,11 +25,30 @@
     	</div>
     </section>
     <div class="checkoutDetails">
-    	<h3>Sub Total: {{checkoutDetails.subtotal | currency}}</h3>
+    	<h3>Sub Total: {{checkoutDetails.subTotal | currency}}</h3>
     	<h3>Tax: {{ checkoutDetails.tax | currency }}</h3>
     	<h3>Shipping: {{ checkoutDetails.shipping  | currency }}</h3>
-    	<h2>Total: {{ checkoutDetails.total | currency }}</h2>
+    	<h2>Total: {{ checkoutDetails.subTotal + checkoutDetails.tax + checkoutDetails.shipping | currency }}</h2>
     </div>
-			<button ng-click="confirmOrder()">Order!!!!!</button>
-    
-</section>
+		<h3 ng-if="promoApplied">your promo ({{promoCode}}) has been applied</h3>
+		<input type="text" ng-model="promoCode"><button ng-click="applyPromo(promoCode)">Apply Promo Code</button>
+
+   <div><!-- Enter Credit Card Info -->
+	    <div><h4>Enter Credit Card for Payment</h4></div>
+	    <div>
+		    <form action="" method="POST">
+			  <script
+			    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+			    data-key="sk_test_AmjjVhqe3no91YPNeGK5V5ZB" <!--  DJ's Stripe test API must be replaced -->
+			    data-amount="2000"
+			    data-name="Demo Site"
+			    data-description="2 widgets ($20.00)"
+			    data-image="/128x128.png">
+			  </script>
+			</form>
+		</div>
+	</div>
+
+
+		<br><button ng-click="confirmOrder()">Order!!!!!</button>
+ </section>

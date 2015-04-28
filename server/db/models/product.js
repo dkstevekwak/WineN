@@ -12,8 +12,18 @@ var schema = new mongoose.Schema({
         type: String
     },
     description: {
-        type: String,
-        required: true
+        review: {
+            type: String,
+            required: true
+        },
+        winery: String,
+        origin: String,
+        do: String,
+        grapes: String,
+        taste: [String],
+        serves: String,
+        vintage: Number,
+        aoc: String
     },
     price: {
         type: String,
@@ -25,10 +35,10 @@ var schema = new mongoose.Schema({
     createdBy: {
         type: mongoose.Schema.Types.ObjectId, ref: 'User' //commented out required
     },
-	categories: {
-		type: [String],
+	categories: [{
+		type: mongoose.Schema.Types.ObjectId, ref:'Category',
 		required: true
-	},
+	}],
     reviews: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'Review' //commented out required
     }]

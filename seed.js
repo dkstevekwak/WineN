@@ -33,11 +33,103 @@ var getCurrentUserData = function () {
 var seedUsers = function () {
     var users = [
         {
-            email: 'testing@fsa.com',
+            email: 'jimmy@fsa.com',
             password: 'password',
             role: 'admin',
-            username: 'fullstack',
-            address: {
+            firstName: 'Jimmy',
+            lastName: 'Farrell',
+            shippingAddress: {
+                line1: '5 Hanover Square',
+                line2: '25th Floor',
+                city: 'New York City',
+                state: 'New York',
+                zip: '10006'
+            },
+            billingAddress: {
+                line1: '5 Hanover Square',
+                line2: '25th Floor',
+                city: 'New York City',
+                state: 'New York',
+                zip: '10006'
+            }
+        },
+        {
+            email: 'alex@fsa.com',
+            password: 'password',
+            role: 'admin',
+            firstName: 'Alex',
+            lastName: 'Wang',
+            shippingAddress: {
+                line1: '5 Hanover Square',
+                line2: '25th Floor',
+                city: 'New York City',
+                state: 'New York',
+                zip: '10006'
+            },
+            billingAddress: {
+                line1: '5 Hanover Square',
+                line2: '25th Floor',
+                city: 'New York City',
+                state: 'New York',
+                zip: '10006'
+            }
+        },
+        {
+            email: 'dj@fsa.com',
+            password: 'password',
+            role: 'admin',
+            firstName: 'DJ',
+            lastName: 'Nadgar',
+            shippingAddress: {
+                line1: '5 Hanover Square',
+                line2: '25th Floor',
+                city: 'New York City',
+                state: 'New York',
+                zip: '10006'
+            },
+            billingAddress: {
+                line1: '5 Hanover Square',
+                line2: '25th Floor',
+                city: 'New York City',
+                state: 'New York',
+                zip: '10006'
+            }
+        },
+        {
+            email: 'steve@fsa.com',
+            password: 'password',
+            role: 'admin',
+            firstName: 'Steve',
+            lastName: 'Kwak',
+            shippingAddress: {
+                line1: '5 Hanover Square',
+                line2: '25th Floor',
+                city: 'New York City',
+                state: 'New York',
+                zip: '10006'
+            },
+            billingAddress: {
+                line1: '5 Hanover Square',
+                line2: '25th Floor',
+                city: 'New York City',
+                state: 'New York',
+                zip: '10006'
+            }
+        },
+        {
+            email: 'testing@fsa.com',
+            password: 'password',
+            role: 'user',
+            firstName: 'Fullstack',
+            lastName: 'Academy',
+            shippingAddress: {
+                line1: '5 Hanover Square',
+                line2: '25th Floor',
+                city: 'New York City',
+                state: 'New York',
+                zip: '10006'
+            },
+            billingAddress: {
                 line1: '5 Hanover Square',
                 line2: '25th Floor',
                 city: 'New York City',
@@ -49,8 +141,16 @@ var seedUsers = function () {
             email: 'obama@gmail.com',
             password: 'potus',
             role: 'user',
-            username: 'pres',
-            address: {
+            firstName: 'Barack',
+            lastName: 'Obama',
+            shippingAddress: {
+                line1: '1 White House',
+                line2: 'Oval Office',
+                city: 'Capital',
+                state: 'Washington D.C.',
+                zip: '11111'
+            },
+            billingAddress: {
                 line1: '1 White House',
                 line2: 'Oval Office',
                 city: 'Capital',
@@ -73,67 +173,263 @@ var seedCategories = function () {
 
 };
 var seedProducts = function () {
-    return User.findOne({email:'obama@gmail.com'}).exec().then(function(user){
+    var redCat;
+    var whiteCat;
+    var sparklingCat;
+    var ciderCat;
+    return Category.findOne({name: 'Red'}).exec()
+    .then(function(category) {
+        redCat = category._id;
+    })
+    .then(function() {
+        return Category.findOne({name: 'White'}).exec()
+    })
+    .then(function(category) {
+        whiteCat = category._id;
+    })
+    .then(function() {
+        return Category.findOne({name: 'Sparkling'}).exec()
+    })
+    .then(function(category) {
+        sparklingCat = category._id;
+    })
+    .then(function() {
+        return Category.findOne({name: 'Cider'}).exec()
+    })
+    .then(function(category) {
+        ciderCat = category._id;
+    })
+    .then(function() {
+        return User.findOne({email:'obama@gmail.com'}).exec()
+    })
+    .then(function(user){
         var products = [
             {
-                name: 'A red wine',
+                name: 'Canada Negra',
                 image: '/img/Andlau Riesling.gif',
-                description: 'This is a very fancy red wine',
+                description: {
+                  review: 'This is a very fancy red wine',
+                  winery: 'Bodegas Enguera',
+                  origin: 'Spain, Valencia',
+                  'do': 'Valencia',
+                  grapes: 'Tempranillo, Syrah',
+                  taste: ['light'],
+                  serves: '14 - 16',
+                  vintage: null,
+                  aoc: ''
+                },
                 price: '59.99',
                 qty: 37,
                 createdBy: user._id,
-                categories: ['Red']
+                categories: [redCat]
             },
             {
-                name: 'A green wine',
-                image: '/img/Drappier grande sendree rose.gif',
-                description: 'very fancy green wine',
-                price: '39.99',
-                qty: 27,
-                createdBy: user._id,
-                categories: ['White']
+              name: 'Cote Chalonnaise',
+              image: '/img/ansata.gif',
+              description: {
+                review: 'This is a very fancy red wine',
+                winery: 'Guy Chaumont',
+                origin: 'France, Bourgogne Cote Chalonnaise',
+                'do': '',
+                grapes: 'Pinot Noir',
+                taste: ['light'],
+                serves: '',
+                vintage: 2010,
+                aoc: 'Bourgogne Cote Chalonnaise'
+              },
+              price: '59.99',
+              qty: 37,
+              createdBy: user._id,
+              categories: [redCat]
             },
             {
-                name: 'A yellow wine',
-                image: '/img/les vallerots Nuits Saint Georges.gif',
-                description: 'very fancy green wine',
-                price: '49.99',
-                qty: 27,
-                createdBy: user._id,
-                categories: ['White']
+              name: 'Beaune Chauacheux Premier Cru',
+              image: '/img/beaune chouacheux.gif',
+              description: {
+                review: 'This is a very fancy red wine',
+                winery: 'Fanny Sabre',
+                origin: 'France, Bourgogne',
+                'do': '',
+                grapes: 'Pinot Noir',
+                taste: ['full'],
+                serves: '',
+                vintage: null,
+                winery: 'Fanny Sabre',
+                aoc: 'Beaune ler Cru'
+              },
+              price: '59.99',
+              qty: 37,
+              createdBy: user._id,
+              categories: [redCat]
+              }, {
+              name: 'Pommard \<Les Vignots\>',
+              image: '/img/bourgogne rouge.gif',
+              description: {
+                review: 'This is a very fancy red wine',
+                winery: 'Chantal Lescure',
+                origin: 'France, Bourgogne',
+                'do': '',
+                grapes: 'Pinot Noir',
+                taste: ['medium', 'full'],
+                vintage: null,
+                aoc: ''
+              },
+              price: '59.99',
+              qty: 37,
+              createdBy: user._id,
+              categories: [redCat]
+            },{
+            name: 'Cremant Brut Zero',
+            image: '/img/cote chalonnaise.gif',
+            description: {
+              review: 'This is a wine with many bubbles',
+              winery: 'Guy Chaumont',
+              origin: 'France, Bourgogne',
+              'do': '',
+              grapes: 'Chardonnay 70%, Aligote 30%',
+              taste: ['bubbly'],
+              serves: '',
+              vintage: null,
+              aoc: ''
+            },
+            price: '59.99',
+            qty: 37,
+            createdBy: user._id,
+            categories: [sparklingCat]
+          }, {
+              name: 'Sidre Tendre',
+              image: '/img/Drappier grande sendree rose.gif',
+              description: {
+                review: 'This is another cidre',
+                winery: 'Eric Bordelet',
+                origin: 'Normandie, France',
+                'do': '',
+                grapes: 'some grapish korean immigrant to france',
+                taste: [''],
+                serves: '',
+                vintage: null,
+                aoc: ''
+              },
+              price: '59.99',
+              qty: 37,
+              createdBy: user._id,
+              categories: [ciderCat]
             }, {
-                name: 'A red wine',
-                image: '/img/Moenchberg Pinot Gris.gif',
-                description: 'very fancy green wine',
-                price: '79.99',
-                qty: 27,
-                createdBy: user._id,
-                categories: ['White']
+            name: 'Poire authentique',
+            image: '/img/Drappier Grande sendree.gif',
+            description: {
+              review: 'This is a cidre',
+              winery: 'Eric Bordelet',
+              origin: 'Normandie, France',
+              'do': '',
+              grapes: 'another grapish korean immigrant to france',
+              taste: [''],
+              serves: '',
+              vintage: null,
+              aoc: ''
+              },
+            price: '59.99',
+            qty: 37,
+            createdBy: user._id,
+            categories: [ciderCat]
             }, {
-                name: 'A blue wine',
-                image: '/img/LB valiniere.gif',
-                description: 'very fancy green wine',
-                price: '159.99',
-                qty: 27,
-                createdBy: user._id,
-                categories: ['White']
+              name: 'Sydre Angelette',
+              image: '/img/Drappier sans souffre.gif',
+              description: {
+                review: 'I am the third spelling of Cidre on this site from the same winery, and it is on purpose',
+                winery: 'Eric Bordelet',
+                origin: 'Normandie, France',
+                'do': '',
+                grapes: 'another grapish korean immigrant to france',
+                taste: [''],
+                serves: '',
+                vintage: null,
+                aoc: ''
+                },
+              price: '59.99',
+              qty: 37,
+              createdBy: user._id,
+              categories: [ciderCat]
             }, {
-                name: 'A purple wine',
-                image: '/img/Moenchberg Pinot Gris.gif',
-                description: 'very fancy green wine',
-                price: '309.99',
-                qty: 27,
-                createdBy: user._id,
-                categories: ['White']
-            }
+            name: 'Tradition',
+            image: '/img/grimaudes.gif',
+            description: {
+              review: 'This is a very fancy red wine',
+              winery: 'Leon Barral',
+              origin: 'France, Languedoc',
+              'do': '',
+              grapes: 'Cinsault, Grenache, carignan',
+              taste: ['medium', 'full'],
+              serves: '',
+              vintage: null,
+              aoc: ''
+            },
+            price: '59.99',
+            qty: 37,
+            createdBy: user._id,
+            categories: [redCat]
+          }, {
+            name: 'Jadis',
+            image: '/img/LB jadis.gif',
+            description: {
+              review: 'This is a very fancy red wine',
+              winery: 'Leon Barral',
+              origin: 'France, Languedoc',
+              'do': '',
+              grapes: 'Syrah, Grenache, carignan',
+              taste: ['full'],
+              serves: '',
+              vintage: null,
+              aoc: 'Faugeres'
+            },
+            price: '59.99',
+            qty: 37,
+            createdBy: user._id,
+            categories: [redCat]
+          }, {
+            name: 'Valinieres',
+            image: '/img/LB tradition.gif',
+            description: {
+              review: 'This is a very fancy red wine',
+              winery: 'Leon Barral',
+              origin: 'France, Languedoc',
+              'do': '',
+              grapes: 'Mourvedre 80%, Syrah 20%',
+              taste: ['full'],
+              serves: '',
+              vintage: null,
+              aoc: 'Faugeres'
+            },
+            price: '59.99',
+            qty: 37,
+            createdBy: user._id,
+            categories: [redCat]
+          }, {
+            name: 'Prelude',
+            image: '/img/LB valiniere.gif',
+            description: {
+              review: 'This is a very fancy red wine',
+              winery: 'Mas Lumen',
+              origin: 'France, Languedoc',
+              'do': '',
+              grapes: 'Carignan 50%, Syrah 27%, Cinsault 13%, Grenache 10%',
+              taste: [],
+              serves: '16',
+              vintage: null,
+              aoc: ''
+            },
+            price: '59.99',
+            qty: 37,
+            createdBy: user._id,
+            categories: [redCat]
+          }
         ];
-
         return q.invoke(Product, 'create', products);
+        });
 
-    })
+    };
 
 
-};
 
 connectToDb.then(function () {
     //mongoose.connection.db.dropDatabase(function() {
@@ -145,13 +441,13 @@ connectToDb.then(function () {
                 //process.kill(0);
             }
         }).then(function () {
-            
+
             return seedCategories();
         }).then(function () {
-            
+
             return seedProducts();
         }).then(function () {
-            
+
             process.kill(0);
         }).catch(function (err) {
             console.error(err);

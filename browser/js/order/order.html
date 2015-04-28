@@ -1,27 +1,44 @@
-<section id="order">
+<section id="order" class="contentTop">
     <div ng-show="orderProcessed">
         <h3>Thank you!</h3>
 
         <h3>Your products have been shipped to : {{order.user.shippingAddress.line1}}</h3>
     </div>
-    <!--<h3>{{order}}</h3>-->
-    <h3>{{orderProcessed}}</h3>
-
+    <h3 ng-if="order.details.promo">your promo ({{order.details.promo}}) has been applied</h3>
     <section id="ordered-products">
         <div class="productBox" ng-repeat="product in order.cart">
             <h3 class="eachProduct"> {{product.name}}</h3>
-            <h3 class="eachProduct"> {{product.description}}</h3>
             <img src="{{product.image}}">
             <h3 class="eachProduct"> {{product.price}}</h3>
             <h3 class="eachProduct"> {{product.orderQty}}</h3>
-            <h3 class="eachProduct" ng-repeat="productCategory in product.categories"> {{productCategory}}</h3>
+            <h3 class="eachProduct" ng-repeat="productCategory in product.categories"> {{productCategory.name}}</h3>
             <button ui-sref="productDetails({productId: product._id})">More Info</button>
         </div>
     </section>
     <div class="checkoutDetails">
+        <h2>Order Status: {{ order.status | uppercase }}</h2>
+        <h2>Order Date: {{ order.date }}</h2>
         <h3>Sub Total: {{order.details.subTotal | currency}}</h3>
         <h3>Tax: {{ order.details.tax | currency }}</h3>
         <h3>Shipping: {{ order.details.shipping  | currency }}</h3>
         <h2>Total: {{ order.details.total | currency }}</h2>
+    </div>
+    <div class="address">
+        <h3>Shipping Address</h3>
+        <h4>{{ order.user.firstName }} {{ order.user.lastName }}</h4>
+        <h4>{{ order.user.shippingAddress.line1 }}</h4>
+        <h4>{{ order.user.shippingAddress.line2 }}</h4>
+        <h4>{{ order.user.shippingAddress.city }}</h4>
+        <h4>{{ order.user.shippingAddress.state }}</h4>
+        <h4>{{ order.user.shippingAddress.zip }}</h4>
+    </div>
+    <div class="address">
+        <h3>Billing Address</h3>
+        <h4>{{ order.user.firstName }} {{ order.user.lastName }}</h4>
+        <h4>{{ order.user.billingAddress.line1 }}</h4>
+        <h4>{{ order.user.billingAddress.line2 }}</h4>
+        <h4>{{ order.user.billingAddress.city }}</h4>
+        <h4>{{ order.user.billingAddress.state }}</h4>
+        <h4>{{ order.user.billingAddress.zip }}</h4>
     </div>
 </section>

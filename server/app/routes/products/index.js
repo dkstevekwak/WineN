@@ -6,7 +6,7 @@ var authFn = require('../authRules.js');
 module.exports = router;
 
 router.get('/', function(req, res, next) {
-	Product.find({}).populate('reviews').exec(function(err, products) {
+	Product.find({}).populate('reviews categories').exec(function(err, products) {
 		if (err) return next(err);
 		res.send(products);
 	});
@@ -19,19 +19,26 @@ router.get('/:productId', function(req, res, next) {
 	});
 });
 
+
 router.put('/:productId', authFn.ensureAdmin, function(req,res,next){
-	var body = req.body;
-	console.log("this is server not test", body)
+	var updatedProduct = req.body;
 	Product.findById(req.params.productId, function(err, product) {
 		if (err) return next(err);
-		body.reviews = body.reviews.map(function(eachReview){
+		updatedProduct.reviews = updatedProduct.reviews.map(function(eachReview){
 			return eachReview._id;
 		});
-		_.extend(product, body);
+		_.extend(product, updatedProduct);
 		product.save(function(err, savedProduct){
 			res.send(savedProduct);
 		});
 	});
+});
+
+router.delete('/:productId', function(req, res, next) {
+    Product.findByIdAndRemove(req.params.productId, function(err, product) {
+        if (err) return next(err);
+        res.send(product);
+    });
 });
 
 

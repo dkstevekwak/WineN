@@ -14,9 +14,8 @@ app.controller('NewProductAdminController', function($scope, Products, $state) {
 	$scope.createProduct = function(product) {
 		Products.createProduct(product)
 		.then(function(product) {
-			console.log('updated product', product)
-				$state.go('productsadmins');
-				//TODO nice to redirect to newly created product page
+            $state.go('productsadmins');
+            //TODO nice to redirect to newly created product page
 		});
 	};
 

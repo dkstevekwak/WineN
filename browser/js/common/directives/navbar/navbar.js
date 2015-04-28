@@ -1,5 +1,5 @@
 'use strict';
-app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) {
+app.directive('navbar', function ($rootScope, ModalService, AuthService, AUTH_EVENTS, $state, Cart) {
 
     return {
         restrict: 'E',
@@ -8,12 +8,32 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
         link: function (scope) {
 
             scope.items = [
-                { label: 'Home', state: 'home' },
-                { label: 'About', state: 'about' },
-                { label: 'Products', state: 'products'},
-                { label: 'Profile', state: 'profile'},
+                //{ label: 'Home', state: 'home' },
+                { label: 'AboutUs', state: 'about' },
+                { label: 'Our Wines', state: 'products'},
+                { label: 'Profile', state: 'profile'}
                 // { label: 'Checkout', state: 'checkout'},
-                { label: 'Cart', state: 'cart'}
+
+            ];
+            //
+            //scope.openCart = function() {
+            //    ModalService.showModal({
+            //        templateUrl: 'js/cart/cart.html',
+            //        controller: "CartController"
+            //    }).then(function(modal) {
+            //        modal.element.modal();
+            //        modal.close.then(function(result) {
+            //            $scope.message = "You said " + result;
+            //        });
+            //    });
+            //};
+
+            scope.adminItems = [
+                { label: 'Products', state: 'productsadmins' },
+                { label: 'Categories', state: 'categories' },
+                { label: 'Users', state: 'usermanagement' },
+                { label: 'Promos', state: 'promos' },
+                { label: 'Orders', state: 'orders' }
             ];
 
             scope.user = null;
@@ -24,6 +44,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
 
             scope.logout = function () {
                 AuthService.logout().then(function () {
+                   Cart.emptyCart();
                    $state.go('home');
                 });
             };
@@ -48,3 +69,5 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
     };
 
 });
+
+

@@ -11,11 +11,11 @@ router.use(function(req,res,next){
         Product.findById(req.body.product, function(err,product){
             req.product = product;
             next();
-        })
+        });
     } else {
         next();
     }
-})
+});
 
 router.get('/:productId', function(req, res, next) {
     var productId = req.params.productId;
@@ -34,7 +34,7 @@ router.post('/', authFn.ensureLoggedIn, function(req,res,next){
         req.product.reviews.push(savedReview._id);
         req.product.save(function(err){
             res.send(savedReview);
-        })
+        });
     });
 });
 

@@ -7,38 +7,76 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders){
-	var getCurrentUser = function(){
-		Users.getCurrentUser().then(function(currUser){
-			$scope.user = currUser;
-		}, function(err){
-			console.log('error getting current user')
-		})
-	}
-	getCurrentUser();
+app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders, Promos){
 
-	$scope.products = Cart.localCart;
+    Users.getCurrentUser().then(function(currUser){
+        $scope.user = currUser;
+    }, function(err){
+        throw new Error(err);
+    });
+
+	$scope.promoCode = null;
+	$scope.products = Cart.getCart();
+	$scope.promoApplied = false;
+
+	var subTotal = Cart.calculateSubTotal($scope.products);
+
 	$scope.checkoutDetails = {
-		subTotal: Cart.calculateSubTotal(),
-		tax: Cart.tax,
-		shipping: Cart.shipping,
-		total: Cart.calculateSubTotal()+Cart.tax+Cart.shipping
+		subTotal: subTotal,
+		tax: Cart.order.tax,
+		shipping: Cart.order.shipping,
+		promo:Cart.order.promo
 	};
+
 	$scope.confirmOrder = function(){
 		var order = {
 			cart: $scope.products,
 			user: $scope.user,
 			details: $scope.checkoutDetails
-		}
+		};
 		Orders.userConfirmOrder(order).then(function(order){
 			Cart.emptyCart();
-			console.log("order created!!!", order);
 			$state.go('order'); //returns the order
 			//redirect via state after thankyou/confirmation page created
 		}, function(err){
-			console.log('order creation failed oh no', err);
-		})
-	}
-	
+            throw new Error(err);
+		});
+	};
+
+	$scope.applyPromo = function(promoCode){
+		var newDate = new Date();
+		if(Cart.order.promo) return console.log("don't be greedy!");
+		Cart.order.promo = $scope.promoCode;
+		$scope.checkoutDetails.promo = $scope.promoCode;
+		Promos.getPromo(promoCode).then(function(promo){
+			if(!promo) console.log("promo does not exist");
+			else if(promo.expirationDate<newDate.toISOString()) console.log("promo expired!")
+			else {
+				if(promo.products.length){
+					$scope.products.forEach(function(cartProduct){
+						promo.products.forEach(function(promoProduct){
+							if(cartProduct._id === promoProduct) {
+								cartProduct.price *= (100-promo.percentage)/100;
+								$scope.checkoutDetails.subTotal = Cart.calculateSubTotal($scope.products);
+								$scope.promoApplied = true;
+							}
+						});
+					});
+				} else {
+					console.log("else", $scope.products);
+					$scope.products.forEach(function(cartProduct){
+						cartProduct.categories.forEach(function(eachCategory){
+							if(eachCategory === promo.category) {
+								cartProduct.price *= (100-promo.percentage)/100;
+								$scope.checkoutDetails.subTotal = Cart.calculateSubTotal($scope.products);
+								$scope.promoApplied = true;
+							}
+						});
+					});
+				}
+			}
+		});
+
+	};
 
 });
