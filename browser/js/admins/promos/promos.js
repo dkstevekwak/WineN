@@ -19,6 +19,8 @@ app.controller('PromosAdminsController', function($scope, Promos, Categories, Pr
 
     $scope.newPromo = new Promo();
 
+    $scope.selectedProducts = [];
+
     Promos.getAllPromos().then(function(promoList){
         $scope.promos = promoList;
     },function(err){
@@ -41,8 +43,12 @@ app.controller('PromosAdminsController', function($scope, Promos, Categories, Pr
         var index = $scope.newPromo.products.indexOf(product._id);
         if(index === -1){
             $scope.newPromo.products.push(product._id)
+            $scope.selectedProducts.push(product._id);
         }
-        else $scope.newPromo.products.splice(index,1);
+        else {
+            $scope.newPromo.products.splice(index,1);
+            $scope.selectedProducts.splice(index, 1);
+        }
     };
     $scope.createPromo = function(promo) {
         Promos.postPromo(promo)
@@ -50,6 +56,7 @@ app.controller('PromosAdminsController', function($scope, Promos, Categories, Pr
             promo.expirationDate = new Date(promo.expirationDate);
             $scope.promos.push(promo);
             $scope.newPromo = new Promo();
+            $scope.selectedProducts = [];
         }, function(err) {
             throw new Error(err);
         });
@@ -68,6 +75,7 @@ app.controller('PromosAdminsController', function($scope, Promos, Categories, Pr
         .then(function(promo) {
             $scope.promos = $scope.promos.filter(eachPromo => promoId !== eachPromo._id);
             $scope.currentPromo = null;
+            $scope.selectedProducts = [];
         }, function(err) {
             throw new Error(err);
         });
@@ -76,6 +84,7 @@ app.controller('PromosAdminsController', function($scope, Promos, Categories, Pr
     $scope.setCurrentPromo = function(promo) {
         if ($scope.currentPromo === promo) {
             $scope.currentPromo = null;
+            $scope.selectedProducts = [];
             return;
         }
         $scope.currentPromo = promo;

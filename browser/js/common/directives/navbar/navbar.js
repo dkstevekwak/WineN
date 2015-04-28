@@ -16,6 +16,13 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
 
             ];
 
+            scope.adminItems = [
+                { label: 'Products', state: 'productsadmins' },
+                { label: 'Users', state: 'usermanagement' },
+                { label: 'Promos', state: 'promos' },
+                { label: 'Orders', state: 'orders' }
+            ];
+
             scope.user = null;
 
             scope.isLoggedIn = function () {

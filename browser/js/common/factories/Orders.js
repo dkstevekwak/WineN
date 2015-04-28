@@ -22,7 +22,6 @@ app.factory('Orders', function ($http) {
   };
 
   var updateOrder = function(order) {
-
     return $http.put('/api/checkout/' + order._id, order).then(function(res) {
       return res.data;
     }, function(err) {
