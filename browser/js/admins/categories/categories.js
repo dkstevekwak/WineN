@@ -3,7 +3,11 @@ app.config(function ($stateProvider) {
     $stateProvider.state('categories', {
         url: '/admins/categories',
         templateUrl: 'js/admins/categories/categories.html',
-        controller: 'CategoriesAdminsController'
+        controller: 'CategoriesAdminsController',
+        data: {
+          authenticate: true,
+          admin: true
+        }
     });
 });
 
