@@ -19,6 +19,9 @@ app.controller('ProductsController', function($scope, Products, Cart, Categories
 	$scope.imageAnimating = [];
 
   Products.getAllProducts().then(function(productList){
+      productList = productList.filter(function(product) {
+          return product.qty > 0;
+      });
     $scope.products = productList;
   }, function(err){
       throw new Error(err);
