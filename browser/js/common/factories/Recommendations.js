@@ -9,7 +9,7 @@ app.factory('Recommendations', function ($http,localStorageService, Users, AuthS
 	    });
 	  };
 	var getProductRec = function(pid){
-		var pidRequestStr = 'http://192.168.1.216:1338/api/'+pid;
+		var pidRequestStr = 'https://winen.herokuapp.com:444/api/'+pid;
 	    return $http.get(pidRequestStr.toString()).then(function(res){
 	    	var arr = [];
 	    	for (var key in res.data){
@@ -27,6 +27,6 @@ app.factory('Recommendations', function ($http,localStorageService, Users, AuthS
 	  };
 	return {
 		getAllRecs,
-		getProductRec
+		getProduc
 	};
 });
