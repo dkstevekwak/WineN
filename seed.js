@@ -173,7 +173,36 @@ var seedCategories = function () {
 
 };
 var seedProducts = function () {
-    return User.findOne({email:'obama@gmail.com'}).exec().then(function(user){
+    var redCat;
+    var whiteCat;
+    var sparklingCat;
+    var ciderCat;
+    return Category.findOne({name: 'Red'}).exec()
+    .then(function(category) {
+        redCat = category._id;
+    })
+    .then(function() {
+        return Category.findOne({name: 'White'}).exec()
+    })
+    .then(function(category) {
+        whiteCat = category._id;
+    })
+    .then(function() {
+        return Category.findOne({name: 'Sparkling'}).exec()
+    })
+    .then(function(category) {
+        sparklingCat = category._id;
+    })
+    .then(function() {
+        return Category.findOne({name: 'Cider'}).exec()
+    })
+    .then(function(category) {
+        ciderCat = category._id;
+    })
+    .then(function() {
+        return User.findOne({email:'obama@gmail.com'}).exec()
+    })
+    .then(function(user){
         var products = [
             {
                 name: 'Canada Negra',
@@ -192,7 +221,7 @@ var seedProducts = function () {
                 price: '59.99',
                 qty: 37,
                 createdBy: user._id,
-                categories: ['Red']
+                categories: [redCat]
             },
             {
               name: 'Cote Chalonnaise',
@@ -211,7 +240,7 @@ var seedProducts = function () {
               price: '59.99',
               qty: 37,
               createdBy: user._id,
-              categories: ['Red']
+              categories: [redCat]
             },
             {
               name: 'Beaune Chauacheux Premier Cru',
@@ -231,7 +260,7 @@ var seedProducts = function () {
               price: '59.99',
               qty: 37,
               createdBy: user._id,
-              categories: ['Red']
+              categories: [redCat]
               }, {
               name: 'Pommard \<Les Vignots\>',
               image: '/img/bourgogne rouge.gif',
@@ -248,7 +277,7 @@ var seedProducts = function () {
               price: '59.99',
               qty: 37,
               createdBy: user._id,
-              categories: ['Red']
+              categories: [redCat]
             },{
             name: 'Cremant Brut Zero',
             image: '/img/cote chalonnaise.gif',
@@ -266,7 +295,7 @@ var seedProducts = function () {
             price: '59.99',
             qty: 37,
             createdBy: user._id,
-            categories: ['Sparkling']
+            categories: [sparklingCat]
           }, {
               name: 'Sidre Tendre',
               image: '/img/Drappier grande sendree rose.gif',
@@ -284,7 +313,7 @@ var seedProducts = function () {
               price: '59.99',
               qty: 37,
               createdBy: user._id,
-              categories: ['Cider']
+              categories: [ciderCat]
             }, {
             name: 'Poire authentique',
             image: '/img/Drappier Grande sendree.gif',
@@ -302,7 +331,7 @@ var seedProducts = function () {
             price: '59.99',
             qty: 37,
             createdBy: user._id,
-            categories: ['Cider']
+            categories: [ciderCat]
             }, {
               name: 'Sydre Angelette',
               image: '/img/Drappier sans souffre.gif',
@@ -320,7 +349,7 @@ var seedProducts = function () {
               price: '59.99',
               qty: 37,
               createdBy: user._id,
-              categories: ['Cider']
+              categories: [ciderCat]
             }, {
             name: 'Tradition',
             image: '/img/grimaudes.gif',
@@ -338,7 +367,7 @@ var seedProducts = function () {
             price: '59.99',
             qty: 37,
             createdBy: user._id,
-            categories: ['Red']
+            categories: [redCat]
           }, {
             name: 'Jadis',
             image: '/img/LB jadis.gif',
@@ -356,7 +385,7 @@ var seedProducts = function () {
             price: '59.99',
             qty: 37,
             createdBy: user._id,
-            categories: ['Red']
+            categories: [redCat]
           }, {
             name: 'Valinieres',
             image: '/img/LB tradition.gif',
@@ -374,7 +403,7 @@ var seedProducts = function () {
             price: '59.99',
             qty: 37,
             createdBy: user._id,
-            categories: ['Red']
+            categories: [redCat]
           }, {
             name: 'Prelude',
             image: '/img/LB valiniere.gif',
@@ -392,16 +421,15 @@ var seedProducts = function () {
             price: '59.99',
             qty: 37,
             createdBy: user._id,
-            categories: ['Red']
+            categories: [redCat]
           }
-];
-
+        ];
         return q.invoke(Product, 'create', products);
+        });
 
-    })
+    };
 
 
-};
 
 connectToDb.then(function () {
     //mongoose.connection.db.dropDatabase(function() {

@@ -28,7 +28,7 @@
 			<h3 class="eachProduct"> {{product.name}}</h3>
             <img class="animated" ng-class="{'pulse':imageAnimating.indexOf(product._id)!==-1}" ng-mouseenter="imageAnimate(product._id)" ng-mouseleave="imageAnimate(product._id)" src="{{product.image}}">
 			<h3 class="eachProduct"> {{product.price | currency}}</h3>
-			<h3 class="eachProduct" ng-repeat="productCategory in product.categories"> {{productCategory}}</h3>
+			<h3 class="eachProduct" ng-repeat="category in product.categories"> {{ category.name }}</h3>
 			<button class="btn btn-default btn-more" ui-sref="productDetails({productId: product._id})">More Info</button>
 			<button class="btn btn-default btn-more" ng-click="addToCart(product)">Add To Cart</button>
 		</div>

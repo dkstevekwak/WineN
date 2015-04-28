@@ -25,10 +25,10 @@ var schema = new mongoose.Schema({
     createdBy: {
         type: mongoose.Schema.Types.ObjectId, ref: 'User' //commented out required
     },
-	categories: {
-		type: [String],
+	categories: [{
+		type: mongoose.Schema.Types.ObjectId, ref:'Category',
 		required: true
-	},
+	}],
     reviews: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'Review' //commented out required
     }]

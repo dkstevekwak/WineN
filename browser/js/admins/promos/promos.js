@@ -14,6 +14,7 @@ app.controller('PromosAdminsController', function($scope, Promos, Categories, Pr
         this.expirationDate = null;
         this.products = [];
         this.category = null;
+        this.percentage = null;
     };
 
     $scope.newPromo = new Promo();
@@ -48,6 +49,7 @@ app.controller('PromosAdminsController', function($scope, Promos, Categories, Pr
         Promos.postPromo(promo)
         .then(function(promo) {
             $scope.promos.push(promo);
+                $scope.newPromo = new Promo();
         }, function(err) {
             throw new Error(err);
         });
@@ -71,7 +73,6 @@ app.controller('PromosAdminsController', function($scope, Promos, Categories, Pr
     };
 
     $scope.setCurrentPromo = function(promo) {
-        console.log("this is category when setting", promo.category);
         if ($scope.currentPromo === promo) {
             $scope.currentPromo = null;
             return;

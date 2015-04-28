@@ -9,15 +9,15 @@ app.config(function ($stateProvider) {
 
 
 app.controller('CartController', function($scope, Cart, Products, Recommendations){
-	$scope.shipping = Cart.shipping;
-	$scope.tax = Cart.tax;
+	$scope.shipping = Cart.order.shipping;
+	$scope.tax = Cart.order.tax;
 	$scope.subTotal = 0;
 	$scope.cartProducts = Cart.getCart();
 	// $scope.
 
 	var updateCartFields = function(){
-		$scope.subTotal = Cart.calculateSubTotal();
 		$scope.cartProducts = Cart.getCart();
+		$scope.subTotal = Cart.calculateSubTotal($scope.cartProducts);
 		$scope.total = $scope.shipping + $scope.tax + $scope.subTotal;
 	};
   $scope.productRecs = [];
