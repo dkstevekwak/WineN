@@ -1,6 +1,7 @@
 <section class="contentTop">
     <div id="products-admins" class="clearfix">
         <div class="all-products col-xs-6">
+            <button class="btn btn-default add-product" ng-click="currentProduct = null">Add New Product</button>
             <input class="searchBox" type="text" placeholder="Search Products" ng-model="query"/>
             <div class="column-titles">
                 <div class="col-xs-9">
@@ -44,7 +45,9 @@
                 </div>
                 <div class="col-xs-6">
                     <label>Categories</label>
-                    <input class="form-control" ng-model="currentProduct.categories"/>
+                    <div class="product-categories" ng-repeat="category in categories">
+                        <input type="checkbox" ng-click="setCategory(category, currentProduct)" ng-checked="currentProduct.categories.indexOf(category._id)!==-1" ng-true-value="category._id" ng-false-value="null"><span>{{ category.name }}</span>
+                    </div>
                 </div>
                 <div class="col-xs-12">
                     <label>Review</label>
@@ -72,6 +75,7 @@
                 </div>
                 <div class="col-xs-12">
                     <button class="btn btn-default">Update Product</button>
+                    <button class="btn btn-danger" type="button" ng-click="deleteProduct(currentProduct._id)">Delete Product</button>
                 </div>
             </form>
             <ul ng-show="currentTab === 'reviews'">
@@ -84,5 +88,58 @@
                 </li>
             </ul>
         </div>
+        <div class="add-product-form col-xs-6" ng-if="!currentProduct">
+            <h2>Add New Product</h2>
+            <form ng-submit="createProduct(newProduct)">
+                <div class="col-xs-4">
+                    <label>Name</label>
+                    <input class="form-control" ng-model="newProduct.name"/>
+                </div>
+                <div class="col-xs-4">
+                    <label>Price</label>
+                    <input class="form-control" ng-model="newProduct.price"/>
+                </div>
+                <div class="col-xs-4">
+                    <label>Inventory</label>
+                    <input class="form-control" ng-model="newProduct.qty"/>
+                </div>
+                <div class="col-xs-6">
+                    <label>Image</label>
+                    <input class="form-control" ng-model="newProduct.image"/>
+                </div>
+                <div class="col-xs-6 product-categories">
+                    <label>Categories</label>
+                    <div ng-repeat="category in categories">
+                        <input type="checkbox" ng-checked="selectedCategories.indexOf(category._id) > -1" ng-click="setCategory(category, newProduct)"><span>{{ category.name }}</span>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <label>Review</label>
+                    <textarea class="form-control" ng-model="newProduct.description.review"/></textarea>
+                </div>
+                <div class="col-xs-6">
+                    <label>AOC</label>
+                    <input class="form-control" ng-model="newProduct.description.aoc"/>
+                    <label>Vintage</label>
+                    <input class="form-control" ng-model="newProduct.description.vintage"/>
+                    <label>Serves</label>
+                    <input class="form-control" ng-model="newProduct.description.serves"/>
+                    <label>Grapes</label>
+                    <input class="form-control" ng-model="newProduct.description.grapes"/>
+                </div>
+                <div class="col-xs-6">
+                    <label>DO</label>
+                    <input class="form-control" ng-model="newProduct.description.do"/>
+                    <label>Origin</label>
+                    <input class="form-control" ng-model="newProduct.description.origin"/>
+                    <label>Winery</label>
+                    <input class="form-control" ng-model="newProduct.description.winery"/>
+                    <label>Taste</label>
+                    <input class="form-control" ng-model="newProduct.description.taste"/>
+                </div>
+                <div class="col-xs-12">
+                    <button class="btn btn-default">Add Product</button>
+                </div>
+            </form>
     </div>
 </section>

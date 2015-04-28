@@ -32,6 +32,13 @@ router.put('/:productId', function(req,res,next){
 	});
 });
 
+router.delete('/:productId', function(req, res, next) {
+    Product.findByIdAndRemove(req.params.productId, function(err, product) {
+        if (err) return next(err);
+        res.send(product);
+    });
+});
+
 
 router.post('/add', function(req,res,next){
 	var body = req.body;
