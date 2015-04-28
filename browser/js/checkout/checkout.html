@@ -1,54 +1,52 @@
 <section id="checkout" class="contentTop">
-    This is checkout view
-    <form>
-    	<h3>{{user.username}}<h3>
-    	<label for="firstname-order">First name:</label>
-    	<input id="firstname-order" type='text' class="form-control" ng-model="user.firstName" />
-    	<label for="lastname-order">Last name:</label>
-    	<input id="lastname-order" type='text' class="form-control" ng-model="user.lastName" />
-    	<label>Address:</label>
-    	<input type='text' placeholder="line1" class="form-control" ng-model="user.shippingAddress.line1" />
-    	<input type='text' placeholder="line2" class="form-control" ng-model="user.shippingAddress.line2" />
-    	<input type='text' placeholder="city" class="form-control" ng-model="user.shippingAddress.city" />
-    	<input type='text' placeholder="state" class="form-control" ng-model="user.shippingAddress.state" />
-    	<input type='text' placeholder="zip" class="form-control" ng-model="user.shippingAddress.zip" />
-    </form>
-    <section id="all-products">
+	<div class="shipping col-xs-4">
+		<form>
+			<h3>{{user.username}}<h3>
+			<label for="firstname-order">First name</label>
+			<input id="firstname-order" type='text' class="form-control" ng-model="user.firstName" />
+			<label for="lastname-order">Last name</label>
+			<input id="lastname-order" type='text' class="form-control" ng-model="user.lastName" />
+			<label>Address</label>
+			<input type='text' placeholder="line1" class="form-control" ng-model="user.shippingAddress.line1" />
+			<input type='text' placeholder="line2" class="form-control" ng-model="user.shippingAddress.line2" />
+			<input type='text' placeholder="city" class="form-control" ng-model="user.shippingAddress.city" />
+			<input type='text' placeholder="state" class="form-control" ng-model="user.shippingAddress.state" />
+			<input type='text' placeholder="zip" class="form-control" ng-model="user.shippingAddress.zip" />
+		</form>
+	</div>
+    <section id="checkout-products" class="col-xs-8">
     	<div class="productBox" ng-repeat="product in products">
-    		<h3 class="eachProduct"> {{product.name}}</h3>
-    		<h3 class="eachProduct"> {{product.description}}</h3>
+    		<h4 class="eachProductName"> {{product.name}}</h4>
     		<img src="{{product.image}}">
-    		<h3 class="eachProduct"> {{product.price}}</h3>
-    		<h3 class="eachProduct"> {{product.qty}}</h3>
-    		<h3 class="eachProduct" ng-repeat="productCategory in product.categories"> {{productCategory}}</h3>
-    		<button ui-sref="productDetails({productId: product._id})">More Info</button>
+    		<h5 class="eachProduct"> {{product.price | currency}}</h5>
+    		<h5 class="eachProduct"> Quantity: {{product.orderQty}}</h5>
     	</div>
     </section>
-    <div class="checkoutDetails">
-    	<h3>Sub Total: {{checkoutDetails.subTotal | currency}}</h3>
-    	<h3>Tax: {{ checkoutDetails.tax | currency }}</h3>
-    	<h3>Shipping: {{ checkoutDetails.shipping  | currency }}</h3>
-    	<h2>Total: {{ checkoutDetails.subTotal + checkoutDetails.tax + checkoutDetails.shipping | currency }}</h2>
-    </div>
+    <div class="checkoutDetails col-xs-12">
 		<h3 ng-if="promoApplied">your promo ({{promoCode}}) has been applied</h3>
-		<input type="text" ng-model="promoCode"><button ng-click="applyPromo(promoCode)">Apply Promo Code</button>
+		<input type="text" ng-model="promoCode"><button class="promoCodeBtn btn btn-default" ng-click="applyPromo(promoCode)">Apply Promo Code</button>
+    	<h4>Sub Total: {{checkoutDetails.subTotal | currency}}</h4>
+    	<h4>Tax: {{ checkoutDetails.tax | currency }}</h4>
+    	<h4>Shipping: {{ checkoutDetails.shipping  | currency }}</h4>
+    	<h3 class="total">Total: {{ checkoutDetails.subTotal + checkoutDetails.tax + checkoutDetails.shipping | currency }}</h3>
+		<button class="btn btn-default submitOrder" ng-click="confirmOrder()">Submit Order</button>
+		<div><!-- Enter Credit Card Info -->
+			<div>
+				<form action="" method="POST">
+					<script
+						src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+						data-key="sk_test_AmjjVhqe3no91YPNeGK5V5ZB" <!--  DJ's Stripe test API must be replaced -->
+						data-amount="2000"
+						data-name="Demo Site"
+						data-description="2 widgets ($20.00)"
+						data-image="/128x128.png">
+					</script>
+				</form>
+			</div>
+			</div>
 
-   <div><!-- Enter Credit Card Info -->
-	    <div><h4>Enter Credit Card for Payment</h4></div>
-	    <div>
-		    <form action="" method="POST">
-			  <script
-			    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-			    data-key="sk_test_AmjjVhqe3no91YPNeGK5V5ZB" <!--  DJ's Stripe test API must be replaced -->
-			    data-amount="2000"
-			    data-name="Demo Site"
-			    data-description="2 widgets ($20.00)"
-			    data-image="/128x128.png">
-			  </script>
-			</form>
-		</div>
 	</div>
 
 
-		<br><button ng-click="confirmOrder()">Order!!!!!</button>
+
  </section>

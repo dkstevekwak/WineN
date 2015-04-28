@@ -11,3 +11,46 @@
 		clear:both;
 	}
 }
+
+#checkout-products {
+  .productBox{
+	width: 15%;
+	img{
+	  height: 70px;
+	  width: 30%;
+	}
+  }
+.eachProductName {
+  color:navy;
+}
+
+}
+.shipping {
+  input {
+	margin-bottom:10px;
+  }
+}
+
+.checkoutDetails {
+  border-top: 1px solid skyblue;
+  padding-top: 30px;
+  text-align: center;
+  button {
+	border: 1px solid skyblue;
+  }
+  .total {
+	padding-top: 10px;
+	border-top: 1px solid skyblue;
+	color: blue;
+	width: 200px;
+	margin: 15px auto;
+  }
+  .promoCodeBtn {
+	margin-left: 6px;
+	margin-bottom: 10px;
+  }
+  .submitOrder{
+	margin-bottom:5px;
+  }
+}
+
