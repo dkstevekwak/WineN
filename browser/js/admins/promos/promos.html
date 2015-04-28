@@ -1,6 +1,7 @@
 <section id="promomanagement" class="contentTop">
     <div id="all-promos-admin" class="clearfix">
         <div class="all-promos col-xs-6">
+            <button class="btn btn-default add-promo" ng-click="currentPromo = null">Add New Promo</button>
             <input class="searchBox" type="text" placeholder="Search Promos" ng-model="query"/>
             <div class="column-titles">
                 <div class="col-xs-12">
@@ -19,20 +20,25 @@
                 <div class="col-xs-6">
                     <label>Code</label>
                     <input type="text" class="form-control" ng-model="currentPromo.code"/>
+                    <label>Discount</label>
+                    <input class="form-control" type="number" ng-model="currentPromo.percentage" />
                     <label>Expiration Date</label>
                     <input type="date" class="form-control" ng-model="currentPromo.expirationDate"/>
+                    <label>Category</label>
+                    <select class="form-control" ng-model="currentPromo.category">
+                        <option value="{{ category._id }}" ng-repeat="category in categories">{{ category.name }}</option>
+                    </select>
+                </div>
+                <div class="col-xs-6">
                     <label>Products</label>
                     <div class="promo-products" ng-repeat="product in products">
                         <input type="checkbox" ng-checked="currentPromo.products.indexOf(product._id)!==-1" ng-true-value="product._id" ng-false-value="null"><span>{{ product.name }}</span>
                     </div>
                 </div>
-                <label>Category</label>
-                <select class="form-control" ng-model="currentPromo.category">
-                    <option value="{{ category._id }}" ng-repeat="category in categories">{{ category.name }}</option>
-                </select>
-                <label>Discount</label>
-                <input type="number" ng-model="currentPromo.percentage" />
-                <button class="btn btn-default">Update Promo</button>
+                <div class="col-xs-12">
+                    <button class="btn btn-default">Update Promo</button>
+                    <button type="button" class="btn btn-danger" ng-click="deletePromo(currentPromo._id)">Delete Promo</button>
+                </div>
             </form>
         </div>
         <div class="create-promo col-xs-6" ng-if="!currentPromo">
@@ -41,24 +47,20 @@
                 <div class="col-xs-6">
                     <label>Code</label>
                     <input type="text" class="form-control" ng-model="newPromo.code"/>
-                </div>
-                <div class="col-xs-6">
+                    <label>Discount</label>
+                    <input class="form-control" type="number" ng-model="newPromo.percentage" />
                     <label>Expiration Date</label>
                     <input type="date" class="form-control" ng-model="newPromo.expirationDate"/>
+                    <label>Category</label>
+                    <select class="form-control" ng-model="newPromo.category">
+                        <option value="{{ category }}" ng-repeat="category in categories">{{ category.name }}</option>
+                    </select>
                 </div>
                 <div class="col-xs-6">
                     <label>Products</label>
                     <div class="promo-products" ng-repeat="product in products">
                         <input type="checkbox" ng-click="setProduct(product)"><span>{{ product.name }}</span>
                     </div>
-                </div>
-                <div class="col-xs-6">
-                    <label>Category</label>
-                    <select class="form-control" ng-model="newPromo.category">
-                        <option value="{{ category }}" ng-repeat="category in categories">{{ category.name }}</option>
-                    </select>
-                    <label>Discount</label>
-                    <input type="number" ng-model="newPromo.percentage" />
                 </div>
                 <div class="col-xs-12">
                     <button class="btn btn-default">Add Promo</button>

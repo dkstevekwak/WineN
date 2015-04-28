@@ -28,6 +28,13 @@ app.directive('navbar', function ($rootScope, ModalService, AuthService, AUTH_EV
             //    });
             //};
 
+            scope.adminItems = [
+                { label: 'Products', state: 'productsadmins' },
+                { label: 'Users', state: 'usermanagement' },
+                { label: 'Promos', state: 'promos' },
+                { label: 'Orders', state: 'orders' }
+            ];
+
             scope.user = null;
 
             scope.isLoggedIn = function () {

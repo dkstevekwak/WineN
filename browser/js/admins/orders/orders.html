@@ -1,17 +1,78 @@
-<section id="orders" class="contentTop">
-    This is orders view
-    <section id="all-orders-admin">
-        This is orders
-        <ul ng-repeat="order in orders">
-            <h1 ng-click="viewOrder(order._id)">{{ order._id }}</h1>
-            <h2>{{ order.date }}</h2>
-            <form name="editOrder-{{order._id}}" ng-submit="updateOrder(order)">
-                Name: <input name="editName-{{order._id}}" ng-model="order.user.firstName"/><br />
-                Total: <input name="editName-{{order._id}}" ng-model="order.details.total"/><br />
-                Status: <input name="editName-{{order._id}}" ng-model="order.status"/><br />
-                Paid: <input name="editName-{{order._id}}" ng-model="order.paid"/><br />
-                <button>Update Order</button>
-            </form>
-        </ul>
-    </section>
+<section id="orderManagement" class="contentTop">
+    <div id="all-orders-admin" class="clearfix">
+        <div class="all-orders col-xs-6">
+            <div class="col-xs-10">
+                <div class="statusSelection btn-group btn-group-justified">
+                    <div class="btn-group"  ng-repeat="status in statuses" role="group">
+                        <button type="button" class="btn btn-default eachStatus" ng-click="selectStatus(status)" ng-class="{'active': status === currentStatus}">{{ status | uppercase }}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="column-titles">
+                <div class="col-xs-6">
+                    <h3>Order Date</h3>
+                </div>
+                <div class="col-xs-6">
+                    <h3>Status</h3>
+                </div>
+            </div>
+            <div ng-click="setCurrentOrder(order)" ng-show="currentStatus === order.status || !currentStatus" ng-class-even="'even-order'" ng-class="{ 'selected-order': currentOrder._id === order._id, 'first-order': $first, 'last-order': $last }" class="clearfix order-listing" ng-repeat="order in orders | orderBy: 'date' ">
+                <div class="col-xs-6 order-id">
+                    <h4>{{ order.date }}</h4>
+                </div>
+                <div class="col-xs-6 user-email">
+                    <h4>{{ order.status | uppercase }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="single-order col-xs-6" ng-show="currentOrder">
+            <div class="col-xs-12">
+                <span class="order-update" ng-show="updateSuccess">Order Status Updated</span>
+            </div>
+            <h2>Order #: {{ currentOrder._id }}</h2>
+            <h3>Date: {{ currentOrder.date }}</h3>
+            <div class="col-xs-6">
+                <form>
+                    <label>Status</label>
+                    <select class="form-control" ng-model="currentOrder.status">
+                        <option value="created">Created</option>
+                        <option value="processing">Processing</option>
+                        <option value="canceled">Canceled</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </form>
+                <div class="order-details">
+                    <span ng-show="currentOrder.paid">PAID</span>
+                    <span ng-show="!currentOrder.paid">NOT PAID</span>
+                    <span class="promo-code">PROMO CODE: <span ng-show="currentOrder.details.promo">{{ currentOrder.details.promo }}</span><span ng-show="!currentOrder.details.promo">N/A</span></span>
+                    <ul class="cart-products">
+                        <li ng-repeat="product in currentOrder.cart">{{ product.price | currency }} x {{ product.orderQty }} {{ product.name }}</li>
+                    </ul>
+                    <span>{{ currentOrder.details.subTotal | currency }} Subtotal</span>
+                    <span>{{ currentOrder.details.shipping | currency }} Shipping</span>
+                    <span>{{ currentOrder.details.tax | currency }} Tax</span>
+                    <span>{{ currentOrder.details.total | currency }} Total</span>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <button class="btn btn-default status-btn" ng-click="updateOrder(currentOrder)">Update Status</button>
+                <div class="addresses">
+                    <label>Shipping Address</label>
+                    <span>{{ currentOrder.user.firstName }} {{ currentOrder.user.lastName }}</span>
+                    <span>{{ currentOrder.user.shippingAddress.line1 }}</span>
+                    <span>{{ currentOrder.user.shippingAddress.line2 }}</span>
+                    <span>{{ currentOrder.user.shippingAddress.city }}</span>
+                    <span>{{ currentOrder.user.shippingAddress.state }}</span>
+                    <span>{{ currentOrder.user.shippingAddress.zip }}</span>
+                    <label>Billing Address</label>
+                    <span>{{ currentOrder.user.firstName }} {{ currentOrder.user.lastName }}</span>
+                    <span>{{ currentOrder.user.billingAddress.line1 }}</span>
+                    <span>{{ currentOrder.user.billingAddress.line2 }}</span>
+                    <span>{{ currentOrder.user.billingAddress.city }}</span>
+                    <span>{{ currentOrder.user.billingAddress.state }}</span>
+                    <span>{{ currentOrder.user.billingAddress.zip }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

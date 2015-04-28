@@ -32,12 +32,18 @@ app.factory('Products', function ($http) {
         throw new Error(err);
     });
   };
+  var deleteProduct = function(productId) {
+      return $http.delete('/api/products/' + productId).then(function(res) {
+          return res.data;
+      });
+  };
 
   return {
     getAllProducts,
     getProduct,
 	updateProduct,
-    createProduct
+    createProduct,
+    deleteProduct
   };
 
 });

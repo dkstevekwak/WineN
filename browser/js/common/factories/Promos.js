@@ -2,7 +2,7 @@
 app.factory('Promos', function ($http) {
     return {
         postPromo: function(promo){
-            promo.category = JSON.parse(promo.category)._id;
+            if (promo.category) promo.category = JSON.parse(promo.category)._id;
             return $http.post('/api/promos', promo).then(function(res){
                 return res.data;
             }, function(err){

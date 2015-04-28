@@ -42,7 +42,7 @@
             margin-bottom: 0;
         }
     }
-    .single-product {
+    .single-product, .add-product-form {
         height: 100%;
         label {
             margin-top: 10px;
@@ -60,9 +60,24 @@
         .even-review {
             background: #F5F5F5;
         }
-        button.btn.btn-default {
+        button.btn {
             margin-top: 20px;
             width: 100%;
+        }
+    }
+    button.add-product {
+        margin-bottom: 30px;
+    }
+    .product-categories {
+        label {
+            display: block;
+        }
+        div {
+            display: inline;
+            margin-right: 10px;
+            span {
+                margin-left: 8px;
+            }
         }
     }
 }
