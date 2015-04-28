@@ -3,7 +3,11 @@ app.config(function ($stateProvider) {
     $stateProvider.state('productsadmins', {
         url: '/admins/products',
         templateUrl: 'js/admins/products/products.html',
-		controller: 'ProductsAdminController'
+		    controller: 'ProductsAdminController',
+        data: {
+          authenticate: true,
+          admin: true
+        }
     });
 });
 
@@ -40,7 +44,7 @@ app.controller('ProductsAdminController', function($scope, Products, Reviews, Ca
     $scope.setCategory = function(category, product){
         var index = product.categories.indexOf(category._id);
         if(index === -1){
-            product.categories.push(category._id)
+            product.categories.push(category._id);
             $scope.selectedCategories.push(category._id);
         }
         else {

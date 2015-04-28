@@ -19,6 +19,9 @@ app.run(function ($rootScope, AuthService, $state) {
     var destinationStateRequiresAuth = function (state) {
         return state.data && state.data.authenticate;
     };
+    var destinationStateRequiresAdmin = function (state) {
+      return state.data.admin;
+    };
 
     // $stateChangeStart is an event fired
     // whenever the process of changing a state begins.
@@ -30,25 +33,55 @@ app.run(function ($rootScope, AuthService, $state) {
             return;
         }
 
-        if (AuthService.isAuthenticated()) {
-            // The user is authenticated.
-            // Short circuit with return.
+        if (AuthService.isAuthenticated() && !destinationStateRequiresAdmin(toState)) {
+          // The user is authenticated and page doesn't require an admin.
+          // Short circuit with return.
+          return;
+        } //if accessing a page that requires auth, and doesn't require admin rights, short circuit
+
+        if (destinationStateRequiresAdmin(toState)) {
+          if (AuthService.isAdmin()){
             return;
+          }
         }
+       event.preventDefault();
+
+
+
+      AuthService.getLoggedInUser().then(function (user) {
+        // If a user is retrieved, then renavigate to the destination
+        // (the second time, AuthService.isAuthenticated() will work)
+        // otherwise, if no user is logged in, go to "login" state.
+
+        if (user) {
+          if (destinationStateRequiresAdmin(toState)){
+            console.log('user data ', user);
+            if (user.role === 'admin') {
+              $state.go(toState.name, toParams);
+            } else {
+              console.log('not authorized');
+              $state.go('profile');
+            }
+          }
+          else {
+            $state.go(toState.name, toParams);
+          } //
+        } else {
+          $state.go('login');
+        }
+      });
+
+
+
+
+
+
+
 
         // Cancel navigating to new state.
-        event.preventDefault();
 
-        AuthService.getLoggedInUser().then(function (user) {
-            // If a user is retrieved, then renavigate to the destination
-            // (the second time, AuthService.isAuthenticated() will work)
-            // otherwise, if no user is logged in, go to "login" state.
-            if (user) {
-                $state.go(toState.name, toParams);
-            } else {
-                $state.go('login');
-            }
-        });
+
+
 
     });
 
