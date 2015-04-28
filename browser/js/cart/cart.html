@@ -1,25 +1,27 @@
 <section id="cart" class="contentTop">
-    <h1>Cart</h1>
-    <div>
-    	<h2>Products</h1>
+    <div class='col-xs-12'>
     	<ul>
-    		<li ng-repeat="product in cartProducts">
-    			<h3>Name: {{product.name}}</h3>
+			<h2 class="cart">Cart</h2>
+    		<li class="eachProduct col-xs-3" ng-repeat="product in cartProducts">
+				<img src="{{product.image}}">
+    			<h6 class="productName">{{product.name}}</h6>
     			Product Quantity:<input type="text" ng-model="product.orderQty" ng-change="changeQty(product._id, product.orderQty)"/>
-    			<h3>Price: {{product.price | currency }}</h3>
+    			<h6 class="price">Price: {{product.price | currency }}</h6>
     			<!--<h3>Amount: {{calculateAmount(product.quantity,product.price)}}</h3>-->
-				<button ng-click="removeItem(product)">remove from Cart</button>
+				<button class="btn btn-default" ng-click="removeItem(product)">remove from Cart</button>
     		</li>
 		</ul>
 	</div>
-	<h3>Sub Total: {{ subTotal | currency }}</h3>
-	<h3>Tax: {{ tax | currency }}</h3>
-	<h3>Shipping: {{ shipping  | currency }}</h3>
-	<h2>Total: {{ total | currency }}</h2>
-	<button ng-click="calculateSubTotal()">Update Cart</button>
-	<button type="submit" ui-sref='checkout'>Checkout</button>
-	<!-- <button ng-click="emptyCart()">Empty Cart</button> 
-	--> <button ng-click="emptyCart()">Empty Cart</button> 
+	<div class="cartDetails">
+		<h4>Sub Total: {{ subTotal | currency }}</h4>
+		<h4>Tax: {{ tax | currency }}</h4>
+		<h4>Shipping: {{ shipping  | currency }}</h4>
+		<h3 class="total">Total: {{ total | currency }}</h3>
+		<button class="btn btn-default" ng-click="calculateSubTotal()">Update Cart</button>
+		<button class="btn btn-default" type="submit" ui-sref='checkout'>Checkout</button>
+		<!-- <button ng-click="emptyCart()">Empty Cart</button>
+		--> <button class="btn btn-default" ng-click="emptyCart()">Empty Cart</button>
+	</div>
 </section>
 
 			<!-- Recommendations NEED STYLING -->
