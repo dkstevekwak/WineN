@@ -25,10 +25,11 @@ app.controller('SignupController', function($scope, $state, Users) {
         }
         Users.createUser(user)
         .then(function(user) {
+            if (typeof user === 'string') {
+                $scope.error = user;
+                return;
+            }
             $state.go('products');
-        })
-        .catch(function(err) {
-            throw new Error(err);
         });
     };
 

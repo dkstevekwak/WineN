@@ -4,7 +4,9 @@ var mongoose = require('mongoose');
 //Alex and DJ, about to add orders to userSchema 'userSchema-ordersUpdate-#46'
 var schema = new mongoose.Schema({
     email: {
-        type: String
+        type: String,
+        required: true,
+        unique: true
     },
     password: {
         type: String
