@@ -3,7 +3,11 @@ app.config(function ($stateProvider) {
     $stateProvider.state('promos', {
         url: '/admins/promos',
         templateUrl: 'js/admins/promos/promos.html',
-        controller: 'PromosAdminsController'
+        controller: 'PromosAdminsController',
+        data: {
+          authenticate: true,
+          admin: true
+        }
     });
 });
 

@@ -3,7 +3,11 @@ app.config(function ($stateProvider) {
     $stateProvider.state('newproductadmins', {
         url: '/admins/newProduct',
         templateUrl: 'js/admins/newProduct/products.html',
-		controller: 'NewProductAdminController'
+        controller: 'NewProductAdminController',
+        data: {
+          authenticate: true,
+          admin: true
+        }
     });
 });
 
