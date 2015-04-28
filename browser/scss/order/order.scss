@@ -1,0 +1,46 @@
+#order {
+  margin-top:14%;
+  .orderDetailTag {
+    margin: 0 auto;
+    width: 185px;
+    color:blue;
+    padding-bottom: 5px;
+    border-bottom: 1px solid blue;
+  }
+  .orderProcessed {
+    margin-top: 7%;
+    margin-left: 3%;
+  }
+  .productDetails {
+    .productBox {
+      h3 {
+        color:navy;
+      }
+      img{
+        height:230px;
+        width:40%;
+      }
+    }
+    button {
+      border: 1px solid skyblue;
+    }
+  }
+
+  .orderDetails {
+    clear:both;
+  }
+  .divider {
+    width: 80%;
+    clear: both;
+    height: 1px;
+    margin: 0 auto;
+    border-bottom: 1px solid blue;
+  }
+  .bottomHalf {
+    margin-left: 12%;
+    h3{
+      color: blue;
+      font-weight: bold;
+    }
+  }
+}
