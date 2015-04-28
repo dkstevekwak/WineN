@@ -2,6 +2,7 @@
 var router = require('express').Router();
 var Order = require('mongoose').model('Order');
 var User = require('mongoose').model('User');
+var Product = require('mongoose').model('Product');
 var _ = require("lodash");
 module.exports = router;
 
@@ -49,8 +50,25 @@ router.post('/', function(req,res,next){
 			user.cart = [];
 			user.save(function(err, savedUser){
 				if(err) return next(err);
-				res.send(savedOrder);
+        var saveArr = [];
+
+
+        body.cart.forEach(function(boughtProduct){
+          console.log('here is inside body.cart', body.cart);
+          Product.findById(boughtProduct._id, function(err, product){
+            if(err) {
+              console.log('big error!', err);
+              return next(err);
+            }
+            console.log('here is the product!!!', product);
+            product.qty -= Number(boughtProduct.orderQty);
+            product.save();
+          });
+
+        });
+        res.send(savedOrder);
 			});
+
 		});
 		if(err) return next(err);
 	});
