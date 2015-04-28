@@ -23,9 +23,9 @@
 
         <button ng-show="!user" ui-sref="signup" class="btn btn-default btn-more login-button">Signup</button>
         <button ng-show="!user" ui-sref="login" class="btn btn-default btn-more login-button">Login</button>
-        <button ui-sref="cart" class="btn btn-default btn-more login-button">
+        <button ng-click="openCart()" class="btn btn-default btn-more login-button">
 
-            <!--ng-click="openCart()"-->
+
             <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
             Cart
         </button>

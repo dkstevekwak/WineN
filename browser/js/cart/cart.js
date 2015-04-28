@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller('CartController', function($scope, Cart, Products, Recommendations){
+app.controller('CartController', function($modalInstance, $scope, Cart, Products, Recommendations){
 	$scope.shipping = Cart.order.shipping;
 	$scope.tax = Cart.order.tax;
 	$scope.subTotal = 0;
@@ -23,6 +23,12 @@ app.controller('CartController', function($scope, Cart, Products, Recommendation
   $scope.productRecs = [];
 	//Order is important
 	if($scope.cartProducts && $scope.cartProducts.length) updateCartFields();	//runs initial calculate on load, further called with ng-change on html quantity forms
+
+
+	$scope.closeModal = function () {
+		$modalInstance.close();
+	};
+
 
 	$scope.addToCart = function(product){
 		Cart.addToCart(product);

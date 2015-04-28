@@ -22,12 +22,15 @@
   }
 .eachProductName {
   color:navy;
+  min-height: 60px;
 }
 
 }
 .shipping {
+  padding-left:3%;
   input {
 	margin-bottom:10px;
+	width: 70%;
   }
 }
 
@@ -48,9 +51,14 @@
   .promoCodeBtn {
 	margin-left: 6px;
 	margin-bottom: 10px;
+	margin-top: 10px;
   }
   .submitOrder{
-	margin-bottom:5px;
+	margin-bottom: 5px;
+	width:117px;
+  }
+  .promoInput {
+  	height: 32px;
   }
 }
 

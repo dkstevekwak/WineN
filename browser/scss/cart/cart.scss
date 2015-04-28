@@ -11,6 +11,7 @@
   .productName {
     color:navy;
     font-size: 20px;
+    min-height: 70px;
   }
   .price {
     color:blue;
@@ -18,20 +19,23 @@
   }
   .eachProduct {
     text-align: center;
+    margin-bottom: 40px;
     img{
       height:200px;
       width:70px;
     }
-    margin-bottom: 40px;
     input {
-      width:8%;
+      width:20px;
     }
     button{
       border: 1px solid skyblue;
+      position: relative;
+      margin-bottom: 20px;
     }
   }
   .cartDetails {
     text-align: center;
+    margin-bottom: 30px;
     button{
       border: 1px solid skyblue;
     }

@@ -1,5 +1,5 @@
 'use strict';
-app.directive('navbar', function ($rootScope, ModalService, AuthService, AUTH_EVENTS, $state, Cart) {
+app.directive('navbar', function ($rootScope, $modal, AuthService, AUTH_EVENTS, $state, Cart) {
 
     return {
         restrict: 'E',
@@ -15,18 +15,14 @@ app.directive('navbar', function ($rootScope, ModalService, AuthService, AUTH_EV
                 // { label: 'Checkout', state: 'checkout'},
 
             ];
-            //
-            //scope.openCart = function() {
-            //    ModalService.showModal({
-            //        templateUrl: 'js/cart/cart.html',
-            //        controller: "CartController"
-            //    }).then(function(modal) {
-            //        modal.element.modal();
-            //        modal.close.then(function(result) {
-            //            $scope.message = "You said " + result;
-            //        });
-            //    });
-            //};
+
+            scope.openCart = function() {
+                var modalInstance = $modal.open({
+                    templateUrl: '/js/cart/cart.html',
+                    controller: 'CartController',
+                    size: 'lg'
+                });
+            };
 
             scope.adminItems = [
                 { label: 'Products', state: 'productsadmins' },
