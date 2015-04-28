@@ -2,7 +2,7 @@
     <div class='col-xs-12'>
     	<ul>
 			<h2 class="cart">Cart</h2>
-    		<li class="eachProduct col-xs-3" ng-repeat="product in cartProducts">
+    		<li class="eachProduct col-xs-4" ng-repeat="product in cartProducts">
 				<img src="{{product.image}}">
     			<h6 class="productName">{{product.name}}</h6>
     			Product Quantity:<input type="text" ng-model="product.orderQty" ng-change="changeQty(product._id, product.orderQty)"/>
@@ -18,14 +18,14 @@
 		<h4>Shipping: {{ shipping  | currency }}</h4>
 		<h3 class="total">Total: {{ total | currency }}</h3>
 		<button class="btn btn-default" ng-click="calculateSubTotal()">Update Cart</button>
-		<button class="btn btn-default" type="submit" ui-sref='checkout'>Checkout</button>
+		<button class="btn btn-default" type="submit" ng-click="closeModal()" ui-sref='checkout'>Checkout</button>
 		<!-- <button ng-click="emptyCart()">Empty Cart</button>
 		--> <button class="btn btn-default" ng-click="emptyCart()">Empty Cart</button>
 	</div>
 </section>
 
 			<!-- Recommendations NEED STYLING -->
-		<div class="recommendations col-lg-12 col-md-12 ng-if="productRecs.length > 0"">
+		<div class="recommendations col-lg-12 col-md-12" ng-if="productRecs.length">
 			<div class="col-lg-12 col-md-12">
 			{{productRec}}
 				<div><h2>Recommended Products:</h2>
