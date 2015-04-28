@@ -24,10 +24,16 @@ module.exports = function (app) {
             if (user) {
                 done(null, user);
             } else {
+              console.log('here is the profile', profile);
+              console.log('maybe an email?', profile.emails)
                 UserModel.create({
                     facebook: {
                         id: profile.id
-                    }
+                    },
+                    firstName: profile.name.givenName,
+                    lastName: profile.name.familyName,
+                    role: 'user',
+                    email: profile.emails[0].value
                 }).then(function (user) {
                     done(null, user);
                 }, function (err) {
@@ -42,7 +48,7 @@ module.exports = function (app) {
 
     passport.use(new FacebookStrategy(facebookCredentials, verifyCallback));
 
-    app.get('/auth/facebook', passport.authenticate('facebook'));
+    app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', { failureRedirect: '/login' }),
