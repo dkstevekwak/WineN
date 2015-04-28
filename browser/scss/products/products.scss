@@ -10,7 +10,7 @@
 	}
 	.categorySelection {
 	  float: left;
-	  height: 60px;
+	  height: 50px;
 	  width: 100%;
 	  text-align: center;
 	  margin-top: 3%;
@@ -43,8 +43,9 @@
 		margin: 30px;
   		text-align: center;
 		img{
-			width: 200px;
-		  	height: 550px;
+			width: 160px;
+		  	height: 400px;
+		  	cursor: pointer;
 		}
   		button{
 		  border: 1px solid skyblue;
@@ -60,7 +61,7 @@
 	.promo{
 		float:left;
 		width:33.3333%;
-		height: 400px;
+		height: 300px;
 		background: lightgray;
 	    border: 1px dotted gray;
 	}
