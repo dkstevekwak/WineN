@@ -6,7 +6,8 @@ app.directive('reviews', function(){
     };
 });
 
-app.controller('ReviewsController', function($stateParams, $scope, Reviews, Users) {
+app.controller('ReviewsController', function($stateParams, $scope, AuthService, Reviews, Users) {
+
     $scope.newReview = {
         title: null,
         text: null,
@@ -14,6 +15,7 @@ app.controller('ReviewsController', function($stateParams, $scope, Reviews, User
         user: null,
         product: null
     };
+
     var productId = $stateParams.productId;
 
     Reviews.getReviews(productId).then(function(reviews){
@@ -21,9 +23,15 @@ app.controller('ReviewsController', function($stateParams, $scope, Reviews, User
     }, function(err){
         throw new Error(err);
     });
+
     $scope.getStar = function(num){
       return num*10;
     };
+
+    $scope.isLoggedIn = function () {
+        return AuthService.isAuthenticated();
+    };
+
     $scope.postReview = function(newReview){
         newReview.product = productId;
         Users.getCurrentUser().then(function(user){
