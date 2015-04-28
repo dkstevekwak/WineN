@@ -1,0 +1,45 @@
+<section id="categories-admin" class="contentTop">
+    <div id="all-categories-admin" class="clearfix">
+        <div class="all-categories col-xs-6">
+            <div class="column-titles">
+                <div class="col-xs-12">
+                    <h3>Category</h3>
+                </div>
+            </div>
+            <div ng-click="setCurrentCategory(category)" ng-class-even="'even-category'" ng-class="{ 'selected-category': currentCategory._id === category._id, 'first-category': $first, 'last-category': $last }" class="clearfix category-listing" ng-repeat="category in categories | orderBy: 'name' ">
+                <div class="col-xs-12 category-name">
+                    <h4>{{ category.name }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="single-category col-xs-6" ng-show="currentCategory">
+            <div class="col-xs-12">
+                <span class="category-update" ng-show="updateSuccess">Category Name Updated</span>
+            </div>
+            <h2>{{ currentCategory.name }}</h2>
+            <form ng-submit="updateCategory(currentCategory)">
+                <div class="col-xs-12">
+                    <label>Name</label>
+                    <input type="text" class="form-control" ng-model="currentCategory.name"/>
+                </div>
+                <div class="col-xs-12">
+                    <button class="btn btn-default">Update Category</button>
+                    <button type="button" class="btn btn-danger" ng-click="deleteCategory(currentCategory._id)">Delete Category</button>
+                </div>
+            </form>
+        </div>
+        <div class="create-category col-xs-6" ng-if="!currentCategory">
+            <h2>Add New Category</h2>
+            <form ng-submit="createCategory(newCategory)">
+                <div class="col-xs-12">
+                    <label>Name</label>
+                    <input type="text" class="form-control" ng-model="newCategory.name"/>
+                </div>
+                <div class="col-xs-12">
+                    <button class="btn btn-default">Add Category</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
