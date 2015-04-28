@@ -29,7 +29,7 @@ app.controller('ProductController', function($scope, $stateParams, Products, Car
 		if (!$scope.seeComments) $scope.seeComments = true;
 		else $scope.seeComments = false;
 	};
-	
+
 	$scope.getProductRec = function(productId){
 		$scope.productRecs = [];
 		Recommendations.getProductRec(productId).then(function(pidArr){

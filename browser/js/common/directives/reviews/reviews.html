@@ -32,7 +32,7 @@
                 <!--<input type="radio" ng-model="newReview.rating" ng-value="5" />-->
                 <!--5-->
             <!--</label>-->
-    <div class="postReview">
+    <div ng-if="isLoggedIn()" class="postReview">
         <form name="commentForm" ng-submit="postReview(newReview)" novalidate>
             <h3>post your own review</h3>
             <fieldset class="rating">
