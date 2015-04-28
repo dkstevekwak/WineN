@@ -29,6 +29,10 @@ app.use(function (req, res, next) {
 
 });
 
+app.get('/github', function(req, res){
+  res.redirect('https://github.com/dkstevekwak/WineN');
+});
+
 app.get('/*', function (req, res) {
     res.sendFile(app.get('indexHTMLPath'));
 });
