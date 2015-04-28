@@ -1,9 +1,12 @@
 'use strict';
 app.factory('Cart', function ($http,localStorageService, Users, AuthService) {
 	// nice to haves cartID, total numberOfItems and subtotal for cookie/session
+    var order = {
+        shipping : 5,
+        tax : 5,
+        promo: null
+    };
 
-	var shipping = 5;
-	var tax = 5;
 	var localCart = JSON.parse(localStorage.getItem('cart')) || [];
 
 	function productExists(productId){
@@ -138,9 +141,8 @@ app.factory('Cart', function ($http,localStorageService, Users, AuthService) {
 	  addToCart,
 	  emptyCart,
 	  removeItem,
-	  shipping,
 	  getCart,
-	  tax,
+	  order,
     calculateSubTotal,
 		changeQty,
     cloudCartSync

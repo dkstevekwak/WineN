@@ -69,10 +69,7 @@ router.put('/:orderId', function(req,res,next){
 	var body = req.body;
 	Order.findById(req.params.orderId, function(err, order) {
 		if (err) return next(err);
-//		for (var key in body){
-//			order[key] = body[key];
-//		}
-		_.extend(order,body);
+		_.extend(order, body);
 		order.save(function(err, saved){
 			res.send(saved);
 		});

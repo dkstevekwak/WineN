@@ -59,7 +59,8 @@ var schema = new mongoose.Schema({
 		},
 		subTotal: {
 			type: Number
-		}
+		},
+		promo: String
 	}
 });
 
@@ -69,7 +70,7 @@ schema.virtual('details.total').get(function(){
 schema.pre('save', function(next){
 //	console.log('inside presave');
 	if (!this.paid) this.paid = true;
-	if (!this.status) this.status = 'Created';
+	if (!this.status) this.status = 'created';
 	if (!this.date) this.date = Date.now();
 	next();
 });

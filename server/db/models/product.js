@@ -12,8 +12,18 @@ var schema = new mongoose.Schema({
         type: String
     },
     description: {
-        type: mongoose.Schema.Types.Mixed,
-        required: true
+        review: {
+            type: String,
+            required: true
+        },
+        winery: String,
+        origin: String,
+        do: String,
+        grapes: String,
+        taste: [String],
+        serves: String,
+        vintage: Number,
+        aoc: String
     },
     price: {
         type: String,
