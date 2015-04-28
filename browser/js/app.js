@@ -1,11 +1,12 @@
 'use strict';
 var app = angular.module('WineNApp', ['ui.router', 'fsaPreBuilt', 'ngAnimate', 'LocalStorageModule', 'ui.bootstrap']);
 
-app.config(function ($urlRouterProvider, $locationProvider) {
+app.config(function ($urlRouterProvider, $locationProvider, $uiViewScrollProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)
     $locationProvider.html5Mode(true);
     // If we go to a URL that ui-router doesn't have registered, go to the "/" url.
     $urlRouterProvider.otherwise('/');
+    $uiViewScrollProvider.useAnchorScroll();
 });
 
 app.config(function (localStorageServiceProvider) {
