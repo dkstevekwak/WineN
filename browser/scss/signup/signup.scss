@@ -1,7 +1,19 @@
-form {
-    span.validationError {
-        margin-left: 10px;
-        color: red;
+
+
+
+.signupForm {
+    input {
+        width: 30%;
+    }
+    .signupInput {
+        margin: 15% 0 0 10%;
+    }
+    button {
+        margin: 30px 0;
     }
 }
 
+
+.socialMedia {
+    margin-left: 10%;
+}
