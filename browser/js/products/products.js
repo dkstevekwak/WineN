@@ -10,10 +10,22 @@ app.config(function ($stateProvider) {
 app.controller('ProductsController', function($state, $scope, Products, Cart, Categories, localStorageService){
 	//locatStorageService
 
-	$scope.currentCategory = "all";
+	$scope.currentCategory = null;
+
+    $scope.findCategory = function(product) {
+        return product.categories.some(function(category) {
+            return category._id === $scope.currentCategory;
+        });
+    }
 
 	$scope.selectCategory = function(category){
-		$scope.currentCategory = category.name;
+        console.log('category._id', category._id)
+        console.log('currentCategory', $scope.currentCategory)
+        if ($scope.currentCategory === category._id) {
+            $scope.currentCategory = null;
+            return;
+        }
+		$scope.currentCategory = category._id;
 	};
 
 	$scope.imageAnimating = [];
