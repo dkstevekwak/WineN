@@ -11,6 +11,17 @@
 				<button class="btn btn-default" ng-click="removeItem(product)">remove from Cart</button>
     		</li>
 		</ul>
+        <div class="recommendations col-lg-12 col-md-12" ng-if="productRecs.length">
+            <div class="col-lg-12 col-md-12">
+                {{productRec}}
+                <div><h2>Recommended Products:</h2>
+                    <div ng-repeat="productRec in productRecs">
+                        <a ui-sref="productDetails({productId: productRec._id})">{{productRec.name}}</a>
+                        <p>{{productRec.price  | currency}} </p> <a class="btn btn-default btn-more" ng-click="addToCart(productRec)">Add</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 	</div>
 	<div class="cartDetails">
 		<h4>Sub Total: {{ subTotal | currency }}</h4>
@@ -22,18 +33,9 @@
 		<!-- <button ng-click="emptyCart()">Empty Cart</button>
 		--> <button class="btn btn-default" ng-click="emptyCart()">Empty Cart</button>
 	</div>
+    <!-- Recommendations NEED STYLING -->
+
 </section>
 
-			<!-- Recommendations NEED STYLING -->
-		<div class="recommendations col-lg-12 col-md-12" ng-if="productRecs.length">
-			<div class="col-lg-12 col-md-12">
-			{{productRec}}
-				<div><h2>Recommended Products:</h2>
-					<div ng-repeat="productRec in productRecs">
-						<a ui-sref="productDetails({productId: productRec._id})">{{productRec.name}}</a>
-						<p>{{productRec.categories[0]}} {{productRec.price}} </p> <a class="btn btn-default btn-more" ng-click="addToCart(productRec)">Add</a>
-					</div>
-				</div>
-			</div>
-		</div>
+
 </div>
