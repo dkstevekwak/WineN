@@ -206,7 +206,7 @@ var seedProducts = function () {
         var products = [
             {
                 name: 'Canada Negra',
-                image: '/img/Andlau Riesling.gif',
+                image: 'https://s3.amazonaws.com/winen/canada-negra.jpg',
                 description: {
                   review: 'This is a very fancy red wine',
                   winery: 'Bodegas Enguera',
@@ -225,7 +225,7 @@ var seedProducts = function () {
             },
             {
               name: 'Cote Chalonnaise',
-              image: '/img/ansata.gif',
+              image: 'https://s3.amazonaws.com/winen/06.jpg',
               description: {
                 review: 'This is a very fancy red wine',
                 winery: 'Guy Chaumont',
@@ -233,7 +233,7 @@ var seedProducts = function () {
                 'do': '',
                 grapes: 'Pinot Noir',
                 taste: ['light'],
-                serves: '',
+                serves: '12',
                 vintage: 2010,
                 aoc: 'Bourgogne Cote Chalonnaise'
               },
@@ -243,16 +243,16 @@ var seedProducts = function () {
               categories: [redCat]
             },
             {
-              name: 'Beaune Chauacheux Premier Cru',
-              image: '/img/beaune chouacheux.gif',
+              name: 'Tournage riant',
+              image: 'https://s3.amazonaws.com/winen/03.jpg',
               description: {
                 review: 'This is a very fancy red wine',
-                winery: 'Fanny Sabre',
-                origin: 'France, Bourgogne',
+                winery: 'Touraine',
+                origin: 'France, Touraine',
                 'do': '',
                 grapes: 'Pinot Noir',
                 taste: ['full'],
-                serves: '',
+                serves: '14',
                 vintage: null,
                 winery: 'Fanny Sabre',
                 aoc: 'Beaune ler Cru'
@@ -263,7 +263,7 @@ var seedProducts = function () {
               categories: [redCat]
               }, {
               name: 'Pommard \<Les Vignots\>',
-              image: '/img/bourgogne rouge.gif',
+              image: 'https://s3.amazonaws.com/winen/02.jpg',
               description: {
                 review: 'This is a very fancy red wine',
                 winery: 'Chantal Lescure',
@@ -280,7 +280,7 @@ var seedProducts = function () {
               categories: [redCat]
             },{
             name: 'Cremant Brut Zero',
-            image: '/img/cote chalonnaise.gif',
+            image: 'https://s3.amazonaws.com/winen/01.jpg',
             description: {
               review: 'This is a wine with many bubbles',
               winery: 'Guy Chaumont',
@@ -288,7 +288,7 @@ var seedProducts = function () {
               'do': '',
               grapes: 'Chardonnay 70%, Aligote 30%',
               taste: ['bubbly'],
-              serves: '',
+              serves: '13',
               vintage: null,
               aoc: ''
             },
@@ -297,16 +297,16 @@ var seedProducts = function () {
             createdBy: user._id,
             categories: [sparklingCat]
           }, {
-              name: 'Sidre Tendre',
-              image: '/img/Drappier grande sendree rose.gif',
+              name: 'Trinquames',
+              image: 'https://s3.amazonaws.com/winen/04.jpg',
               description: {
                 review: 'This is another cidre',
-                winery: 'Eric Bordelet',
+                winery: 'Touraine',
                 origin: 'Normandie, France',
                 'do': '',
-                grapes: 'some grapish korean immigrant to france',
-                taste: [''],
-                serves: '',
+                grapes: 'five kinds of variety',
+                taste: ['medium'],
+                serves: '14',
                 vintage: null,
                 aoc: ''
               },
@@ -316,15 +316,15 @@ var seedProducts = function () {
               categories: [ciderCat]
             }, {
             name: 'Poire authentique',
-            image: '/img/Drappier Grande sendree.gif',
+            image: 'https://s3.amazonaws.com/winen/08.jpg',
             description: {
               review: 'This is a cidre',
               winery: 'Eric Bordelet',
               origin: 'Normandie, France',
               'do': '',
               grapes: 'another grapish korean immigrant to france',
-              taste: [''],
-              serves: '',
+              taste: ['full'],
+              serves: '15',
               vintage: null,
               aoc: ''
               },
@@ -333,18 +333,18 @@ var seedProducts = function () {
             createdBy: user._id,
             categories: [ciderCat]
             }, {
-              name: 'Sydre Angelette',
-              image: '/img/Drappier sans souffre.gif',
-              description: {
-                review: 'I am the third spelling of Cidre on this site from the same winery, and it is on purpose',
-                winery: 'Eric Bordelet',
-                origin: 'Normandie, France',
-                'do': '',
-                grapes: 'another grapish korean immigrant to france',
-                taste: [''],
-                serves: '',
-                vintage: null,
-                aoc: ''
+                name: 'Pouilly Fuisse',
+                image: 'https://s3.amazonaws.com/winen/011.jpg',
+                description: {
+                    review: 'This is a very fancy red wine',
+                    winery: 'Philippe Valette',
+                    origin: 'France, Macon',
+                    'do': '',
+                    grapes: 'Chardonnay 100%',
+                    taste: ['light'],
+                    serves: '12',
+                    vintage: null,
+                    aoc: ''
                 },
               price: '59.99',
               qty: 37,
@@ -352,7 +352,7 @@ var seedProducts = function () {
               categories: [ciderCat]
             }, {
             name: 'Tradition',
-            image: '/img/grimaudes.gif',
+            image: 'https://s3.amazonaws.com/winen/013.jpg',
             description: {
               review: 'This is a very fancy red wine',
               winery: 'Leon Barral',
@@ -369,16 +369,16 @@ var seedProducts = function () {
             createdBy: user._id,
             categories: [redCat]
           }, {
-            name: 'Jadis',
-            image: '/img/LB jadis.gif',
+            name: 'Bel Air',
+            image: 'https://s3.amazonaws.com/winen/09.jpg',
             description: {
               review: 'This is a very fancy red wine',
-              winery: 'Leon Barral',
+              winery: 'La Grange Tiphaine',
               origin: 'France, Languedoc',
               'do': '',
               grapes: 'Syrah, Grenache, carignan',
               taste: ['full'],
-              serves: '',
+              serves: '14',
               vintage: null,
               aoc: 'Faugeres'
             },
@@ -387,16 +387,16 @@ var seedProducts = function () {
             createdBy: user._id,
             categories: [redCat]
           }, {
-            name: 'Valinieres',
-            image: '/img/LB tradition.gif',
+            name: 'Pommard',
+            image: 'https://s3.amazonaws.com/winen/014.jpg',
             description: {
               review: 'This is a very fancy red wine',
-              winery: 'Leon Barral',
+              winery: 'Les Vignots',
               origin: 'France, Languedoc',
               'do': '',
               grapes: 'Mourvedre 80%, Syrah 20%',
               taste: ['full'],
-              serves: '',
+              serves: '12',
               vintage: null,
               aoc: 'Faugeres'
             },
@@ -406,7 +406,7 @@ var seedProducts = function () {
             categories: [redCat]
           }, {
             name: 'Prelude',
-            image: '/img/LB valiniere.gif',
+            image: 'https://s3.amazonaws.com/winen/07.jpg',
             description: {
               review: 'This is a very fancy red wine',
               winery: 'Mas Lumen',
@@ -422,7 +422,83 @@ var seedProducts = function () {
             qty: 37,
             createdBy: user._id,
             categories: [redCat]
-          }
+          }, {
+                name: 'Finca Enguera Blanc',
+                image: 'https://s3.amazonaws.com/winen/012.jpg',
+                description: {
+                    review: 'This is a very fancy red wine',
+                    winery: 'Bodegas Enguera',
+                    origin: 'Spain, Valencia',
+                    'do': 'Valencia',
+                    grapes: 'Verdil 100%',
+                    taste: ['medium'],
+                    serves: '10',
+                    vintage: null,
+                    aoc: ''
+                },
+                price: '59.99',
+                qty: 37,
+                createdBy: user._id,
+                categories: [whiteCat]
+            },
+            {
+                name: 'Pouilly Fuisse Tradition',
+                image: 'https://s3.amazonaws.com/winen/010.jpg',
+                description: {
+                    review: 'This is a very fancy red wine',
+                    winery: 'Philippe Valette',
+                    origin: 'France, Macon',
+                    'do': '',
+                    grapes: 'Chardonnay 100%',
+                    taste: ['light'],
+                    serves: '10',
+                    vintage: null,
+                    aoc: ''
+                },
+                price: '59.99',
+                qty: 37,
+                createdBy: user._id,
+                categories: [whiteCat]
+            },
+            {
+                name: 'Les Vignes de mon Pere',
+                image: 'https://s3.amazonaws.com/winen/05.jpg',
+                description: {
+                    review: 'This is a very fancy red wine',
+                    winery: 'Philippe Valette',
+                    origin: 'France, Macon',
+                    'do': '',
+                    grapes: 'Chardonnay 100%',
+                    taste: ['light'],
+                    serves: '10',
+                    vintage: null,
+                    aoc: ''
+                },
+                price: '59.99',
+                qty: 37,
+                createdBy: user._id,
+                categories: [whiteCat]
+            },
+            {
+                name: 'Vin Juane',
+                image: 'https://s3.amazonaws.com/winen/vin-jaune.jpg',
+                description: {
+                    review: 'This is a very fancy red wine',
+                    winery: 'Domaine Ganevat',
+                    origin: 'France, Jura',
+                    'do': '',
+                    grapes: 'Savagrin 100%',
+                    taste: ['medium'],
+                    serves: '10',
+                    vintage: null,
+                    aoc: ''
+                },
+                price: '59.99',
+                qty: 37,
+                createdBy: user._id,
+                categories: [whiteCat]
+            }
+
         ];
         return q.invoke(Product, 'create', products);
         });
