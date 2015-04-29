@@ -24,14 +24,24 @@
         </div>
 	</div>
 	<div class="cartDetails">
-		<h4>Sub Total: {{ subTotal | currency }}</h4>
-		<h4>Tax: {{ tax | currency }}</h4>
-		<h4>Shipping: {{ shipping  | currency }}</h4>
-		<h3 class="total">Total: {{ total | currency }}</h3>
-		<button class="btn btn-default" ng-click="calculateSubTotal()">Update Cart</button>
-		<button class="btn btn-default" type="submit" ng-click="closeModal()" ui-sref='checkout'>Checkout</button>
-		<!-- <button ng-click="emptyCart()">Empty Cart</button>
-		--> <button class="btn btn-default" ng-click="emptyCart()">Empty Cart</button>
+        <div ng-hide="cartProducts.length">
+            <h4>Sub Total: $0.00</h4>
+            <h4>Tax: $0.00</h4>
+            <h4>Shipping: $0.00</h4>
+            <h3 class="total">Total: $0.00</h3>
+        </div>
+        <div ng-show="cartProducts.length">
+            <h4>Sub Total: {{ subTotal | currency }}</h4>
+            <h4>Tax: {{ tax | currency }}</h4>
+            <h4>Shipping: {{ shipping  | currency }}</h4>
+            <h3 class="total">Total: {{ total | currency }}</h3>
+        </div>
+        <div ng-show="cartProducts.length">
+            <button class="btn btn-default" ng-click="calculateSubTotal()">Update Cart</button>
+            <button class="btn btn-default" type="submit" ng-click="closeModal()" ui-sref='checkout'>Checkout</button>
+            <!-- <button ng-click="emptyCart()">Empty Cart</button>
+            --> <button class="btn btn-default" ng-click="emptyCart()">Empty Cart</button>
+        </div>
 	</div>
     <!-- Recommendations NEED STYLING -->
 

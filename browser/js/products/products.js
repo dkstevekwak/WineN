@@ -19,8 +19,6 @@ app.controller('ProductsController', function($state, $scope, Products, Cart, Ca
     }
 
 	$scope.selectCategory = function(category){
-        console.log('category._id', category._id)
-        console.log('currentCategory', $scope.currentCategory)
         if ($scope.currentCategory === category._id) {
             $scope.currentCategory = null;
             return;
