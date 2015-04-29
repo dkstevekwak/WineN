@@ -7,7 +7,7 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('ProductsController', function($scope, Products, Cart, Categories, localStorageService){
+app.controller('ProductsController', function($state, $scope, Products, Cart, Categories, localStorageService){
 	//locatStorageService
 
 	$scope.currentCategory = "all";
@@ -44,6 +44,8 @@ app.controller('ProductsController', function($scope, Products, Cart, Categories
 	};
 	$scope.setPromo = function(promoCode) {
 		Cart.order.promo = promoCode;
+		Cart.featuredPromo = true;
+		$state.go("checkout");
 	}
 	//Search
 	$scope.search = function (product){

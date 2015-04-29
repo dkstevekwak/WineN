@@ -1,6 +1,6 @@
 <section id="order" class="contentTop">
     <h3 class="orderDetailTag">Your Order Details</h3>
-    <h3 ng-if="order.details.promo">your promo ({{order.details.promo}}) has been applied</h3>
+    <h3 class="orderConfirmation" ng-if="order.details.promo">your promo ({{order.details.promo}}) has been applied</h3>
     <section class="productDetails" id="ordered-products">
         <div class="productBox col-xs-3" ng-repeat="product in order.cart">
             <h3 class="eachProduct"> {{product.name}}</h3>
