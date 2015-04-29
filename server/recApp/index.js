@@ -2,14 +2,13 @@
 var path = require('path');
 var express = require('express');
 var app = express();
-module.exports = app;
+var router = app.Router();
+module.exports = router;
 
 // Pass our express application pipeline into the configuration
-// function located at server/app/configure/index.js
-require('./configure')(app);
 
 //CORs
-app.all("/api/*", function (req, res, next) {
+router.all("/api/*", function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With");
     res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
@@ -18,7 +17,7 @@ app.all("/api/*", function (req, res, next) {
 
 // Routes that will be accessed via AJAX should be prepended with
 // /api so they are isolated from our GET /* wildcard.
-app.use('/api', require('./routes'));
+router.use('/api', require('./routes'));
 
 
 /*
@@ -27,7 +26,7 @@ app.use('/api', require('./routes'));
     This allows for proper 404s instead of the wildcard '/*' catching
     URLs that bypass express.static because the given file does not exist.
 */
-app.use(function (req, res, next) {
+router.use(function (req, res, next) {
 
     if (path.extname(req.path).length > 0) {
         res.status(404).end();
@@ -37,11 +36,11 @@ app.use(function (req, res, next) {
 
 });
 
-//app.get('/*', function (req, res) {
-//    res.sendFile(app.get('indexHTMLPath'));
+//router.get('/*', function (req, res) {
+//    res.sendFile(router.get('indexHTMLPath'));
 //});
 
 // Error catching endware.
-app.use(function (err, req, res) {
+router.use(function (err, req, res) {
     res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
