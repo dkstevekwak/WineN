@@ -1,7 +1,7 @@
 'use strict';
 app.factory('Recommendations', function ($http,localStorageService, Users, AuthService) {
 	var getAllRecs = function(){
-	    return $http.get('https://winen.herokuapp.com:23783/api/').then(function(res){
+	    return $http.get('https://winen.herokuapp.com/recommendations/').then(function(res){
 	    	console.log("getAllRecs res.data",res.data);
 	    	return res.data;
 	    }, function(err){
@@ -9,7 +9,7 @@ app.factory('Recommendations', function ($http,localStorageService, Users, AuthS
 	    });
 	  };
 	var getProductRec = function(pid){
-		var pidRequestStr = 'https://winen.herokuapp.com:23783/api/'+pid;
+		var pidRequestStr = 'https://winen.herokuapp.com/recommendations/'+pid;
 	    return $http.get(pidRequestStr.toString()).then(function(res){
 	    	var arr = [];
 	    	for (var key in res.data){
