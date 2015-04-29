@@ -12,15 +12,7 @@ app.factory('Recommendations', function ($http,localStorageService, Users, AuthS
 		var pidRequestStr = '/recommendations/'+pid;
 	    return $http.get(pidRequestStr.toString()).then(function(res){
 	    	var arr = [];
-	    	for (var key in res.data){
-	    		arr.push({ "productId": key, "qty": res.data[key] });
-	    	}
-	    	arr = arr.sort(function(a,b){
-	    		return b.qty - a.qty;
-	    	});
-	    	arr = arr.slice(0,3);
-	    	console.log("getProductRec arr",arr);
-	    	return arr; //res.data;
+	    	return res.data;
 	    }, function(err){
 	        throw new Error(err);
 	    });
