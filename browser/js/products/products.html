@@ -21,14 +21,14 @@
 	<section id="all-products">
 		<div class="categorySelection btn-group btn-group-justified">
 			<div class="btn-group"  ng-repeat="category in categories" role="group">
-				<button type="button" class="btn btn-default eachCategory" ng-click="selectCategory(category)" ng-class="{'active': category.name === currentCategory}">{{category.name}}</button>
+				<button type="button" class="btn btn-default eachCategory" ng-click="selectCategory(category)" ng-class="{'active': category._id === currentCategory}">{{category.name}}</button>
 			</div>
 		</div>
 		<!-- Search Box Start -->
 		<input class="searchBox" type="text" placeholder="Search" ng-model="query"/>
 		<!-- Search Box End -->
 
-		<div class="productBox" ng-show="currentCategory === 'all' || product.categories.indexOf(currentCategory) !== -1" ng-repeat=" product in products | filter: search ">
+		<div class="productBox" ng-show="!currentCategory || findCategory(product)" ng-repeat=" product in products | filter: search ">
 			<h3 class="eachProduct"> {{product.name}}</h3>
             <img class="animated" ui-sref="productDetails({productId: product._id})" ng-class="{'pulse':imageAnimating.indexOf(product._id)!==-1}" ng-mouseenter="imageAnimate(product._id)" ng-mouseleave="imageAnimate(product._id)" src="{{product.image}}">
 			<h3 class="eachProduct"> {{product.price | currency}}</h3>
