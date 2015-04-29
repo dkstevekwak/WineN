@@ -45,8 +45,9 @@ app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders, Pro
 
 	$scope.applyPromo = function(promoCode){
 		var newDate = new Date();
-		if(Cart.order.promo) return console.log("don't be greedy!");
+		if(Cart.order.promo && !Cart.featuredPromo) return console.log("don't be greedy!");
 		Cart.order.promo = $scope.promoCode;
+		Cart.featuredPromo = false;
 		$scope.checkoutDetails.promo = $scope.promoCode;
 		Promos.getPromo(promoCode).then(function(promo){
 			if(!promo) console.log("promo does not exist");

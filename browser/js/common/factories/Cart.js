@@ -26,7 +26,7 @@ app.factory('Cart', function ($http,localStorageService, Users, AuthService) {
       target.push(source.pop());
     }
   };
-
+    var featuredPromo = false;
   function calculateSubTotal(products){
     var subTotal=0;
     products.forEach(function(eachProduct){
@@ -138,6 +138,7 @@ app.factory('Cart', function ($http,localStorageService, Users, AuthService) {
     //cloudCartSync(); //checks cloud cart on load;
   };
   return {
+      featuredPromo,
 	  addToCart,
 	  emptyCart,
 	  removeItem,
