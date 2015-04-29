@@ -27,9 +27,18 @@ router.get('/:orderId', function(req, res, next) {
 router.post('/guest', function(req,res,next){
 	var body = req.body;
 	var order = new Order(body);
-	order.save(function(err,saved){
+	_.assign(order, body);
+	order.save(function(err,savedOrder){
 		if(err) return next(err);
-		res.send(saved);
+        body.cart.forEach(function(boughtProduct){
+          Product.findById(boughtProduct._id, function(err, product){
+            if(err) return next(err);
+            product.qty -= Number(boughtProduct.orderQty);
+            product.save();
+          });
+
+        });
+        res.send(savedOrder);
 	});
 });
 
@@ -54,13 +63,10 @@ router.post('/', function(req,res,next){
 
 
         body.cart.forEach(function(boughtProduct){
-          console.log('here is inside body.cart', body.cart);
           Product.findById(boughtProduct._id, function(err, product){
             if(err) {
-              console.log('big error!', err);
               return next(err);
             }
-            console.log('here is the product!!!', product);
             product.qty -= Number(boughtProduct.orderQty);
             product.save();
           });

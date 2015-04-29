@@ -13,6 +13,9 @@ var schema = new mongoose.Schema({
 				type: String, //tentative until we decide sessionID or userID handling
 				required: true
 			},
+			email: {
+				type: String
+			},
 			firstName: {
 				type: String
 			},
