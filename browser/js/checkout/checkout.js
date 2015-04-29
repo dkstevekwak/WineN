@@ -34,13 +34,21 @@ app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders, Pro
 			user: $scope.user,
 			details: $scope.checkoutDetails
 		};
-		Orders.userConfirmOrder(order).then(function(order){
-			Cart.emptyCart();
-			$state.go('order'); //returns the order
-			//redirect via state after thankyou/confirmation page created
-		}, function(err){
-            throw new Error(err);
-		});
+        if (!$scope.user._id) {
+            order.user._id = order.user.email;
+            Orders.guestConfirmOrder(order)
+            .then(function(order) {
+                Cart.emptyCart();
+                $state.go('order');
+            });
+        }
+        else {
+            Orders.userConfirmOrder(order).then(function(order){
+                Cart.emptyCart();
+                $state.go('order'); //returns the order
+                //redirect via state after thankyou/confirmation page created
+            });
+        }
 	};
 
 	$scope.applyPromo = function(promoCode){
