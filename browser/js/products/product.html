@@ -51,7 +51,7 @@
 				<div><h2>Recommended Products:</h2>
 					<div ng-repeat="productRec in productRecs">
 						<a ui-sref="productDetails({productId: productRec._id})">{{productRec.name}}</a>
-						<p>{{productRec.categories[0]}} {{productRec.price}} </p> <a class="btn btn-default btn-more" ng-click="addToCart(productRec)">Add</a>
+						<p>{{productRec.price  | currency}}</p> <a class="btn btn-default btn-more" ng-click="addToCart(productRec)">Add</a>
 					</div>
 				</div>
 			</div>
