@@ -65,6 +65,10 @@ var schema = new mongoose.Schema({
 		},
 		promo: String
 	}
+    ,stripeToken: {
+		String
+	}
+    
 });
 
 schema.virtual('details.total').get(function(){

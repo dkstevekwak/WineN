@@ -14,6 +14,17 @@
 			<input type='text' placeholder="city" class="form-control" ng-model="user.shippingAddress.city" />
 			<input type='text' placeholder="state" class="form-control" ng-model="user.shippingAddress.state" />
 			<input type='text' placeholder="zip" class="form-control" ng-model="user.shippingAddress.zip" />
+			<br><label>Credit Card Payment</label>
+			<h4>Full Name</h4>
+			<input type='text' placeholder="Full Name" class="form-control" ng-model="payment.card.fullname" />
+			<h4>Card Number</h4>
+			<input type='text' placeholder="4242 4242 4242 4242" class="form-control" ng-model="payment.card.number" />
+			<h4>CVC - last 3 digits from the back of your card</h4>
+			<input type='text' placeholder="333" class="form-control" ng-model="payment.card.cvc" />
+			<h4>Expiration Month - 01 for January</h4>
+			<input type='text' placeholder="01" class="form-control" ng-model="payment.card.exp_month" />
+			<h4>Exipration Year - 17 for 2017</h4>
+			<input type='text' placeholder="17" class="form-control" ng-model="payment.card.exp_year" />			
 		</form>
 	</div>
     <section id="checkout-products" class="col-xs-8">
@@ -32,14 +43,23 @@
     	<h4>Shipping: {{ checkoutDetails.shipping  | currency }}</h4>
     	<h3 class="total">Total: {{ checkoutDetails.subTotal + checkoutDetails.tax + checkoutDetails.shipping | currency }}</h3>
 		<button class="btn btn-default submitOrder" ng-click="confirmOrder()">Submit Order</button>
-		<div><!-- Enter Credit Card Info -->
+		<button class="btn btn-default payForOrder" ng-click="charge()">Pay with Stripe</button>
+		<!-- Old Stripe Payment form Enter Credit Card Info
+		<div>
 			<div>
-
+				<form action="" method="POST">
+					<script
+						src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+						data-key="pk_test_bC5hEtd5IV9alZAEPMlS9kuH"
+						data-amount="2000"
+						data-name="Demo Site"
+						data-description="2 widgets ($20.00)"
+						data-image="/128x128.png">
+					</script>
+				</form>
 			</div>
-			</div>
-
+		</div>
+		 -->
 	</div>
-
-
 
  </section>

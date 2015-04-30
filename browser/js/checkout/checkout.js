@@ -7,7 +7,7 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders, Promos){
+app.controller("CheckoutCtrl", function($state, $scope, $http, Cart, Users, Orders, Promos, stripe){
 
     Users.getCurrentUser().then(function(currUser){
         $scope.user = currUser;
@@ -25,7 +25,7 @@ app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders, Pro
 		subTotal: subTotal,
 		tax: Cart.order.tax,
 		shipping: Cart.order.shipping,
-		promo:Cart.order.promo
+		promo: Cart.order.promo
 	};
 
 	$scope.confirmOrder = function(){
@@ -33,6 +33,7 @@ app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders, Pro
 			cart: $scope.products,
 			user: $scope.user,
 			details: $scope.checkoutDetails
+			,stripeToken: $scope.payment.token
 		};
         if (!$scope.user._id) {
             order.user._id = order.user.email;
@@ -87,5 +88,44 @@ app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders, Pro
 		});
 
 	};
+	
+	// angular-stripe library is only one month old, 
+	// it was published in mar 2015
+	// card model on scope to be injected into stripe 
+	$scope.payment = {
+		card : {
+				  number: '',
+				  cvc: '',
+				  exp_month: '',
+				  exp_year: ''
+////				  number: $('.card-number').val(),
+////				  cvc: $('.card-cvc').val(),
+////				  exp_month: $('.card-expiry-month').val(),
+////				  exp_year: $('.card-expiry-year').val()
+		}
+	};
+	
+	// when requesting a payment token from stripe	
+	$scope.charge = function () {
+	    return stripe.card.createToken($scope.payment.card)
+	      .then(function (token) {
+	        console.log('token created for card ending in ', token.card.last4);
+	        var payment = angular.copy($scope.payment);
+	        payment.card = void 0;
+	        payment.token = $scope.payment.token = token.id;
+	        return $scope.confirmOrder();
+	      })
+//	      .then(function (payment) {
+//	        console.log('successfully submitted payment for $', payment.amount);
+//	      })
+	      .catch(function (err) {
+	        if (err.type && /^Stripe/.test(err.type)) {
+	          console.log('Stripe error: ', err.message);
+	        }
+	        else {
+	          console.log('Other error occurred, possibly with your API', err.message);
+	        }
+	      });
+	  };	
 
 });
