@@ -25,8 +25,7 @@ app.controller("CheckoutCtrl", function($state, $scope, $http, Cart, Users, Orde
 		subTotal: subTotal,
 		tax: Cart.order.tax,
 		shipping: Cart.order.shipping,
-		promo:Cart.order.promo
-		//,stripeToken: 
+		promo: Cart.order.promo
 	};
 
 	$scope.confirmOrder = function(){
@@ -34,6 +33,7 @@ app.controller("CheckoutCtrl", function($state, $scope, $http, Cart, Users, Orde
 			cart: $scope.products,
 			user: $scope.user,
 			details: $scope.checkoutDetails
+			,stripeToken: $scope.payment.token
 		};
         if (!$scope.user._id) {
             order.user._id = order.user.email;
@@ -97,9 +97,7 @@ app.controller("CheckoutCtrl", function($state, $scope, $http, Cart, Users, Orde
 				  number: '',
 				  cvc: '',
 				  exp_month: '',
-				  exp_year: '', 
-				  amount: 100*($scope.checkoutDetails.subTotal+$scope.checkoutDetails.tax+$scope.checkoutDetails.shipping)
-
+				  exp_year: ''
 ////				  number: $('.card-number').val(),
 ////				  cvc: $('.card-cvc').val(),
 ////				  exp_month: $('.card-expiry-month').val(),
@@ -114,12 +112,12 @@ app.controller("CheckoutCtrl", function($state, $scope, $http, Cart, Users, Orde
 	        console.log('token created for card ending in ', token.card.last4);
 	        var payment = angular.copy($scope.payment);
 	        payment.card = void 0;
-	        payment.token = token.id;
+	        payment.token = $scope.payment.token = token.id;
 	        return $scope.confirmOrder();
 	      })
-	      .then(function (payment) {
-	        console.log('successfully submitted payment for $', payment.amount);
-	      })
+//	      .then(function (payment) {
+//	        console.log('successfully submitted payment for $', payment.amount);
+//	      })
 	      .catch(function (err) {
 	        if (err.type && /^Stripe/.test(err.type)) {
 	          console.log('Stripe error: ', err.message);

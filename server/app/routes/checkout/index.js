@@ -28,6 +28,27 @@ router.post('/guest', function(req,res,next){
 	var body = req.body;
 	var order = new Order(body);
 	_.assign(order, body);
+	
+	// Set your secret key: remember to change this to your live secret key in production
+	// See your keys here https://dashboard.stripe.com/account/apikeys
+	var stripe = require("stripe")("SECRETKEY");
+
+	// (Assuming you're using express - expressjs.com)
+	// Get the credit card details submitted by the form
+	var stripeToken = order.stripeToken;
+
+	var charge = stripe.charges.create({
+	  amount: Math.round(100*(order.details.shipping+order.details.tax+order.details.subTotal)), // amount in cents, again
+	  currency: "usd",
+	  source: stripeToken,
+	  description: "Example charge"
+	}, function(err, charge) {
+	  if (err && err.type === 'StripeCardError') {
+	    // The card has been declined
+	  }
+	});
+	
+	//saving to mongo
 	order.save(function(err,savedOrder){
 		if(err) return next(err);
         body.cart.forEach(function(boughtProduct){
