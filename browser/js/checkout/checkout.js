@@ -7,7 +7,7 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders, Promos){
+app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders, Promos, stripe){
 
     Users.getCurrentUser().then(function(currUser){
         $scope.user = currUser;
@@ -34,13 +34,21 @@ app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders, Pro
 			user: $scope.user,
 			details: $scope.checkoutDetails
 		};
-		Orders.userConfirmOrder(order).then(function(order){
-			Cart.emptyCart();
-			$state.go('order'); //returns the order
-			//redirect via state after thankyou/confirmation page created
-		}, function(err){
-            throw new Error(err);
-		});
+        if (!$scope.user._id) {
+            order.user._id = order.user.email;
+            Orders.guestConfirmOrder(order)
+            .then(function(order) {
+                Cart.emptyCart();
+                $state.go('order');
+            });
+        }
+        else {
+            Orders.userConfirmOrder(order).then(function(order){
+                Cart.emptyCart();
+                $state.go('order'); //returns the order
+                //redirect via state after thankyou/confirmation page created
+            });
+        }
 	};
 
 	$scope.applyPromo = function(promoCode){
@@ -79,5 +87,27 @@ app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders, Pro
 		});
 
 	};
+	
+	$scope.charge = function () {
+	    return stripe.card.createToken($scope.payment.card)
+	      .then(function (token) {
+	        console.log('token created for card ending in ', token.card.last4);
+	        var payment = angular.copy($scope.payment);
+	        payment.card = void 0;
+	        payment.token = token.id;
+	        return $http.post('https://yourserver.com/payments', payment);
+	      })
+	      .then(function (payment) {
+	        console.log('successfully submitted payment for $', payment.amount);
+	      })
+	      .catch(function (err) {
+	        if (err.type && /^Stripe/.test(err.type)) {
+	          console.log('Stripe error: ', err.message);
+	        }
+	        else {
+	          console.log('Other error occurred, possibly with your API', err.message);
+	        }
+	      });
+	  };	
 
 });

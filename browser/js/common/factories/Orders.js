@@ -40,6 +40,8 @@ app.factory('Orders', function ($http) {
     };
     var guestConfirmOrder = function(order) {
       return $http.post('/api/checkout/guest', order).then(function(res) {
+        update.currentOrder = res.data;
+        update.justOrdered = true;
         return res.data; //returns the order
       }, function(err) {
           throw new Error(err);

@@ -2,11 +2,13 @@
 	<div class="shipping col-xs-4">
 		<form>
 			<h3>{{user.username}}<h3>
-			<label for="firstname-order">First name</label>
+			<label for="firstname-order">First Name</label>
 			<input id="firstname-order" type='text' class="form-control" ng-model="user.firstName" />
-			<label for="lastname-order">Last name</label>
+			<label for="lastname-order">Last Name</label>
 			<input id="lastname-order" type='text' class="form-control" ng-model="user.lastName" />
-			<label>Address</label>
+			<label for="email-order">Email</label>
+			<input id="email-order" type='text' class="form-control" ng-model="user.email" />
+			<label>Shipping Address</label>
 			<input type='text' placeholder="line1" class="form-control" ng-model="user.shippingAddress.line1" />
 			<input type='text' placeholder="line2" class="form-control" ng-model="user.shippingAddress.line2" />
 			<input type='text' placeholder="city" class="form-control" ng-model="user.shippingAddress.city" />
@@ -30,12 +32,14 @@
     	<h4>Shipping: {{ checkoutDetails.shipping  | currency }}</h4>
     	<h3 class="total">Total: {{ checkoutDetails.subTotal + checkoutDetails.tax + checkoutDetails.shipping | currency }}</h3>
 		<button class="btn btn-default submitOrder" ng-click="confirmOrder()">Submit Order</button>
-		<div><!-- Enter Credit Card Info -->
+		<button class="btn btn-default payForOrder" ng-click="charge()">Submit Order</button>
+		<!-- Old Stripe Payment form Enter Credit Card Info
+		<div>
 			<div>
 				<form action="" method="POST">
 					<script
 						src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-						data-key="sk_test_AmjjVhqe3no91YPNeGK5V5ZB" <!--  DJ's Stripe test API must be replaced -->
+						data-key="pk_test_bC5hEtd5IV9alZAEPMlS9kuH"
 						data-amount="2000"
 						data-name="Demo Site"
 						data-description="2 widgets ($20.00)"
@@ -43,10 +47,8 @@
 					</script>
 				</form>
 			</div>
-			</div>
-
+		</div>
+		 -->
 	</div>
-
-
 
  </section>

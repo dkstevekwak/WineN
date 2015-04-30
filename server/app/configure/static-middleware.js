@@ -14,5 +14,4 @@ module.exports = function (app) {
     app.use(express.static(bowerPath));
     app.use(express.static(publicPath));
     app.use(express.static(browserPath));
-
 };

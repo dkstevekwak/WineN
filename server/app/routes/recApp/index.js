@@ -65,8 +65,18 @@ router.get('/:productId', function(req, res, next){
     return product._id.toString() === req.params.productId.toString();
   });
   if (validProduct){
+    var arr= [];
+    for (var key in req.hashTable[req.params.productId]){
+      arr.push({ "productId": key, "qty": req.hashTable[req.params.productId][key] });
+    }
+    arr = arr.sort(function(a,b){
+      return b.qty - a.qty;
+    });
+    arr = arr.slice(0,3);
+
+    console.log();
     //console.log('here is rec engine prod id', req.params.productId);
-    res.send(req.hashTable[req.params.productId]);
+    res.send(arr);
     next();
   }
   else next();
@@ -75,6 +85,7 @@ router.get('/:productId', function(req, res, next){
 router.get('/', function(req, res, next){
   //console.log('here is rec engine prod id', req.params.productId);
   res.send(req.hashTable);
+  console.log(hashTable);
   next();
 })
 
