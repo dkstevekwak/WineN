@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('WineNApp', ['ui.router', 'fsaPreBuilt', 'ngAnimate', 'LocalStorageModule', 'ui.bootstrap']);
+var app = angular.module('WineNApp', ['ui.router', 'fsaPreBuilt', 'ngAnimate', 'LocalStorageModule', 'ui.bootstrap', 'angular-stripe']);
 
 app.config(function ($urlRouterProvider, $locationProvider, $uiViewScrollProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)
@@ -11,6 +11,10 @@ app.config(function ($urlRouterProvider, $locationProvider, $uiViewScrollProvide
 
 app.config(function (localStorageServiceProvider) {
 	localStorageServiceProvider.setPrefix('WineNApp');
+});
+
+app.config(function (stripeProvider) {
+    stripeProvider.setPublishableKey('PUBLICKEY');
 });
 
 // This app.run is for controlling access to specific states.

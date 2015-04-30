@@ -7,7 +7,7 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders, Promos, stripe){
+app.controller("CheckoutCtrl", function($state, $scope, $http, Cart, Users, Orders, Promos, stripe){
 
     Users.getCurrentUser().then(function(currUser){
         $scope.user = currUser;
@@ -26,6 +26,7 @@ app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders, Pro
 		tax: Cart.order.tax,
 		shipping: Cart.order.shipping,
 		promo:Cart.order.promo
+		//,stripeToken: 
 	};
 
 	$scope.confirmOrder = function(){
@@ -88,6 +89,25 @@ app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders, Pro
 
 	};
 	
+	// angular-stripe library is only one month old, 
+	// it was published in mar 2015
+	// card model on scope to be injected into stripe 
+	$scope.payment = {
+		card : {
+				  number: '',
+				  cvc: '',
+				  exp_month: '',
+				  exp_year: '', 
+				  amount: 100*($scope.checkoutDetails.subTotal+$scope.checkoutDetails.tax+$scope.checkoutDetails.shipping)
+
+////				  number: $('.card-number').val(),
+////				  cvc: $('.card-cvc').val(),
+////				  exp_month: $('.card-expiry-month').val(),
+////				  exp_year: $('.card-expiry-year').val()
+		}
+	};
+	
+	// when requesting a payment token from stripe	
 	$scope.charge = function () {
 	    return stripe.card.createToken($scope.payment.card)
 	      .then(function (token) {
@@ -95,7 +115,7 @@ app.controller("CheckoutCtrl", function($state, $scope, Cart, Users, Orders, Pro
 	        var payment = angular.copy($scope.payment);
 	        payment.card = void 0;
 	        payment.token = token.id;
-	        return $http.post('https://yourserver.com/payments', payment);
+	        return $scope.confirmOrder();
 	      })
 	      .then(function (payment) {
 	        console.log('successfully submitted payment for $', payment.amount);
