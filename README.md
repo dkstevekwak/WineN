@@ -18,5 +18,5 @@ WineN is an ecommerce platform created in 10 business days.
 - Recommendation engine based on aggregate order purchase histories [link](https://github.com/dkstevekwak/WineN/blob/master/server/app/routes/recApp/index.js)
 - Promotion code admin CRUD + business logic
 - App was developed using the Agile methodology with bi-daily Scrum meetings and mostly pair programming.
-- Feature dependency chart leveraged to determine what to work on and minimize code conflict [link](https://www.lucidchart.com/documents/edit/374e4574-0f32-4c03-a834-6751c24a074d?shared=true)
+- Feature dependency chart leveraged to determine what to work on and minimize code conflict [link](http://imgur.com/566EtiJ)
 - Waffle.io utilized for feature states, task assignments, and bug reporting
