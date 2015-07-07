@@ -15,18 +15,22 @@ app.factory('Cart', function ($http,localStorageService, Users, AuthService) {
 		});
 		return test.length;
 	} //check if product exists, returns a num
+
   var dumpCart = function(cart){
     while (cart && cart.length){
       cart.pop();
     }
   };
+
   var populateCart = function(target, source){
     //assumes target is blank
     while (source && source.length){
       target.push(source.pop());
     }
   };
-    var featuredPromo = false;
+
+  var featuredPromo = false;
+
   function calculateSubTotal(products){
     var subTotal=0;
     products.forEach(function(eachProduct){
@@ -45,9 +49,11 @@ app.factory('Cart', function ($http,localStorageService, Users, AuthService) {
     dumpCart(localCart);
     populateCart(localCart, temp);
   }; //reads from local cart;
+
   var setLocalCart = function(){
     localStorage.setItem('cart',JSON.stringify(localCart));
   };
+
   function incrementQty(productId){
     localCart.filter(function(el){
       return el._id === productId;
@@ -55,6 +61,7 @@ app.factory('Cart', function ($http,localStorageService, Users, AuthService) {
     setLocalCart();
     updateCloudCart();
   }//adds one to item in local cart + localStorage
+
 	var changeQty = function(productId, qty){
 		localCart.filter(function(el){
 			return el._id === productId;
@@ -102,11 +109,6 @@ app.factory('Cart', function ($http,localStorageService, Users, AuthService) {
 		readCart();
 		return localCart;
 	}; //a function that resets localCart to read localStorage
-
-
-
-
-
 
   var updateCloudCart = function(){
     Users.getCurrentUser().then(function(user) {

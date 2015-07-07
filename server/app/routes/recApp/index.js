@@ -12,27 +12,22 @@ router.use('/*', function(req, res, next){
     var productAnalyzer = function(productId){
       var recProducts = {};
       var filteredOrders = orders.filter(function(order, idx){
-        //console.log('this is for order ', idx)
         return order.cart.some(function(orderProduct){
-            //console.log(orderProduct._id," vs ",productId, (orderProduct._id) === productId);
             return (orderProduct._id).toString() === productId.toString();
-          }) ; //due to some historical changes in schema && order.paid == true
+          }) ;
       }); //returns a list of orders containing productId
-      //console.log("HERE IS FILTERED ORDERS", filteredOrders.length);
       filteredOrders.forEach(function(order){
-        //console.log('here are the orders inside filteredOrders', order);
         order.cart.forEach(function(el){
-          //console.log('here is order.cart', order.cart);
           if (el._id.toString() !== productId.toString()){
             if (recProducts[el._id]) recProducts[el._id]++;
             else recProducts[el._id] = 1;
-            //console.log("here is the product association: ", el._id ," qty: " ,  recProducts[el._id])
           }
         })
       })  //updates the rec Products for the productId
       return recProducts;
     }
-    //need to take filtered orders and return an object.
+
+
     Product.find({}, function(err, products){
       var result = {};
       req.products = products;
@@ -41,8 +36,6 @@ router.use('/*', function(req, res, next){
       })
       
       //sort results to have products with highest quantities first.
-//      console.log("_.sortBy(result)",_.sortBy(result));
-//      results = _.sortBy(result);
       
       req.hashTable = result;
 
@@ -50,10 +43,7 @@ router.use('/*', function(req, res, next){
       next();
     })
 
-    //var table = {
-    //  product_id: times
-    //}
-    //
+    // sample output
     //{ product_id: { product_id2 : Qty, product_id3: Qty } }
 
 
@@ -74,8 +64,6 @@ router.get('/:productId', function(req, res, next){
     });
     arr = arr.slice(0,3);
 
-    console.log();
-    //console.log('here is rec engine prod id', req.params.productId);
     res.send(arr);
     next();
   }
@@ -83,7 +71,6 @@ router.get('/:productId', function(req, res, next){
 
 })
 router.get('/', function(req, res, next){
-  //console.log('here is rec engine prod id', req.params.productId);
   res.send(req.hashTable);
   console.log(hashTable);
   next();
@@ -91,10 +78,6 @@ router.get('/', function(req, res, next){
 
 // Make sure this is after all of
 // the registered routes!
-
-// router.use(function(err, req, res, next) {
-// 	if (err) return res.sendStatus(500);
-// });
 
 router.use(function (req, res) {
     res.status(404).end();
